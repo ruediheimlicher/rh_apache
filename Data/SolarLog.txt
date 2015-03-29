@@ -1,0 +1,92 @@
+Apache SolarLogElektrodaten: leeres File
+Elektrodaten: leeres File
+Elektrodaten: leeres File
+Stunde: 12  Ertrag	TemperaturMittelwert: 	StundeErtragSumme: 0.00	bisherige Tageslaufzeit: 0
+Daten cgivars: 47134	*	*	*	*	*	*
+Daten solar: 47134	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0
+13:06  Daten cgivars: 47214	*	*	*	*	*	*
+Daten solar: 47214	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0
+13:08  Daten cgivars: 47316	*	*	*	*	*	*
+13:08  Daten solar: 47316	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0
+13:12  Daten cgivars: 47548	*	*	*	*	*	*
+13:12  Daten solar: 47548	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0
+13:13  Daten cgivars: 47622	*1D	*1D	*1A	*57	*5B	*2D
+13:13  Daten solar: 47622	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45
+13:14  Daten cgivars: 47656	*	*	*	*	*	*
+13:14  Daten solar: 47656	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0
+13:14  Daten cgivars: 47656	*	*	*	*	*	*
+13:14  Daten solar: 47656	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0
+13:15  Daten cgivars: 47723	*1D	*1D	*1A	*57	*5B	*2D
+13:15  Daten solar: 47723	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45
+13:16  Daten cgivars: 47787	*1D	*1D	*1A	*57	*5B	*2D
+13:16  Daten solar: 47787	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45
+Stunde: 13  Ertrag	TemperaturMittelwert: 	StundeErtragSumme: 0.00	bisherige Tageslaufzeit: 0
+16:31  Daten cgivars: 59500	*	*	*	*	*	*
+16:31  Daten solar: 59500	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0
+16:31  Daten cgivars: 59511	*	*	*	*	*	*
+16:31  Daten solar: 59511	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0
+17:02  Daten cgivars: 61347	*	*	*	*	*	*
+17:02  Daten solar: 61347	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0
+17:18  Daten cgivars: 62323	*	*	*	*	*	*
+17:18  Daten solar: 62323	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0
+17:20  Daten cgivars: 62450	*1D	*1D	*1A	*57	*5B	*2D
+17:20  Daten solar: 62450	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45
+17:22  Daten cgivars: 62569	*1D	*1D	*1A	*57	*5B	*2D
+17:22  Daten solar: 62569	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45
+17:24  Daten cgivars: 62699	*1D	*1D	*1A	*57	*5B	*2D	*0	*FF
+17:24  Daten solar: 62699	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 0	d7: 255
+17:30  Daten cgivars: 63010	*1D	*1D	*1A	*57	*5B	*2D	*0	*FF
+17:30  Daten solar: 63010	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 0	d7: 255
+17:32  Daten cgivars: 63123	*1D	*1D	*1A	*57	*5B	*2D	*0	*FF
+17:32  Daten solar: 63123	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 0	d7: 255
+17:36  Daten cgivars: 63371	*1D	*1D	*1A	*57	*5B	*2D	*0	*FF
+17:36  Daten solar: 63371	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 0	d7: 255
+17:36  Daten cgivars: 63386	*	*	*	*	*	*	*	*
+17:36  Daten solar: 63386	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 0	d7: 0
+17:36  Daten cgivars: 63386	*	*	*	*	*	*	*	*
+17:36  Daten solar: 63386	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 0	d7: 0
+17:37  Daten cgivars: 63462	*	*	*	*	*	*	*	*
+17:37  Daten solar: 63462	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 0	d7: 0
+17:39  Daten cgivars: 63557	*	*	*	*	*	*	*	*
+17:39  Daten solar: 63557	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 0	d7: 0
+17:41  Daten cgivars: 63702	*	*	*	*	*	*	*	*
+17:41  Daten solar: 63702	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 0	d7: 0
+17:42  Daten cgivars: 63770	*	*	*	*	*	*	*	*
+17:42  Daten solar: 63770	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 0	d7: 0
+17:47  Daten cgivars: 64073	*1D	*1D	*1A	*57	*5B	*2D	*0	*FF
+17:47  Daten solar: 64073	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 0	d7: 255
+17:50  Daten cgivars: 64232	*1D	*1D	*1A	*57	*5B	*2D	*0	*FF
+17:50  Daten solar: 64232	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 0	d7: 255
+17:52  Daten cgivars: 64326	*	*	*	*	*	*	*	*
+17:52  Daten solar: 64326	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 0	d7: 0
+17:52  Daten cgivars: 64329	*1D	*1D	*1A	*57	*5B	*2D	*0	*FF
+17:52  Daten solar: 64329	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 0	d7: 255
+17:52  Daten cgivars: 64371	*	*	*	*	*	*	*	*
+17:52  Daten solar: 64371	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 0	d7: 0
+17:53  Daten cgivars: 64406	*	*	*	*	*	*	*	*
+17:53  Daten solar: 64406	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 0	d7: 0
+17:55  Daten cgivars: 64556	*	*	*	*	*	*	*	*
+17:55  Daten solar: 64556	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 0	d7: 0
+17:56  Daten cgivars: 64587	*1D	*1D	*1A	*57	*5B	*2D	*0	*FF
+17:56  Daten solar: 64587	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 0	d7: 255
+17:59  Daten cgivars: 64790	*1D	*1D	*1A	*57	*5B	*2D	*20	*FF
+17:59  Daten solar: 64790	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 32	d7: 255
+18:00  Daten cgivars: 64809	*1D	*1D	*1A	*57	*5B	*2D	*9	*FF
+18:00  Daten solar: 64809	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 9	d7: 255
+18:00  Daten cgivars: 64815	*1D	*1D	*1A	*57	*5B	*2D	*0	*FF
+18:00  Daten solar: 64815	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 0	d7: 255
+18:00  Daten cgivars: 64818	*1D	*1D	*1A	*57	*5B	*2D	*C	*FF
+18:00  Daten solar: 64818	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 12	d7: 255
+18:43  Daten cgivars: 67424	*1D	*1D	*1A	*57	*5B	*2D	*2	*FF
+18:43  Daten solar: 67424	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 2	d7: 255
+solar_exp: neuer Tag: Laufzeit: 57445  Datum: 28.03.15 15:57
+SolarTagErtrag neue Zeile anlegen: 28.03.15
+Elektrodaten: leeres File
+15:58  Daten cgivars: 57500	*0	*0	*0	*0	*0	*0	*E	*0
+15:58  Daten solar: 57500	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 14	d7: 0
+15:58  Daten cgivars: 57529	*0	*0	*0	*0	*0	*0	*1F	*0
+15:58  Daten solar: 57529	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 31	d7: 0
+16:00  Daten cgivars: 57636	*1D	*1D	*1A	*57	*5B	*2D	*18	*FF
+16:00  Daten solar: 57636	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 24	d7: 255
+11:51  Daten cgivars: 42673	*1D	*1D	*1A	*57	*5B	*2D	*0	*FF
+11:51  Daten solar: 42673	d0: 29	d1: 29	d2: 26	d3: 87	d4: 91	d5: 45	d6: 0	d7: 255

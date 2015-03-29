@@ -1,0 +1,15 @@
+HomeCentral
+Solar-Temperaturdaten
+Datum: 28.03.15 15:58
+Zeit: 15:58
+Kollektor-Vorlauf: 0.0
+Kollektor-Ruecklauf: 0.0
+Ertrag: 0.0
+Ertragsumme: 0.00
+0
+1
+Mittelwert: 0.00
+0
+Kollektortemperatur: 0.00
+1
+Aussentemperatur: 1.0

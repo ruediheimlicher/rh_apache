@@ -1,0 +1,15 @@
+HomeCentral
+Pumpedaten
+Datum: 28.03.15 15:58
+Zeit: 15:58
+57500
+Stunden-Pumpelaufzeit: 0
+Status: 1
+0
+57500
+Kollektor-Vorlauf: 0.0
+Kollektor-Ruecklauf: 0.0
+Ertrag: 0.0
+Ertragsumme: 0.00
+Mittelwert: 0.00
+Pumpe-Tageslaufzeit: 0

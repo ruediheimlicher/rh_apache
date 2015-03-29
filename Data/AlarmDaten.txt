@@ -1,0 +1,5 @@
+HomeCentral
+Startzeit: 2015-02-01 03:09:47
+Datum: 02.02.15 14:19
+Status: 0
+Reset: 1

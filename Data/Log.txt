@@ -1,0 +1,72 @@
+ip Start 
+I've tried 1 things as a test
+I've tried 2 things as a test
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 19.03.15 19:23
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 19.03.15 19:23
+ip Start 
+I've tried 1 things as a test
+I've tried 2 things as a test
+ip Start 
+I've tried 1 things as a test
+I've tried 2 things as a test
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 19.03.15 19:28
+Start Datumstring: Datum: 19.03.15 19:49
+neues File fuer TimePrefs: Datum: 19.03.15 19:49
+** Datum: 19.03.15 19:49	Brennerstatus: 0
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 19.03.15 20:46
+ip Start 
+I've tried 1 things as a test
+I've tried 2 things as a test
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 23.03.15 14:26
+ip Start 
+I've tried 1 things as a test
+I've tried 2 things as a test
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 23.03.15 14:26
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 23.03.15 14:27
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 23.03.15 14:27
+ip Start 
+I've tried 1 things as a test
+I've tried 2 things as a test
+ip Start 
+I've tried 1 things as a test
+I've tried 2 things as a test
+ip Start 
+I've tried 1 things as a test
+I've tried 2 things as a test
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 26.03.15 07:37
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 27.03.15 09:22
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 27.03.15 11:22
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 27.03.15 16:31
+I've tried 1 things as a test
+I've tried 2 things as a test
+hello Start Datumstring: Datum: 27.03.15 16:31
+ip Start 
+I've tried 1 things as a test
+I've tried 2 things as a test
+ip Start 
+I've tried 1 things as a test
+I've tried 2 things as a test

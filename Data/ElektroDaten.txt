@@ -1,0 +1,9 @@
+HomeCentral
+Elektrodaten
+Datum: 28.03.15 15:58
+Zeit: 11:51
+57529
+Elektro-Laufzeit: -14856
+Status: 0
+1
+57529

@@ -1,0 +1,1 @@
+HomeAlarmDaten: anzAlarmdateiZeilen ist NULL
