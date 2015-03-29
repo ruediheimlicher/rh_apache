@@ -1,0 +1,560 @@
+.kalenderabschnitt
+{
+	position:absolute; 
+	top:40px;
+	left: 860px;
+	width:180px; 
+	height:200px;
+    z-index:1; 
+	background-color:#def; 
+
+}
+
+
+
+ul.main-nav
+{
+	margin:1px;
+	padding:2px;
+	list-style:none;
+	line-height:18px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	
+}
+
+
+ul.main-nav  a
+{
+	padding:1px;
+	margin:1px;
+	width:100px;
+	background:#3aacf6;
+	color:#f3f3fa;
+	float:left;
+	text-align:center;
+	text-decoration:none;
+	border-bottom:1px solid #fff;
+	border-color:#abc;
+
+}
+
+ul.main-nav-save
+{
+	margin:1px;
+	padding:2px;
+	list-style:none;
+	line-height:18px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	
+}
+
+ul.main-nav-save  a
+{
+	padding:1px;
+	margin:1px;
+	width:75px;
+	background:#3aacf6;
+	color:#f3f3fa;
+	float:left;
+	text-align:center;
+	text-decoration:none;
+	border-bottom:1px solid #fff;
+	border-color:#abc;
+
+}
+
+
+ul.li
+{
+	display:block;
+}
+
+ul.main-nav li a:hover 
+{
+	background:#b2a2f4;
+	color:#1d462b;
+}
+
+
+ul#foto-nav
+{
+	
+	padding:10px;
+	list-style:none;
+	width:200px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+ul#foto-nav li
+{
+	display:block;
+}
+
+ul#foto-nav li a
+{
+padding:5px;
+width:200px;
+background:#3a8c56;
+color:#f3d3e2;
+float:left;
+text-align:center;
+text-decoration:none;
+border-bottom:1px solid #fff;
+border-color:#abc;
+}
+
+ul#foto-nav li a:hover 
+{
+  background:#8ca294;
+  color:#1d462b;
+}
+
+ul#cal-nav
+{
+	padding:10px;
+	list-style:none;
+	width:80px;
+	font-family: Arial, Helvetica, sans-serif;
+	display:table;
+	
+}
+
+ul#cal-nav li
+{
+	display:block;
+	
+}
+
+ul#cal-nav li a
+{
+
+padding:1px;
+width:25px;
+background:#3a8c56;
+color:#f3d3e2;
+float:left;
+text-align:center;
+text-decoration:none;
+border-bottom:1px solid #fff;
+border-color:#abc;
+}
+ul#cal-nav li a:hover 
+{
+  background:#8ca294;
+  color:#1d462b;
+}
+
+
+	
+.titelfoto
+{
+	position:absolute; 
+	top:20px;
+	left: 820px;
+	width:200px; 
+	height:200px;
+    z-index:1; 
+	background-color:#ddf; 
+}
+
+.relfoto
+{
+	position:absolute; 
+	top:20px;
+	left: 600px;
+	width:200px; 
+	height:200px;
+    z-index:1; 
+	background-color:#ddf; 
+}
+
+
+.bild80prozent
+{
+#float: right;
+    width: 89.9%;
+    height: 80%;
+}
+
+
+.bild50prozent
+{
+	float: left;
+    width: 49.9%;
+    height: 50%;
+}
+
+.titelabschnitt
+{
+	position:absolute; 
+	left:40px;
+	top:20px;
+	width:1000px;
+	height:40px;
+	background-color:#ffa; 
+	border:1px solid #666;
+}
+
+.solarmenuabschnitt
+{
+	position:absolute; 
+	left:30px;
+	top:60px;
+	width:110px;
+	height:130px;
+/*	background-color:#dff; */
+}
+
+.solardatenabschnitt
+{
+	position:absolute; 
+	left:160px;
+	top:60px;
+	width:500px;
+	height:120px;
+	background-color:#dff; 
+}
+
+.solardiagrammabschnitt
+{
+	position:relative; 
+	left:10px;
+	top:150px;
+	width:1050px;
+	height:340px;
+	/*background-color:#dff; */
+}
+
+
+.solarertragabschnitt
+{
+	position:relative; 
+	left:10px;
+	top:150px;
+	width:1050px;
+	height:300px;
+	/*background-color:#dff; */
+}
+
+
+.adminabschnitt
+{
+	position:absolute; 
+	left:40px;
+	top:380px;
+	width:140px;
+	height:180px;
+	background-color:#def; 
+}
+
+
+.abschnitt1
+{
+	position:absolute; 
+	left:200px;
+	top:120px;
+	width:840px;
+	height:520px;
+	background-color:#abc; 
+	/*border:2px solid blue;*/
+}
+
+.fotoabschnitt1
+{
+	position:absolute; 
+	left:200px;
+	top:120px;
+	width:840px;
+	height:520px;
+	background-color:#abc; 
+	/*border:2px solid blue;*/
+}
+
+.albumabschnitt
+{
+position:relative;
+	left:10px;
+	top:10px;
+	width:640px;
+	height:120px;
+	background-color:#aac; 
+
+
+}
+
+
+.savemenuabschnitt
+{
+	position:absolute; 
+	left:905px;
+	top:280px;
+	width:80px;
+	height:50px;
+/*	background-color:#dff; */
+}
+
+
+
+
+
+
+
+.u1
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: normal;
+	text-transform: none;
+	color: #000000;
+	background-position: left top;
+	text-align: left;
+	text-indent: 2px;
+	vertical-align: baseline;
+
+}
+
+
+.all12 
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	text-transform: none;
+	color: #000000;
+	background-position: left top;
+	text-align: left;
+	text-indent: 2px;
+	vertical-align: baseline;
+	display: table-row;
+}
+.all14 
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	text-transform: none;
+	color: #000000;
+	background-position: left top;
+	text-align: left;
+	text-indent: 2px;
+	vertical-align: baseline;
+	display: table-row;
+}
+
+	td
+	{
+		text-align:right;
+	}
+	
+	td.kalender
+	{
+		font-size:10;
+		margin:1px;
+		padding: 1px;
+		text-align:right;
+	}
+	
+	td.kalenderheute
+	{
+		font-size:10;
+		margin:2px;
+		padding: 2px;
+		background-color: #abc;
+		text-align:right;
+	}
+	
+	td.kalenderzukunft
+	{
+		margin:2px;
+		padding: 2px;
+		background-color: #fff;
+		text-align:right;
+
+	}
+	
+	tr.kalender
+	{
+		margin:1px;
+		padding: 1px;
+	}
+	
+	th.kalender td.kalendermonat 
+	{
+		font-size:10;
+		font-weight:normal;
+		margin:1px;
+		padding: 1px;
+		text-align:left;
+	}
+
+	p {
+		font-size:10;
+		margin:10px;
+		padding:5px;
+		border:0px solid;
+		}
+		
+	p.kalender
+	{
+		font-size:12px;
+		font-weight:bold;
+		color: blue;
+		margin:4px;
+		padding:1px;
+		
+	}
+	
+	h1 {
+		font-size:48;
+		font-weight:bold;
+		margin-top:5px;
+		padding-top: 20px;;
+		}
+		
+	h2 {
+		font-size:18;
+		font-weight:bold;
+		margin-top:20px;
+		}
+
+	input.kalender 
+	{
+		
+		width: 158px;
+		margin-left:4px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 12px;
+		font-weight: bold;	
+	}
+	
+    .basic #container 
+    {
+     	width: 100%;  /* Mit einer Breite, die 20 Pixel unter der vollen Breite von 800 Pixel liegt, können Sie dem Browser-Chrome Rechnung tragen und gleichzeitig eine horizontale Bildlaufleiste vermeiden. */
+    	background: #0FFFFF;
+    	margin: 10 auto; /* Durch automatische Ränder (in Verbindung mit einer Breite) wird die Seite zentriert. */
+    	border: 0px solid #000000;
+    	text-align: left; /* Hierdurch wird die Einstellung text-align: center im Body-Element überschrieben. */
+    	height: 1300px;
+    }
+    
+    .basic #mainContent {
+    	padding: 0 30px; /* padding (Auffüllung) bezeichnet den Innenabstand und margin (Rand) den Außenabstand der div -Box. */
+    	height: auto;
+    	
+	}
+		.Stil3 {font-size: 100%}
+		.Stil4 {font-size: 10%}
+		
+	table 
+	{
+		font-size:12px;
+		color:#FF0000;
+		margin:0px;
+
+		}
+	table.kalender
+	{
+		font-size:12px;
+		color:#FF0000;
+		margin:1px;
+	}
+	
+	table.text 
+	{
+		color:;
+		border:1px solid red;
+		padding:0px;
+		margin:4px;
+
+	}
+	
+	table.ohne 
+	{
+		color:;
+		border:0px solid red;
+		padding:0px;
+		margin:1px;
+		}
+		
+	 
+	table.text td 
+	{
+		margin:0px;
+		padding:0px;
+		border:0px solid yellow;
+		font-size:12px;
+		}
+	table.text tr 
+	{
+		margin:0px;
+		padding:0px;
+		border:0px solid green;
+		font-size:10px;
+		}
+	.r1
+	{
+			border:0px solid yellow;
+			padding:0px;
+			
+	}
+	
+	
+	
+th, td 
+{
+	margin: 1px;
+	padding: 0px;
+}
+tr.monat th
+{
+	color: #212f6e;
+	background: #909090;
+	padding:0px;
+}
+tr.wochentag th
+{
+	color: #e1e1e1;
+	background: #808080;
+	font-weight: normal;
+}
+td.samstag 
+{
+	color: #a05050;
+	font-weight: bold;
+}
+td.sonntag 
+{
+	color: #ac000a;
+	font-weight: bold;
+}
+td.kw 
+{
+	color: #666;
+	font-weight: bold;
+}
+td.heute 
+{
+	border: 2px solid #ff8000;
+}
+.kalender 
+{
+	line-height: 1em;
+}
+
+a:link 
+{
+	color:#0000ff;
+	text-decoration:none;
+}    /* unvisited link */
+
+a:hover 
+{
+	color:#ff00ff;
+	text-decoration:none;
+}    /* unvisited link */
+

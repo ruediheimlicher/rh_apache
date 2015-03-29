@@ -1,0 +1,8 @@
+Informatik/
+Fotoalbum/
+Bilder/
+Data/HomeDaten/
+Data/SolarDaten/
+Data/SolardiagrammDaten/
+kirchenchor_data/konzert/
+phpmyadmin/

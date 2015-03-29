@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>HomeCentral</title>
+<script type="text/javascript" src="../flot/jquery.js"></script> 
+<script type="text/javascript" src="../flot/flot.jquery.js"></script> 
+<script type="text/javascript"> 
+// we will add our javascript code here 
+$(document).ready(function() 
+{
+$("a").click(function() 
+	{
+     //alert("Hello world!");
+   }
+   );
+   // do stuff when DOM is ready
+ }
+ );
+</script> 
+
+<style type="text/css">
+<!--
+.U1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	color: #333333;
+	letter-spacing: normal;
+	text-align: left;
+	vertical-align: baseline;
+	word-spacing: normal;
+	background-position: left top;
+}
+.all {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #666666;
+	background-position: left top;
+	letter-spacing: normal;
+	text-align: left;
+	vertical-align: baseline;
+	word-spacing: normal;
+	white-space: normal;
+}
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.all14 {	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	text-transform: none;
+	color: #000000;
+	background-position: left top;
+	text-align: left;
+	text-indent: 2px;
+	vertical-align: baseline;
+	display: table-row;
+}
+.All18 {	color: #339900;
+	display: inline;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+}
+body {
+	background-color: #66FFCC;
+}
+.Stil1 {font-size: 14px}
+-->
+</style>
+</head>
+
+<body>
+<p class="U1">&nbsp;</p>
+<table width="90%" border="1" cellspacing="0" bgcolor="#66FF66">
+  <tr>
+    <th width="37%" scope="col"><div align="left"><span class="U1">HomeCentral</span></div></th>
+    <th width="38%" scope="col">&nbsp;</th>
+    <th width="25%" scope="col"><div align="left"><span class="U1">&gt; <a href="http://ruediheimlicher.dyndns.org">Website</a></span></div></th>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="90%" height="117" border="1" cellspacing="1" bgcolor="#66CC00">
+  <tr>
+    <th width="45%" rowspan="3" align="left" valign="top" scope="col"><div align="left">Daten</div></th>
+    <th width="100" height="62" align="left" valign="top" class="all14" scope="col"><a href="http://www.ruediheimlicher.ch/Data/HomeDaten.txt" class="all14">HomeDaten</a><a href="http://www.ruediheimlicher.ch/Data/HomeCentralPrefs.txt"><br />
+    </a></th>
+    <th width="100" align="left" valign="top" class="all" scope="col"><a href="http://www.ruediheimlicher.ch/Data/HomeCentralPrefs.txt">lastTime<br />
+    </a><a href="http://www.ruediheimlicher.ch/Data/LastData.txt"> lastData</a></th>
+  </tr>
+  <tr>
+    <td width="100" height="29" align="left" valign="middle"><span class="all14"><a href="http://www.ruediheimlicher.ch/Data/TemperaturDaten.txt">Temperatur</a></span><br /></td>
+    <td width="100" align="left" valign="top" class="all"><a href="http://www.ruediheimlicher.ch/Data/TemperaturMittel.txt">Mittelwerte</a></td>
+  </tr>
+  <tr>
+    <td width="100" align="left" valign="middle" class="all14"><a href="http://www.ruediheimlicher.ch/Data/BrennerDaten.txt">Brenner</a></td>
+    <td width="100" align="left" valign="top" class="all"><a href="http://www.ruediheimlicher.ch/Data/Brennerzeit.txt">Einschaltzeiten</a></td>
+  </tr>
+</table>
+
+<p><span class="Stil1">
+<form action="../../cgi-bin/solar.pl">
+  Alarm: 
+    <input name="12" type="submit" id="12" value=" Reset "/>
+</p>
+<p>&nbsp;</p>
+
+</form>
+
+<p class="U1">&nbsp;</p>
+<p><span class="all">../..<a href="../Data/BrennerDaten.txt" class="all"><br />
+</a></span><span class="all"><a href="http://www.ruediheimlicher.ch/Data/HomeCentralPrefs.txt"></a></span><br/>
+<span class="all"><a href="http://www.ruediheimlicher.ch/Data/LastData.txt"></a></span></p>
+<p class="all14"><span class="all">TWI <a href="http://ruediheimlicher.dyndns.org/twi?pw=ideur00&amp;status=0">OFF</a> <a href="http://ruediheimlicher.dyndns.org/twi?pw=ideur00&amp;status=1">ON</a></span><br />
+</p>
+</body>
+</html>

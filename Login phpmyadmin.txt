@@ -1,0 +1,29 @@
+Login: root, Ideur0047
+
+http://localhost/public_html/phpmyadmin/import.php#PMAURL-1:sql.php?db=nova&table=campground&server=1&target=&token=4192d0b89b5594176417a506ba9cb6a9
+
+
+hostswiss
+	$db=mysql_connect('localhost','ruedihei_db','rueti8630');
+
+	mysql_set_charset('utf8',$db);
+	mysql_select_db("ruedihei_usa", $db); 
+	
+
+apache
+	$db=mysql_connect('localhost','root','Ideur0047');
+
+	mysql_set_charset('utf8',$db);
+	mysql_select_db("nova", $db); 
+
+
+                                                              |
+| For details on getting started with mod_perl 2, see:         |
+|                                                              |
+|   http://perl.apache.org/docs/2.0/user/intro/start_fast.html |
+|                                                              |
+|                                                              |
+| Found a bug?  File a bug report:                             |
+|                                                              |
+|   http://perl.apache.org/bugs/                               |
+|                                                       
