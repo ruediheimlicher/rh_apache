@@ -1,0 +1,1 @@
+document.write("Begruessungstext: Guten Tag");
