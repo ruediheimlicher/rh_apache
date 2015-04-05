@@ -185,10 +185,21 @@ ul#cal-nav li a:hover
 	position:absolute; 
 	left:160px;
 	top:60px;
-	width:500px;
-	height:120px;
+	width:400px;
+	height:140px;
+/*	background-color:#dff; */
+}
+
+.solarboilerabschnitt
+{
+	position:absolute; 
+	left:580px;
+	top:40px;
+	width:200px;
+	height:200px;
 	/*background-color:#dff; */
 }
+
 
 .solardiagrammabschnitt
 {
@@ -368,7 +379,7 @@ position:relative;
 	p.pfadfehler 
 	{
 		font-size:14;
-		font-weight:bold;
+		font-weight:normal;
 		margin:10px;
 		padding:5px;
 		border:0px solid;
@@ -384,6 +395,35 @@ position:relative;
 		
 	}
 	
+	p.boilerblau
+	{
+		font-size:10px;
+		font-weight:normal;
+		color: blue;
+		margin:4px;
+		padding:1px;	
+	}
+	p.boilerrot
+	{
+		font-size:10px;
+		font-weight:normal;
+		color: red;
+		margin:4px;
+		padding:1px;
+		
+	}
+	p.boilerweiss
+	{
+		font-size:10px;
+		font-weight:normal;
+		color: white;
+		margin:4px;
+		padding:1px;
+		
+	}
+
+
+
 	h1 {
 		font-size:48;
 		font-weight:bold;

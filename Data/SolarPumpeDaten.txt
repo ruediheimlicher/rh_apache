@@ -1,12 +1,12 @@
 HomeCentral
 Pumpedaten
-Datum: 28.03.15 15:58
-Zeit: 15:58
-57500
+Datum: 30.03.15 15:05
+Zeit: 15:05
+54312
 Stunden-Pumpelaufzeit: 0
-Status: 1
+Status: 0
 0
-57500
+0
 Kollektor-Vorlauf: 0.0
 Kollektor-Ruecklauf: 0.0
 Ertrag: 0.0

@@ -1,15 +1,15 @@
 HomeCentral
 Solar-Temperaturdaten
-Datum: 28.03.15 15:58
-Zeit: 15:58
+Datum: 30.03.15 15:05
+Zeit: 15:05
 Kollektor-Vorlauf: 0.0
 Kollektor-Ruecklauf: 0.0
-Ertrag: 0.0
+Ertrag: 0.00
 Ertragsumme: 0.00
 0
-1
+0
 Mittelwert: 0.00
 0
 Kollektortemperatur: 0.00
-1
-Aussentemperatur: 1.0
+0
+Aussentemperatur: 0.00

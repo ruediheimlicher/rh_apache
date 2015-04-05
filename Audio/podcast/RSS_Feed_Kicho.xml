@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+	<channel>
+		<!-- Titel des Podcasts, wie er in iTunes erscheint -->
+		<title>Podcast Kirchenchor Dürnten</title>
+
+		<!-- URL der Webseite, die aufgerufen werden soll -->
+		<link>http://www.refduernten.ch/kirchenchor</link>
+		
+		<!-- Beschreibung des Podcast -->
+		 <language>de-de </language>
+
+		<description>Podcast Telefonklingel</description>
+		<item>
+			
+			<!-- Titel der mp3-Datei, wie er in iTunes erscheint -->
+			<title>MIDI Sopran</title>
+			<!--<link>
+
+				URL der Text-Datei 
+								
+				</link>-->
+			
+			<!-- Beschreibung der Datei, die bereitgestellt ist -->
+			<description>Sopran-Stimme</description>
+
+			<!--URL der Datei, die bereitgestellt ist (hier: mp3-Datei) -->
+			<enclosure url="http://www.refduernten.ch/content/e14561/e12463/e15420/e15577/e15789/Ostern2013_S.mp3" length="3400000" type="audio/mpeg"/>
+			
+			<comments>http://ekzemplo.com/entry/4403/comments</comments>
+			<pubDate>Mon, 14 Jan 2013 11:03:14 +0100</pubDate>
+		</item>
+		
+	</channel>
+</rss>

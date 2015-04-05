@@ -795,7 +795,114 @@ open $LOGFILE, ">>../Data/SolarLog.txt" || die "Logfile Solarlog nicht gefunden\
 #print $LOGFILE "Pumpedaten lesen: oldPumpelaufzeit: $oldPumpelaufzeit\toldPumpestatus: $oldPumpestatus\tlastStartzeit: $Pumpedatei[8]\tlaufzeit: $laufzeit\n";
 #print $LOGFILE "anzPumpedateiZeilen: $anzPumpedateiZeilen\n";
 
-close($LOGFILE);
+			close($LOGFILE);
+			my $istheute=0;
+
+			open $SOLARTEMPERATURMITTEL, "<../Data/SolarTemperaturMittel.txt" || die "SolarTemperaturdaten nicht gefunden";
+			my @TemperaturMittelArray = <$SOLARTEMPERATURMITTEL>;
+			chomp(@TemperaturMittelArray);
+			
+			
+	#		@TemperaturMittelArray = grep length( $_ ), @TemperaturMittelArray;
+			
+			my $anzTemperaturMittelZeilen=@TemperaturMittelArray;
+
+			open my $TESTFILE, ">>../Data/testLog.txt" || die "Z 130 testlog nicht gefunden\n";
+
+			open my $TESTMITTEL, "<../Data/SolarTemperaturMittel.txt" || die "SolarTemperaturdaten nicht gefunden";
+			my @testMittelArray = <$TESTMITTEL>;
+			printf "*testMittelArray vor*<br>";
+			my @blankarray;
+			my @realarray;
+#			foreach(@testMittelArray)
+#			{
+#				printf "*$_*<br>";
+#			}
+			
+			my $lastLine = $TemperaturMittelArray[$anzTemperaturMittelZeilen-1];
+			my @zeilenarray = split("\t",$lastLine);
+			my $anzZeilen=@zeilenarray;
+			printf  "zeilenarray anzZeilen: *$anzZeilen*<br>";
+			
+			my $zeilendatum = $zeilenarray[0];
+			print $TESTFILE "zeilendatum raw: *$zeilendatum*\t";
+			my @zeilendatumarray = split('\.',$zeilendatum);
+			 my $chunk;
+			 my $anzchunk = @zeilendatumarray;
+			 print $TESTFILE "*$zeilendatum* \t anzchunk: *$anzchunk*\t";
+			 printf  "*$zeilendatum*  anzchunk: *$anzchunk*<br>";
+			 
+	#		 foreach(@zeilendatumarray)
+	#		 {
+	#		 print $TESTFILE  "*$_\n";
+	#		 }
+			 
+			
+			
+			my $zeilentag = $zeilendatumarray[0];
+			$zeilentag += 0;
+			my $zeilenmonat = $zeilendatumarray[0];
+			$zeilenmonat += 0;
+			print $TESTFILE "tag: $tag, aus Zeile: $zeilentag monat: $monat, aus zeile: $zeilendatumarray[1]\n";
+			printf  "tag: $tag, aus Zeile: $zeilentag monat: $monat, aus zeile: $zeilendatumarray[1]<br>";
+
+			if (($zeilendatumarray[0] == $tag) && ($zeilendatumarray[1] == $monat))
+			{
+			 	$istheute = 1;
+			}
+			
+			
+			#print $TESTFILE "anz arrayzeilen: $anzTemperaturMittelZeilen\n";
+			print $TESTFILE "lastLine: $lastLine\n";
+			print $TESTFILE "zeilendatum: $zeilendatum $stunde:$min istheute: $istheute\n";
+			printf  "lastLine: $lastLine<br>";
+			printf  "zeilendatum: $zeilendatum $stunde:$min istheute: $istheute<br>";
+			#my @newTemperaturMittelArray = grep /\S/, @TemperaturMittelArray;
+			#my $anznewTemperaturMittelZeilen=@newTemperaturMittelArray;
+			#print $TESTFILE "anz newarrayzeilen  vorher: $anznewTemperaturMittelZeilen\n";
+
+
+
+			my $Stundenzeile=0;
+				my $minimum = 5.0;
+				my $maximum = 30.0;
+
+			my $Kollektortemperaturmittelwert = int($minimum + rand($maximum - $minimum));
+			
+			if ($anzTemperaturMittelZeilen && $istheute) # schon Zeile(n) vorhanden
+			{
+				if ($anzZeilen < 25)
+				{
+					$Stundenzeile = $TemperaturMittelArray[$anzTemperaturMittelZeilen-1]; # letzte Zeile lesen
+				
+					$TemperaturMittelArray[$anzTemperaturMittelZeilen-1]= "$Stundenzeile\t$Kollektortemperaturmittelwert";
+				}				
+			}
+			else		# neue Zeile anlegen
+			{
+				# Datum tab Aussentemperatur tab Stundenmittelwerte
+				$Stundenzeile= "$oldTag.$oldMonat.$oldJahr\t$Kollektortemperaturmittelwert";
+				$TemperaturMittelArray[$anzTemperaturMittelZeilen] = $Stundenzeile;
+			}
+			
+			# TemperaturMittelArray schreiben
+			open $SOLARTEMPERATURMITTEL, ">../Data/SolarTemperaturMittel.txt" || die "SolarTemperaturdaten nicht gefunden";
+			foreach (@TemperaturMittelArray)
+			{
+				print $SOLARTEMPERATURMITTEL "$_\n";
+			}
+			
+			close ($SOLARTEMPERATURMITTEL);
+
+			close $TESTFILE;
+
+			close($SOLARTEMPERATURMITTEL);
+
+
+
+
+
+
 
 
 
@@ -858,6 +965,11 @@ else
 	#	Aussentemperatur speichern
 	my @TemperaturArray=0;
 	my $anzTemperaturZeilen=0;
+	
+	
+	
+	
+	
 	
 	#
 	#	Temperaturdaten speichern. (Kopie von home.pl)
@@ -1061,6 +1173,7 @@ else
 	#
 	#	Mittelwerte bei voller Stunde in SolarTemperaturMittel und SolarPumpeErtrag speichern
 	#
+			my $istheute = 0;
 
 	#	if ($oldMinute % 5 == 0) # Testphase
 	
@@ -1087,13 +1200,64 @@ else
 			#open LOGFILE, ">>../Data/SolarLog.txt" || die "Elektrodatei: Logfile nicht gefunden\n";
 			#print LOGFILE "fullKollektortemperaturmittelwert: $fullKollektortemperaturmittelwert\tKollektortemperaturmittelwert:  $Kollektortemperaturmittelwert\n";
 			#close LOGFILE;
+
+			open my $TESTMITTEL, "<../Data/SolarTemperaturMittel.txt" || die "SolarTemperaturdaten nicht gefunden";
+			my @testMittelArray = <$TESTMITTEL>;
+			
+			
+
+			my $testMittelZeilen=@testMittelArray;
+			chomp(@testMittelArray);
+
 			
 				
 			open $SOLARTEMPERATURMITTEL, "<../Data/SolarTemperaturMittel.txt" || die "SolarTemperaturdaten nicht gefunden";
 			my @TemperaturMittelArray = <$SOLARTEMPERATURMITTEL>;
 			my $anzTemperaturMittelZeilen=@TemperaturMittelArray;
 			chomp(@TemperaturMittelArray);
+			
+			
+			my @chomparray = my $TemperaturMittelArray;
+			###
+			open my $TESTFILE, ">>../Data/testLog.txt" || die "Z 130 testlog nicht gefunden\n";
+			my $lastLine = $TemperaturMittelArray[$anzTemperaturMittelZeilen-1];
+			my @zeilenarray = split("\t",$lastLine);
+			my $zeilendatum = $zeilenarray[0];
+			print $TESTFILE "zeilendatum raw: *$zeilendatum*\t";
+			my @zeilendatumarray = split('\.',$zeilendatum);
+			 my $chunk;
+			 my $anzchunk = @zeilendatumarray;
+			 print $TESTFILE "*$zeilendatum* \t anzchunk: *$anzchunk*\t";
+
 			my $Stundenzeile=0;
+			if ($anzTemperaturMittelZeilen && $istheute) # schon Zeile(n) vorhanden
+			{
+				$Stundenzeile = $TemperaturMittelArray[$anzTemperaturMittelZeilen-1]; # letzte Zeile lesen
+				
+				$TemperaturMittelArray[$anzTemperaturMittelZeilen-1]= "$TemperaturMittelArray[$anzTemperaturMittelZeilen-1]\t$Kollektortemperaturmittelwert";
+								
+			}
+			else # neue Zeile anlegen
+			{
+				# Datum tab Aussentemperatur tab Stundenmittelwerte
+				$Stundenzeile= "$oldTag.$oldMonat.$oldJahr\t$Kollektortemperaturmittelwert";
+				$TemperaturMittelArray[$anzTemperaturMittelZeilen] = $Stundenzeile;
+			}
+			
+			# TemperaturMittelArray schreiben
+			open $SOLARTEMPERATURMITTEL, ">../Data/SolarTemperaturMittel.txt" || die "SolarTemperaturdaten nicht gefunden";
+			foreach (@TemperaturMittelArray)
+			{
+				print $SOLARTEMPERATURMITTEL "$_\n";
+			}
+			
+			close ($SOLARTEMPERATURMITTEL);
+
+			
+			
+			###
+			
+			$Stundenzeile=0;
 			if ($anzTemperaturMittelZeilen) # schon Zeile(n) vorhanden
 			{
 				$Stundenzeile = $TemperaturMittelArray[$anzTemperaturMittelZeilen-1]; # letzte Zeile lesen

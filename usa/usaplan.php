@@ -1,4 +1,4 @@
-<?
+<?php
 	$db=mysql_connect('myni3576.sql.mhs.ch','myni3576','ruelczhedcu');
 	#$db=mysqli_connect('myni3576.sql.mhs.ch','myni3576','ruelczhedcu','meine_db');
 

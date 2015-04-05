@@ -60,6 +60,8 @@ if(document.getElementById) document.getElementById("nd1").style.display = "none
     	<li><a href="Informatik/Blatt_Informatik.htm">Informatik</a></li>
     	<li><a href="fotologin.php">Fotoalbum</a></li>
     	<li><a href="kirchenchor/chor.php">Chor</a></li>
+    	<li><a href="kirchenchor/chor_midi.php">Chor MIDI</a></li>
+    	<li><a href="kirchenchor/chor_archiv.php">Archiv</a></li>
     	<li><a href="kirchenchor/chor_login.php">admin</a></li>
     	<li><a href="usa/usa_sql_old.php">USA</a></li>
 

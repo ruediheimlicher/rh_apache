@@ -1,0 +1,26 @@
+.playerabschnitt
+{
+	position:relative; 
+	left:0px;
+	top:10px;
+	width:520px;
+	height:90px;
+	background-color:#fb2; 
+	border:1px solid #fbf;
+	border-color:#fbc;
+
+}
+
+.markerabschnitt
+{
+	position:absolute; 
+	left:0px;
+	top:58px;
+	width:520px;
+	height:20px;
+	background-color:none; 
+	/*border:1px solid #fbf;
+	border-color:#fbc;*/
+	z-index:1003;
+
+}

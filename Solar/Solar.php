@@ -274,7 +274,7 @@
 				<td width="40px"><div align="right"><?php echo $DatumTag;?></div></td>
 				<td width="18px">&nbsp;</td>
 				<td width="94px"><div align="left">Zeit:</div></td>
-				<td><div align="right"><?phpecho $DatumZeit;?></div></td>
+				<td><div align="right"><?php echo $DatumZeit;?></div></td>
 				<td>&nbsp;</td>
 			  </tr>
 			</table>
@@ -283,48 +283,83 @@
 			<table class=ohne border="0" cellpadding="0px">
 			  <tr class="text">
 				<td width="154" class="basic"><div align="left">Kollektor-Vorlauf</div></td>
-				<td width="30" class="basic"><div align="right"><?echo number_format(($Daten[2]/2),1) ;?></div></td>
+				<td width="30" class="basic"><div align="right"><?php echo number_format(($Daten[2]/2),1) ;?></div></td>
 				<td width="16" class="basic"><div align="right"><span class="Stil3">°C</span></div></td>
 				<td width="21" class="basic">&nbsp;</td>
 				<td width="80" class="basic"><div align="left">Umwälzpumpe</div></td>
-				<td width="40" class="basic"><?echo $PumpeStatus ?></td>
+				<td width="40" class="basic"><?php echo $PumpeStatus ?></td>
 			  </tr>
 			  <tr class="text">
 				<td width="154" class="basic"><div align="left">Kollektor-Rücklauf</div></td>
-				<td width="30" class="basic"><div align="right"><?echo number_format(($Daten[3]/2),1);?></div></td>
+				<td width="30" class="basic"><div align="right"><?php echo number_format(($Daten[3]/2),1);?></div></td>
 				<td width="16" class="basic"><div align="right"><span class="Stil3">°C</span></div></td>
 			  </tr>
 			  <tr class="text">
 				<td width="154" class="basic"><div align="left">Kollektortemperatur</div></td>
-				<td width="30" class="basic"><div align="right"><?echo number_format(($Daten[7]/2),1);?></div></td>
+				<td width="30" class="basic"><div align="right"><?php echo number_format(($Daten[7]/2),1);?></div></td>
 				<td width="16" class="basic"><div align="right"><span class="Stil3">°C</span></div></td>
 			  </tr>
 		
 			  <tr class="text">
 				<td width="154" class="basic"><div align="left">Boiler oben</div></td>
-				<td width="30" class="basic"><div align="right"><?echo number_format(($Daten[6]/2),1);?></div></td>
+				<td width="30" class="basic"><div align="right"><?php echo number_format(($Daten[6]/2),1);?></div></td>
 				<td width="16" class="basic"><div align="right"><span class="Stil3">°C</span></div></td>
 				<td width="21" class="basic">&nbsp;</td>
 				<td width="80" class="basic"><div align="left">Elektroeinsatz</div></td>
-				<td width="40" class="basic"><?echo $ElektroStatus ?></td>
+				<td width="40" class="basic"><?php echo $ElektroStatus ?></td>
 			  </tr>
 			  <tr class="text">
 				<td width="154" class="basic"><div align="left">Boiler mitte</div></td>
-				<td width="30" class="basic"><div align="right"><?echo number_format(($Daten[5]/2),1);?></div></td>
+				<td width="30" class="basic"><div align="right"><?php echo number_format(($Daten[5]/2),1);?></div></td>
 				<td width="16" class="basic"><div align="right"><span class="Stil3">°C</span></div></td>
 			  </tr>
 		
 			  <tr class="text">
 				<td width="154" class="basic"><div align="left">Boiler unten</div></td>
-				<td width="30" class="basic"><div align="right"><?echo number_format(($Daten[4]/2),1);?></div></td>
+				<td width="30" class="basic"><div align="right"><?php echo number_format(($Daten[4]/2),1);?></div></td>
 				<td width="16" class="basic"><div align="right"><span class="Stil3">°C</span></div></td>
 			  </tr>
 			</table>
 	   
 		</div> <!-- solardatenabschnitt --!>
+		
+		<div class = "solarboilerabschnitt">
+		
+			<div style="position:relative; top:8px; left:10px;">
+			<img src="../Bilder/Solar.png" width="140" height=auto alt="Falkenstr. 20 8630 Rüti">
+			
+			</div><!--Bild Boiler--!>
+			
+			<div style="position:absolute; top:8px; left:80px;">
+			<p class = "boilerrot"><?php echo number_format(($Daten[7]/2),1) ;?> °C</p>
+			</div><!--Koll temp --!>
+
+			<div style="position:absolute; top:80px; left:110px;">
+			<p class = "boilerrot"><?php echo number_format(($Daten[2]/2),1) ;?></p>
+			</div><!--Koll Vorlauf --!>
+
+			<div style="position:absolute; top:80px; left: 20px;">
+			<p class = "boilerblau"><?php echo number_format(($Daten[3]/2),1) ;?></p>
+			</div><!--Koll Ruecklauflauf --!>
+
+			<div style="position:absolute; top:92px; left: 64px;">
+			<p class = "boilerweiss" ><?php echo number_format(($Daten[6]/2),1) ;?></p>
+			</div><!--Boiler oben --!>
+
+			<div style="position:absolute; top:128px; left: 64px;">
+			<p class = "boilerweiss" ><?php echo number_format(($Daten[5]/2),1) ;?></p>
+			</div><!--Boiler mitte --!>
+
+			<div style="position:absolute; top:162px; left: 64px;">
+			<p class = "boilerweiss" ><?php echo number_format(($Daten[4]/2),1) ;?></p>
+			</div><!--Boiler unten --!>
+
+
+		</div ><!--solarboilerabschnitt"--!>
+
 			
 		<div class = "kalenderabschnitt">	
-		<?php
+		<?php 
 			
 			
 			# POST auswerten
@@ -700,7 +735,7 @@
 		
 		
 			<!--
-	 		<textarea name="Solardaten" cols="40" rows="5" ><?echo ($SolardatenText);?></textarea>
+	 		<textarea name="Solardaten" cols="40" rows="5" ><?php echo ($SolardatenText);?></textarea>
 	 		-->
 	 		
 	 		<?php

@@ -1,0 +1,126 @@
+zeilendatum raw: *28.03.15*	*28.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 28 monat: 03, aus zeile: 03
+lastLine: 28.03.15
+zeilendatum: 28.03.15 15:29 istheute: 
+zeilendatum raw: *28.03.15*	*28.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 28 monat: 03, aus zeile: 03
+lastLine: 28.03.15
+zeilendatum: 28.03.15 15:29 istheute: 
+zeilendatum raw: *28.03.15*	*28.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 28 monat: 03, aus zeile: 03
+lastLine: 28.03.15
+zeilendatum: 28.03.15 15:30 istheute: 
+zeilendatum raw: *28.03.15*	*28.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 28 monat: 03, aus zeile: 03
+lastLine: 28.03.15
+zeilendatum: 28.03.15 15:31 istheute: 
+zeilendatum raw: *28.03.15*	*28.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 28 monat: 03, aus zeile: 03
+lastLine: 28.03.15
+zeilendatum: 28.03.15 15:32 istheute: 
+zeilendatum raw: *28.03.15*	*28.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 28 monat: 03, aus zeile: 03
+lastLine: 28.03.15
+zeilendatum: 28.03.15 15:33 istheute: 0
+zeilendatum raw: *02.02.15*	*02.02.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 2 monat: 03, aus zeile: 02
+lastLine: 02.02.15	3.10	3.04	
+zeilendatum: 02.02.15 15:36 istheute: 0
+zeilendatum raw: *02.02.15*	*02.02.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 2 monat: 03, aus zeile: 02
+lastLine: 02.02.15	3.10	3.04	
+zeilendatum: 02.02.15 15:37 istheute: 0
+zeilendatum raw: *02.02.15*	*02.02.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 2 monat: 03, aus zeile: 02
+lastLine: 02.02.15	3.10	3.04	
+zeilendatum: 02.02.15 15:39 istheute: 0
+zeilendatum raw: *02.02.15*	*02.02.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 2 monat: 03, aus zeile: 02
+lastLine: 02.02.15	3.10	3.04	
+zeilendatum: 02.02.15 15:47 istheute: 0
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14
+zeilendatum: 30.03.15 15:50 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5
+zeilendatum: 30.03.15 15:52 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14
+zeilendatum: 30.03.15 15:52 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16
+zeilendatum: 30.03.15 15:52 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9
+zeilendatum: 30.03.15 16:06 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27
+zeilendatum: 30.03.15 16:06 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19
+zeilendatum: 30.03.15 16:07 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15
+zeilendatum: 30.03.15 16:07 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22
+zeilendatum: 30.03.15 16:09 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26
+zeilendatum: 30.03.15 16:10 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23	16
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23	16	15
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23	16	15	23
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23	16	15	23	29
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23	16	15	23	29	23
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23	16	15	23	29	23	24
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23	16	15	23	29	23	24	18
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23	16	15	23	29	23	24	18	13
+zeilendatum: 30.03.15 16:12 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23	16	15	23	29	23	24	18	13	9
+zeilendatum: 30.03.15 16:13 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23	16	15	23	29	23	24	18	13	9
+zeilendatum: 30.03.15 16:13 istheute: 1
+zeilendatum raw: *29.03.15*	*29.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 29 monat: 03, aus zeile: 03
+lastLine: 29.03.15	14	5	14	16	9	27	19	15	22	26	5	5	24	10	23	16	15	23	29	23	24	18	13	9
+zeilendatum: 29.03.15 16:14 istheute: 0
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	18
+zeilendatum: 30.03.15 20:25 istheute: 1
+zeilendatum raw: *30.03.15*	*30.03.15* 	 anzchunk: *3*	tag: 30, aus Zeile: 30 monat: 03, aus zeile: 03
+lastLine: 30.03.15	18	29
+zeilendatum: 30.03.15 20:25 istheute: 1
+zeilendatum raw: *31.03.15*	*31.03.15* 	 anzchunk: *3*	tag: 31, aus Zeile: 31 monat: 03, aus zeile: 03
+lastLine: 31.03.15
+zeilendatum: 31.03.15 17:36 istheute: 1
+zeilendatum raw: *31.03.15*	*31.03.15* 	 anzchunk: *3*	tag: 31, aus Zeile: 31 monat: 03, aus zeile: 03
+lastLine: 31.03.15	6
+zeilendatum: 31.03.15 17:36 istheute: 1
+zeilendatum raw: *31.03.15*	*31.03.15* 	 anzchunk: *3*	tag: 04, aus Zeile: 31 monat: 04, aus zeile: 03
+lastLine: 31.03.15	6	10
+zeilendatum: 31.03.15 17:46 istheute: 0
+zeilendatum raw: *04.04.15*	*04.04.15* 	 anzchunk: *3*	tag: 04, aus Zeile: 4 monat: 04, aus zeile: 04
+lastLine: 04.04.15	20
+zeilendatum: 04.04.15 17:46 istheute: 1
