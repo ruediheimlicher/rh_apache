@@ -29,10 +29,25 @@ include("pwd.php");
 <script type="text/javascript" src="../Audio/Player/jplayer/jquery.jplayer.min.js"></script>
 
 <script type="text/javascript">
-var playerwerk = "http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3";
+//var playerwerk = "http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3";
+
+//var playerwerk = "../Data/kirchenchor/Lieder/Test/Requiem2_A.mp3";
+
+// vom KG-Netz
+var playerwerk = "http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e1903/Requiem2_A.mp3";
+
+// von home
+//var playerwerk = "http://www.ruediheimlicher.ch/Data/kirchenchor/Lieder/Test/Requiem2_A.mp3";
+
+
+//var playerwerk = "../Data/kirchenchor/Lieder/Test/Cum_sanctis_S.mp3";
+//var playerwerk = "http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e1839/Cum_sanctis_S.mp3";
+
+
 var playerstimme = "Bass";
     
-$(document).ready(function(){
+$(document).ready(function()
+{
     $("#jquery_jplayer_1").jPlayer(
     {
     ready: function () 
@@ -720,11 +735,11 @@ print '	<div class="registerwahlabschnitt"> ';
 		#print '<br><p>register: '.$register.'</p>';
 print '</div> '; # registerwahlabschnitt
 
-   ?>
+?>
    <script type="text/javascript">
-   			playerwerk  = "<?php echo $playpfad; ?>";
-   			
-		</script>';
+   	//playerwerk  = "<?php echo $playpfad; ?>";
+   	//playerwerk  = "http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e1839/Cum_sanctis_S.mp3";
+	</script>
 
 <?php
 print '<div class = "audioabschnitt">	';
@@ -766,8 +781,8 @@ print '<div class = "audioabschnitt">	';
 
 				print '<div class="playerabschnitt">';
 				#pfad: ftp://ruediheimlicher:@ruediheimlicher.ch//public_html/Audio/Player/jplayer/jplayer.blue.monday.css
-				#print '
-				?>
+				print '
+				
 				  <div id="jquery_jplayer_1" class="jp-jplayer"></div>
 				  
 				  <div id="jp_container_1" class="jp-audio">
@@ -818,8 +833,9 @@ print '<div class = "audioabschnitt">	';
 					  </div>
 					</div>
 				  </div>
+
 				  
-				  <?php 
+				 ';
 				
 				print '<div class="markerabschnitt">';
 					# Lineal-Tabelle

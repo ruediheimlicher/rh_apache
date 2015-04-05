@@ -24,6 +24,23 @@ include("pwd.php");
 <title>Chor MIDI Admin</title>
  
 <link href="chor.css" rel="stylesheet" type="text/css" />
+
+   <script type="text/javascript">
+    function makeSelection(frm, id) 
+    {
+      if(!frm || !id)
+        return;
+      var elem = frm.elements[id];
+      if(!elem)
+        return;
+      var val = elem.options[elem.selectedIndex].value;
+      opener.targetElement.value = val;
+      this.close();
+    }
+    </script>
+
+
+
 </head>
 
 <body class="liste">
@@ -32,6 +49,16 @@ include("pwd.php");
 <div><h1 class="lernmedien">Chor MIDI Admin</h1></div>
 	
 <!--<h2 class="lernmedien">Admin</h2>-->
+<!--https://www.daniweb.com/web-development/javascript-dhtml-ajax/threads/119146/using-a-popup-to-fill-an-input-field -->
+ <form id="frm" name="frm" action="#">
+    <span>Names: </span>
+    <select name="nameSelection">
+      <option value="holly">Holly</option>
+      <option value="golly">Golly</option>
+      <option value="molly">Molly</option>
+    </select>
+    <input type="button" value="Select Name" onclick="makeSelection(this.form, 'nameSelection');">
+  </form>
 
 <?php
 #phpinfo();
@@ -441,10 +468,6 @@ if (isset($_POST['sent']))
 					print '</form><br>';
 
 	}
-
-
-
-
 	else
 	{
 
@@ -458,7 +481,11 @@ if (isset($_POST['sent']))
 		<table>
 			<tr>
 				<td><p class="nameneingabe">aktiv:</td>
-				<td><input size="4" maxlength="40" name="neuesaktiv"></td>
+				<td>
+				    <input type="radio" id="yes" name="neuesaktiv" value="1" checked = "checked"><label for="neuesaktiv" > Ja</label> 
+    				<input type="radio" id="no" name="neuesaktiv" value="0"><label for="neuesaktiv"> Nein</label> 
+				</td>
+				<!--<td><input size="4" maxlength="40" name="neuesaktiv" value = "1"></td> -->
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">event:</td>
@@ -482,7 +509,15 @@ if (isset($_POST['sent']))
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">Register:</td>
-				<td><input size="40" maxlength="40" name="neuesregister"></td>
+				<td class = "registereingabe">
+				 
+        			<input type="radio" id="sopran" name="neuesregister" value="sopran" checked = "checked"><label for="sopran" > Sopran</label> 
+    				<input type="radio" id="alt" name="neuesregister" value="alt"><label for="alt"> Alt</label> 
+					<input type="radio" id="tenor" name="neuesregister" value="tenor"><label for="tenor"> Tenor</label> 
+					<input type="radio" id="bass" name="neuesregister" value="bass"><label for="bass"> Bass</label> 
+  				
+
+				<!--<input size="40" maxlength="40" name="neuesregister"></td> -->
 			</tr>
 						<tr>
 				<td><p class="nameneingabe">Stimme 1:</td>

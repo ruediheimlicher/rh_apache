@@ -816,7 +816,8 @@ print '<div class = "fileabschnitt">';
    		<script type="text/javascript">
    			//playerstueck = "../Data/kirchenchor/Konzert_2013/Missa/1_Kyrie/Kyrie_B_mix.mp3";
    			playerstueck  = "<?php echo $playpfad; ?>";
-   			
+   			 //playerstueck  = "http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e1839/Cum_sanctis_S.mp3";
+
 		</script>
 <?php
 print '<p> playpfad: '.$playpfad.'</p>';

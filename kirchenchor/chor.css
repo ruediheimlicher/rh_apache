@@ -1364,6 +1364,18 @@ td.listetabelleneingabe
 	<!--cell-spacing:4px; -->
 }
 
+td.registereingabe
+{ 
+	color: #007F16;
+	border:none; /*1px solid #007F16; */
+	text-align:left; 
+	overflow:hidden;
+	<!--cell-spacing:4px; -->
+	width: 300px;
+	height:30px;
+}
+
+
 tr.admintabelletablerow
 { 
 	color: #007F16;
@@ -1374,5 +1386,16 @@ tr.admintabelletablerow
 	<!--cell-spacing:4px; -->
 }
 
+fieldset.register { 
+    display: block;
+    margin-left: 20px;
+    margin-right: 2px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    height:200;
+    border: 4px groove (internal value);
+}
 
 
