@@ -127,7 +127,7 @@ body.archiv
 {
 	position:absolute; 
 	top:80px;
-	left: 550px;
+	left: 460px;
 	width:700px; 
 	height:100px;
     /*z-index:1; */
@@ -138,9 +138,9 @@ body.archiv
 .audioabschnitt
 {
 	position:absolute; 
-	left:560px;
+	left:460px;
 	top:170px;
-	width:560px;
+	width:660px;
 	height:520px;
 	background-color:#abf; 
 	border:1px solid #abf;
@@ -311,7 +311,7 @@ h2.menutitel
 
 h1.titel
  {
-	font-size:22px;
+	font-size:18px;
 	font-weight:bold;
 	color: blue;
 	margin-top:12px;
@@ -323,7 +323,7 @@ h1.titel
 
 h2.eventtitel
  {
-	font-size:18px;
+	font-size:16px;
 	font-weight:bold;
 	color: blue;
 	margin-top:0px;
@@ -381,7 +381,7 @@ h2.suchtitel
 
 h2.stuecktitel
  {
-	font-size:18px;
+	font-size:14px;
 	font-weight:bold;
 	color: blue;
 	margin-top:4px;
@@ -444,7 +444,7 @@ h3.erklaerung
 	font-size:10pt;
 	font-weight:normal;
 	color: blue;
-	margin:10px;
+	margin-top:100px;
 	margin-left:10px;
 	padding:1px;
 	line-height:1.5;
@@ -551,7 +551,7 @@ h3.auswahluntertitel
 	position:absolute; 
 	left:30px;
 	top:170px;
-	width:500px;
+	width:420px;
 	height:auto;
 	background-color:#bdf; 
 }
@@ -566,7 +566,7 @@ h3.auswahluntertitel
 	margin:10px;
 	
 	
-	width:460px;
+	width:360px;
 	min-height:60px;
 	
 	background-color:#bdf; 
@@ -579,7 +579,7 @@ h3.auswahluntertitel
 	position:absolute; 
 	left:8px;
 	top:8px;
-	width:160px;
+	width:140px;
 	height:auto;
 	/*background-color:#d0f; */
 }
@@ -613,8 +613,8 @@ h3.auswahluntertitel
 	/*border:1px solid #808;*/
 	margin:1px;
 	position:relative; 
-	left:200px;
-	width:240px;
+	left:140px;
+	width:200px;
 	height:auto;
 	background-color:#acf; 
 }
@@ -644,7 +644,7 @@ h3.auswahluntertitel
 	top:0px;
 	margin:8px;
 	padding:4px;
-	width:480px;
+	width:390px;
 	min-height:100px;
 	overflow:hidden;
 	background-color:#cef; 
@@ -672,10 +672,39 @@ h3.auswahluntertitel
 	margin:20px;
 	left:0px;
 	top:0px;
-	width:510px;
+	width:610px;
 	height:70px; /* 50px*/
 	
 }
+.safariplayerabschnitt
+{
+	position:absolute; 
+	padding-top:2px;
+	padding-bottom:8px;
+	padding-left:10px;
+	margin:10px;
+	left:0px;
+	top:20px;
+	width:610px;
+	height:100px; /* 50px*/
+	background:#3afff6;
+}
+
+.safarimarkerabschnitt
+{
+	position:relative; 
+	padding-top:2px;
+	padding-bottom:8px;
+	padding-left:0px;
+	margin:0px;
+	left:0px;
+	top:0px;
+	width:310px;
+	height:30px; /* 50px*/
+	/*background:#3affff;*/
+}
+
+
 
 .headerabschnitt
 {
@@ -851,12 +880,12 @@ ul.register-nav
 	margin:0px;
 	padding:0px;
 	list-style:none;
-	line-height:40px;
+	line-height:60px;
 	/*background:#3a00f6;*/
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	float:left;
-	width:580px;
+	width:680px;
 
 }
 
@@ -865,9 +894,9 @@ ul.register-nav  a
 	padding:1px;
 	margin-left:0px;
 	margin-right:12px;
-	width:100px;
-	height:40px;
-	font-size: 24px;
+	width:120px;
+	height:60px;
+	font-size: 28px;
 	background:#3aacf6;
 	color:#f3f3fa;
 	float:left;
@@ -1159,9 +1188,9 @@ td.text_center
 
 table.markertabelle
 {
-margin-left :102px;
+margin-left :180px;
 margin-top:-3px;
-width:410px;*/
+width:400px;*/
 }
 
  th.marker

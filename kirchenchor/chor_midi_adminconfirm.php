@@ -546,7 +546,7 @@ else
 
 # Bezeichnung richtig?
 
-	}	# if file da
+}	# if file da
 } # upload
 
 print '<br><form action="chor_midi_admin.php" method = "post" >';
