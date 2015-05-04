@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*
 
 Chor Admin Datenbank 
@@ -7,10 +8,11 @@ Chor Admin Datenbank
 include("pwd.php");
 
 /* verbinden mit db */
-	$db=mysql_connect('localhost','root','Ideur0047');
-
-	mysql_set_charset('utf8',$db);
-	mysql_select_db("midi", $db); 
+	#$db=mysql_connect('localhost','root','Ideur0047');
+	#$db = include "../bank.php";
+	$db = include "chor_db.php";
+	#mysql_set_charset('utf8',$db);
+	#mysql_select_db("midi", $db); 
 
 ?>
 
@@ -98,17 +100,18 @@ function submitform(registername)
 
 <?php
 #phpinfo();
+#date_default_timezone_set(Europe/Zurich);
 
 $safaribrowser = strpos(getenv('HTTP_USER_AGENT'),"Safari");
 #echo '<br>'.$browser.' pos: '.strpos("Safari",$browser).'<br>';
 #if (strpos($browser, "Safari"))
 if ($safaribrowser)
 {
-echo "<br>Browser ist Safari<br>";
+	#echo "<br>Browser ist Safari<br>";
 }
 else
 {
-	echo "<br>Browser ist nicht Safari<br>";
+	#echo "<br>Browser ist nicht Safari<br>";
 
 }
 $datum="";
@@ -138,22 +141,183 @@ $home_ip = $set['home_ip'];
 $remote_ip=$_SERVER['REMOTE_ADDR'];
 $home_ip = $set['home_ip'];
 $zeit = $_SERVER['REQUEST_TIME'];
+
 #print_r($_SESSION);
 #print 'home_ip: '.$set['home_ip'].' remote_ip: '.$remote_ip.'<br>';
-#echo $_SERVER['HTTP_HOST'];  
-#print 'session_id: '.session_id().'<br>';
+#echo $_SERVER['HTTP_HOST'],"<br>"; 
 $session_id = session_id();
+$aktuellestunde = date("H",$zeit);
+ print ' aktuellestunde: '.$aktuellestunde.' session-stunde: '.$_SESSION['stunde'].'<br>';
+
+$neuerevent=0;
+
+ if (isset($_SESSION['stunde']))
+ {
+ 	if ($_SESSION['stunde'] == $aktuellestunde) # gleicher Anlauf
+ 	{
+ 		$neuerevent=0;
+ 	}
+ 	else # weiterer Anlauf
+ 	{
+ 		$neuerevent=1;
+ 		$_SESSION['stunde'] = date("H",$zeit);
+ 	}
+ 	print 'sessionstunde: '.$_SESSION['stunde'].'<br>';
+ 	
+ }
+ else
+ {
+ 	print 'neue sessionstunde: '.date("H",$zeit).'<br>';
+ 	$_SESSION['stunde'] = date("H",$zeit);
+ 	
+ 	$neuerevent=1;
+ }
+ print ' neuerevent: '.$neuerevent.'<br>';
+#print ' session_id: '.$session_id.'<br>';
 #print 'ip: '.$remote_ip.'<br>';
 #print 'zeit: '.$zeit.'<br>';
 
 $datum = date("d.m.Y",$zeit);
 $uhrzeit = date("H:i",$zeit);
-#echo $datum,"  ",$uhrzeit," Uhr<br>";
+
+
+echo "Datum: ",$datum,"  Zeit: ",$uhrzeit," Uhr<br>";
+#http://www.traum-projekt.com/forum/19-traum-dynamik/131064-datum-format-yyyy-mm-dd.html
+
+
+$sql_datum = date('Y-m-d', strtotime($datum));
+
+$kalenderjahr = date("Y")*1;
+$kalendermonat = date("m")*1;
+$kalendertag = date("d")*1;
+#print 'kalenderjahr: '.$kalenderjahr.' kalendermonat: '.$kalendermonat.' kalendertag: '.$kalendertag.'<br>';
+
 
 $besucher = get_current_user();
 #print_r($_SERVER);
 $besucher = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-#echo $besucher," <br>";
+#echo "besucher: ", $besucher," <br>";
+
+$result_besuche = mysql_query("SELECT * FROM besucher WHERE ip  = '$remote_ip'", $db)or die(print '<p>Beim Suchen nach IP ist ein Fehler passiert: '.mysql_error().'</p>');
+#print mysql_error();
+$rowkontrolle = mysql_num_rows($result_besuche);
+if ($rowkontrolle > 1)
+{
+print 'rowkontrolle: '.$rowkontrolle.'<br>';
+}
+$besucherarray = array();
+
+$register = "";
+$sopran=0;
+$alt=0;
+$tenor=0;
+$bass=0;
+$alle=0;
+
+while ($stat = mysql_fetch_array($result_besuche) ) #
+{
+
+	//print 'in while stat:  stat[ip]: *'.$stat['ip'].'*  remote_ip: '.$remote_ip.' besuche: '.$stat['besuch'].'<br>';
+
+	if (($stat['ip'] == $remote_ip)   && !(in_array($remote_ip,$besucherarray)) ) 
+	{
+		#print_r($stat);
+		#print '<br>';
+		print 'in besuchbesucherarray: '.$stat['besuch'].'<br>';
+		$besucherarray[]=$stat['besuch']; # 
+		$besucher_session_id = $stat['session_id'];
+		#print 'session_id: '.$session_id.' besucher_session_id: '.$besucher_session_id.'<br>';
+
+		if (isset($stat['register']))
+		{
+			$register=$stat['register'];
+			print 'register: '.$register.' | ';
+		}
+		if (isset($stat['sopran']))
+		{
+			$sopran=$stat['sopran'];
+			print 'sopran: '.$sopran.' | ';
+		}
+		if (isset($stat['sopran']))
+		{
+			$alt=$stat['alt'];
+			print 'alt: '.$alt.' | ';
+		}
+		if (isset($stat['sopran']))
+		{
+			$tenor=$stat['tenor'];
+			print 'tenor: '.$tenor.' | ';
+		}
+		if (isset($stat['bass']))
+		{
+			$bass=$stat['bass'];
+			print 'bass: '.$bass.'<br>';
+		}
+		if (isset($stat['alle']))
+		{
+			$bass=$stat['alle'];
+			print 'alle: '.$alle.'<br>';
+		}
+
+	}
+	
+}
+
+$anzahlbesuche=0;
+if (count($besucherarray))
+{
+	$anzahlbesuche = $besucherarray[0]+1;
+}
+#print 'besuche neu: '.$anzahlbesuche.' besucher_session_id: '.$besucher_session_id.'<br>';
+
+if ($remote_ip == $home_ip) # nur at home anzeigen
+{
+	print 'besucher: '.$besucher.' * ';
+	print 'home_ip: '.$set['home_ip'].' remote_ip: '.$remote_ip.' ';
+	print 'besuche neu: '.$anzahlbesuche.' ';
+	print 'session_id: '.$session_id.' besucher_session_id: '.$besucher_session_id.'<br>';
+}
+
+
+#if (!($session_id == $besucher_session_id)) #Neue  Session
+
+{
+	if (count($besucherarray) )
+	{
+		print '<br>bisherige IP ip: '.$stat['ip'].'  home_ip: '.$set['home_ip'].' datum: '.$datum.'<br>';
+		
+		#if ( ! ($remote_ip == $home_ip))
+		{
+			mysql_query("UPDATE besucher SET besuch = '$anzahlbesuche' ,zeit = '$uhrzeit', datum = '$sql_datum', session_id = '$session_id'  WHERE ip = '$remote_ip'"); 
+			print 'error: ';
+			print_r(mysql_error());
+			print '<br>';
+			mysql_query("UPDATE besucher SET  kalendertag = '$kalendertag',kalendermonat = '$kalendermonat' ,kalenderjahr = '$kalenderjahr'   WHERE ip = '$remote_ip'"); 
+
+			
+		}
+	}
+	else
+	
+	{
+		print 'neue IP ip: *'.$stat['ip'].'*  home_ip: '.$set['home_ip'].'<br>';
+		$besuche = $anzahlbesuche+1;
+		print 'name: '.$besucher.' ';
+		print 'besuch: '.$besuche.' ';
+		print 'remote_ip: '.$remote_ip.' ';
+		print 'zeit: '.$uhrzeit.' ';
+		print 'datum: '.$datum.' ';
+		print 'session_id: '.$session_id.'<br>';
+		
+		$result_insert = mysql_query("INSERT INTO besucher (id,name,besuch,ip,zeit,datum,kalenderjahr, kalendermonat,kalendertag,session_id) VALUES (NULL,'$besucher','$besuche','$remote_ip','$uhrzeit','$sql_datum','$kalenderjahr','$kalendermonat','$kalendertag','$session_id')");
+		print_r(mysql_error());
+		print '<br>';
+		
+	}
+
+}
+//print_r($besucherarray);
+
 
 #CREATE TABLE neu_test AS SELECT * FROM test;
 $test=1;
@@ -195,10 +359,63 @@ $playpfad = "";
 $stimme  = "";
 
 $register = "";
-if (isset($_GET['register']))
+if (isset($_GET['register']) )
 {
-$register = $_GET['register']; # beim Klick auf Register
+	$register = $_GET['register']; # beim Klick auf Register
+	mysql_query("UPDATE besucher SET register = '$register'   WHERE ip = '$remote_ip'"); 
+	if ($register === "Sopran")
+	{
+		if ($neuerevent)
+		{
+			$sopran = $sopran + 1;
+			mysql_query("UPDATE besucher SET sopran = '$sopran'   WHERE ip = '$remote_ip'"); 
+		}
+	}
+
+	if ($register === "Alt")
+	{
+		if ($neuerevent)
+		{
+			$alt = $alt + 1;
+			mysql_query("UPDATE besucher SET alt = '$alt'   WHERE ip = '$remote_ip'"); 
+		}
+	}
+
+	if ($register === "Tenor")
+	{
+		if ($neuerevent)
+		{
+			$tenor = $tenor + 1;
+			mysql_query("UPDATE besucher SET tenor = '$tenor'   WHERE ip = '$remote_ip'");
+		} 
+	}
+
+
+	if ($register === "Bass")
+	{
+		if ($neuerevent)
+		{
+			$bass = $bass + 1;
+			mysql_query("UPDATE besucher SET bass = '$bass'   WHERE ip = '$remote_ip'"); 
+		}
+	}
+
+	if ($register === "Alle")
+	{
+		if ($neuerevent)
+		{
+		$alle = $alle + 1;
+		mysql_query("UPDATE besucher SET alle = '$alle'   WHERE ip = '$remote_ip'"); 
+		}
+	}
+
+
 }
+
+
+
+
+
 $playwerk="";
 if (isset($_GET['playpfad']) && $_GET['playpfad'])
 {
@@ -282,7 +499,7 @@ if (isset($_POST['task']))
 }
 #print 'task: '.$task.'<br>';
 
-$registernamenarray = array("Sopran","Alt","Tenor","Bass");
+$registernamenarray = array("Sopran","Alt","Tenor","Bass","Alle");
 
 ?>
 	
@@ -349,7 +566,7 @@ foreach ($aktiveventliste as $activevent)
 	#print '<br>';
 	print '<h2 class = "eventtitel ">'.$activevent.'</h2>';
 
-	#print '<br>event: '.$activevent.'<br>';
+	#print '<br>event: '.$activevent.' register: '.$register.'<br>';
  	$werkarray = array();
 	$result_werk = mysql_query("SELECT werk FROM audio WHERE event = '$activevent' AND register = '$register'", $db)or die(print '<p  >Beim Suchen nach mididaten ist ein Fehler passiert: '.mysql_error().'</p>');
 	while ($werkdaten = mysql_fetch_array($result_werk))

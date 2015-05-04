@@ -338,7 +338,7 @@ $plot->SetTitle("Solardaten von heute");
 
 $plot->SetPlotAreaWorld(NULL, 0, 720, 129);
 
-$plot->DrawGraph();	 
+#$plot->DrawGraph();	 
 
 	
 	

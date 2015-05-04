@@ -1486,3 +1486,7 @@ SolarPumpeZeit Teststring
 01.02.15	Pumpe-Laufzeit: 0
 27.03.15	Pumpe-Laufzeit: 0
 30.03.15	Pumpe-Laufzeit: -3188
+04.04.15	Pumpe-Laufzeit: 0
+08.04.15	Pumpe-Laufzeit: 0
+16.04.15	Pumpe-Laufzeit: 0
+20.04.15	Pumpe-Laufzeit: 0

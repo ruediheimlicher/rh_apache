@@ -1,8 +1,10 @@
 <?php
+
+include("pwd.php");
+
+
 /* verbinden mit db */	
-	$db=mysql_connect('localhost','root','Ideur0047');
-	mysql_set_charset('utf8',$db);
-	mysql_select_db("kicho", $db); 
+	$db = include "chor_db.php";
 
 if (isset($_POST['uploadok']))
 {
@@ -14,11 +16,18 @@ if (isset($_POST['uploadok']))
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type"content="text/html;charset=UTF-8"/>
+<title>Chor MIDI Besucher</title>
 <link href="chor.css"rel="stylesheet"type="text/css"/>
 </head>
 <body class="basic">
 
 <?php
+#date_default_timezone_set(Europe-Zurich);
+$zeit = $_SERVER['REQUEST_TIME'];
+
+$datum = date("d.m.Y",$zeit);
+$uhrzeit = date("H:i",$zeit);
+echo "Datum: ",$datum,"  Zeit: ",$uhrzeit," Uhr<br>";
 
 $result_home = mysql_query("SELECT * FROM settings WHERE id= 0", $db)or die(print '<p>Beim Suchen nach home ist ein Fehler passiert: '.mysql_error().'</p>');
 print mysql_error();
@@ -52,13 +61,21 @@ $result_editdaten = mysql_query("SELECT * FROM besucher  ORDER BY besuch DESC", 
 
 
 		$editdatenarray = array();
+		
+		
 		print '<table >';
 		print '<tr height = 24px>';
 		print '<th class = "text" width = "120px">IP Besucher</td>';
-		print '<th class = "text" width = "300px">IP Session</td>';
-		print '<th class = "text" width = "100px">Zeit</td>';
+		print '<th class = "text" width = "200px">IP Session</td>';
+		print '<th class = "text" width = "80px">Zeit</td>';
 		print '<th class = "text" width = "100px">Datum</td>';
-		print '<th class = "text" width = "150px">Anzahl Besuche</td>';
+		print '<th class = "text" width = "80px">Besuche</td>';
+		print '<th class = "text" width = "80px">Register</td>';
+		print '<th class = "text" width = "20px">S</td>';
+		print '<th class = "text" width = "20px">A</td>';
+		print '<th class = "text" width = "20px">T</td>';
+		print '<th class = "text" width = "20px">B</td>';
+		print '<th class = "text" width = "30px">all</td>';
 
 		
 		
@@ -68,8 +85,17 @@ $result_editdaten = mysql_query("SELECT * FROM besucher  ORDER BY besuch DESC", 
 			print '<td class = "text_right">'.$editdaten['ip'].'</td>';
 			print '<td class = "text">'.$editdaten['session_id'].'</td>';
 			print '<td class = "text_center">'.$editdaten['zeit'].'</td>';
-			print '<td class = "text_center"> '.$editdaten['datum'].'</td>';
+			#date('d.m.Y', strtotime($row['Datum'])); 
+			$home_datum = date('d.m.Y', strtotime($editdaten['datum']));
+			#print '<td class = "text_center"> '.date('d.m.Y', strtotime($editdaten['datum'])).'</td>';
+			print '<td class = "text_center"> '.$home_datum.'</td>';
 			print '<td class = "text_center">'.$editdaten['besuch'].'</td>';
+			print '<td class = "text_center">'.$editdaten['register'].'</td>';
+			print '<td class = "text_center">'.$editdaten['sopran'].'</td>';
+			print '<td class = "text_center">'.$editdaten['alt'].'</td>';
+			print '<td class = "text_center">'.$editdaten['tenor'].'</td>';
+			print '<td class = "text_center">'.$editdaten['bass'].'</td>';
+			print '<td class = "text_center">'.$editdaten['alle'].'</td>';
 			print '</td>';
 			
 			

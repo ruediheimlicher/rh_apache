@@ -199,3 +199,35 @@ Elektrodaten: leeres File
 17:46  Daten solar: 63961	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 1	d7: 0
 17:46  Daten cgivars: 63965	*0	*0	*0	*0	*0	*0	*5	*0
 17:46  Daten solar: 63965	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 5	d7: 0
+neuer Tag: Laufzeit: 67608  Datum: 08.04.15 18:46
+SolarTagErtrag neue Zeile anlegen: 08.04.15
+Elektrodaten: leeres File
+18:46  Daten cgivars: 67611	*0	*0	*0	*0	*0	*0	*21	*0
+18:46  Daten solar: 67611	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 33	d7: 0
+18:46  Daten cgivars: 67615	*0	*0	*0	*0	*0	*0	*25	*0
+18:46  Daten solar: 67615	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 37	d7: 0
+neuer Tag: Laufzeit: 74703  Datum: 12.04.15 20:45
+SolarTagErtrag neue Zeile anlegen: 12.04.15
+Elektrodaten: leeres File
+20:45  Daten cgivars: 74728	*0	*0	*0	*0	*0	*0	*1	*0
+20:45  Daten solar: 74728	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 1	d7: 0
+20:45  Daten cgivars: 74732	*0	*0	*0	*0	*0	*0	*14	*0
+20:45  Daten solar: 74732	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 20	d7: 0
+21:07  Daten cgivars: 76020	*0	*0	*0	*0	*0	*0	*3	*0
+21:07  Daten solar: 76020	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 3	d7: 0
+21:07  Daten cgivars: 76024	*0	*0	*0	*0	*0	*0	*3	*0
+21:07  Daten solar: 76024	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 3	d7: 0
+neuer Tag: Laufzeit: 78496  Datum: 20.04.15 21:48
+SolarTagErtrag neue Zeile anlegen: 20.04.15
+Elektrodaten: leeres File
+21:48  Daten cgivars: 78497	*0	*0	*0	*0	*0	*0	*B	*0
+21:48  Daten solar: 78497	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 11	d7: 0
+21:48  Daten cgivars: 78501	*0	*0	*0	*0	*0	*0	*F	*0
+21:48  Daten solar: 78501	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 15	d7: 0
+neuer Tag: Laufzeit: 30727  Datum: 25.04.15 08:32
+SolarTagErtrag neue Zeile anlegen: 25.04.15
+Elektrodaten: leeres File
+08:32  Daten cgivars: 30728	*0	*0	*0	*0	*0	*0	*8	*0
+08:32  Daten solar: 30728	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 8	d7: 0
+08:32  Daten cgivars: 30732	*0	*0	*0	*0	*0	*0	*0	*0
+08:32  Daten solar: 30732	d0: 0	d1: 0	d2: 0	d3: 0	d4: 0	d5: 0	d6: 0	d7: 0

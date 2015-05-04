@@ -7,10 +7,11 @@ Chor MIDI Admin Datenbank
 include("pwd.php");
 
 /* verbinden mit db */
-	$db = include "../bank.php";
+	#$db = include "../bank.php";
+	$db = include "chor_db.php";
 
-	mysql_set_charset('utf8',$db);
-	mysql_select_db("midi", $db); 
+	#mysql_set_charset('utf8',$db);
+	#mysql_select_db("midi", $db); 
 
 ?>
 
@@ -477,6 +478,12 @@ if (isset($_POST['sent']))
 		
 		$neuerdatensatzstring = '<h2 style="margin-left:40px">Daten</h2>';
 		
+		$neuerevent="";
+		if (isset($_POST['neuerevent']))
+		{
+			$neuerevent = $_POST['neuerevent'];
+		}
+		
 		print '
 		<table>
 			<tr>
@@ -489,7 +496,8 @@ if (isset($_POST['sent']))
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">event:</td>
-				<td><input size="40" maxlength="40" name="neuerevent"></td>
+				<td><input size="40" maxlength="40" name="neuerevent" value = "'.$neuerevent.'"></td>
+				
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">werk:</td>
@@ -515,6 +523,7 @@ if (isset($_POST['sent']))
     				<input type="radio" id="alt" name="neuesregister" value="alt"><label for="alt"> Alt</label> 
 					<input type="radio" id="tenor" name="neuesregister" value="tenor"><label for="tenor"> Tenor</label> 
 					<input type="radio" id="bass" name="neuesregister" value="bass"><label for="bass"> Bass</label> 
+					<input type="radio" id="alle" name="neuesregister" value="alle"><label for="alle"> Alle</label> 
   				
 
 				<!--<input size="40" maxlength="40" name="neuesregister"></td> -->
@@ -598,7 +607,6 @@ if (isset($_POST['sent']))
 	print $tableheaderstring;
 
 	print '<form action="" method="post">';
-	#print '<form action="/cgi-bin/lerntest.pl" method="post" accept-charset="UTF8">';
 	$zeile=0;
 	while ($archivdaten = mysql_fetch_assoc($result_archiv) )
 	{
