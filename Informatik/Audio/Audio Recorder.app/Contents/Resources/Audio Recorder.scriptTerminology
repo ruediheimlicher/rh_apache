@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Classes</key>
+	<dict>
+		<key>Application</key>
+		<dict>
+			<key>Attributes</key>
+			<dict>
+				<key>duration</key>
+				<dict>
+					<key>Description</key>
+					<string>The duration of the current recording, in milliseconds</string>
+					<key>Name</key>
+					<string>duration</string>
+				</dict>
+				<key>durationAsString</key>
+				<dict>
+					<key>Description</key>
+					<string>The duration of the current recording, formatted as a string</string>
+					<key>Name</key>
+					<string>duration as string</string>
+				</dict>
+				<key>filePath</key>
+				<dict>
+					<key>Description</key>
+					<string>The path of the current recording</string>
+					<key>Name</key>
+					<string>current file path</string>
+				</dict>
+				<key>mP3BitRate</key>
+				<dict>
+					<key>Description</key>
+					<string>The bit rate for MP3 recordings</string>
+					<key>Name</key>
+					<string>MP3 bit rate</string>
+				</dict>
+				<key>mP3Mode</key>
+				<dict>
+					<key>Description</key>
+					<string>The mode for MP3 recordings</string>
+					<key>Name</key>
+					<string>MP3 mode</string>
+				</dict>
+				<key>nextFileName</key>
+				<dict>
+					<key>Description</key>
+					<string>The file name for the next recording</string>
+					<key>Name</key>
+					<string>next file name</string>
+				</dict>
+				<key>outputFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>The folder where recordings will be saved</string>
+					<key>Name</key>
+					<string>output folder path</string>
+				</dict>
+				<key>outputFormat</key>
+				<dict>
+					<key>Description</key>
+					<string>The audio format for recordings</string>
+					<key>Name</key>
+					<string>output format</string>
+				</dict>
+				<key>quality</key>
+				<dict>
+					<key>Description</key>
+					<string>The audio quality for recordings</string>
+					<key>Name</key>
+					<string>quality</string>
+				</dict>
+				<key>state</key>
+				<dict>
+					<key>Description</key>
+					<string>The application's recording status</string>
+					<key>Name</key>
+					<string>status</string>
+				</dict>
+				<key>volume</key>
+				<dict>
+					<key>Description</key>
+					<string>The volume of the default input device</string>
+					<key>Name</key>
+					<string>volume</string>
+				</dict>
+			</dict>
+			<key>Description</key>
+			<string>Audio Recorder's top level scripting object.</string>
+			<key>Name</key>
+			<string>application</string>
+			<key>PluralName</key>
+			<string>applications</string>
+		</dict>
+	</dict>
+	<key>Commands</key>
+	<dict>
+		<key>LoadCustomSettings</key>
+		<dict>
+			<key>Description</key>
+			<string>Load custom settings for Apple Lossless or MP4 that were saved from Audio Recorder</string>
+			<key>Name</key>
+			<string>load custom settings</string>
+			<key>UnnamedArgument</key>
+			<dict>
+				<key>Description</key>
+				<string>the file path</string>
+			</dict>
+		</dict>
+		<key>PauseRecording</key>
+		<dict>
+			<key>Description</key>
+			<string>Pause the recording.</string>
+			<key>Name</key>
+			<string>pause recording</string>
+		</dict>
+		<key>StartRecording</key>
+		<dict>
+			<key>Description</key>
+			<string>Start the recording.</string>
+			<key>Name</key>
+			<string>start recording</string>
+		</dict>
+		<key>StopRecording</key>
+		<dict>
+			<key>Description</key>
+			<string>Stop the recording.</string>
+			<key>Name</key>
+			<string>stop recording</string>
+		</dict>
+	</dict>
+	<key>Description</key>
+	<string>Classes and commands for the Audio Recorder application</string>
+	<key>Enumerations</key>
+	<dict>
+		<key>MP3Mode</key>
+		<dict>
+			<key>JointStereo</key>
+			<dict>
+				<key>Description</key>
+				<string>Joint Stereo</string>
+				<key>Name</key>
+				<string>joint stereo</string>
+			</dict>
+			<key>Mono</key>
+			<dict>
+				<key>Description</key>
+				<string>Mono</string>
+				<key>Name</key>
+				<string>mono</string>
+			</dict>
+			<key>Stereo</key>
+			<dict>
+				<key>Description</key>
+				<string>Stereo</string>
+				<key>Name</key>
+				<string>stereo</string>
+			</dict>
+		</dict>
+		<key>OutputFormat</key>
+		<dict>
+			<key>AIFF</key>
+			<dict>
+				<key>Description</key>
+				<string>AIFF</string>
+				<key>Name</key>
+				<string>AIFF</string>
+			</dict>
+			<key>AppleLossless</key>
+			<dict>
+				<key>Description</key>
+				<string>Apple Lossless</string>
+				<key>Name</key>
+				<string>apple lossless</string>
+			</dict>
+			<key>MP3</key>
+			<dict>
+				<key>Description</key>
+				<string>MP3</string>
+				<key>Name</key>
+				<string>MP3</string>
+			</dict>
+			<key>MP4</key>
+			<dict>
+				<key>Description</key>
+				<string>MP4</string>
+				<key>Name</key>
+				<string>MP4</string>
+			</dict>
+			<key>WAV</key>
+			<dict>
+				<key>Description</key>
+				<string>WAV</string>
+				<key>Name</key>
+				<string>WAV</string>
+			</dict>
+		</dict>
+		<key>Quality</key>
+		<dict>
+			<key>CD</key>
+			<dict>
+				<key>Description</key>
+				<string>CD</string>
+				<key>Name</key>
+				<string>CD</string>
+			</dict>
+			<key>Custom</key>
+			<dict>
+				<key>Description</key>
+				<string>Custom</string>
+				<key>Name</key>
+				<string>custom</string>
+			</dict>
+			<key>Voice</key>
+			<dict>
+				<key>Description</key>
+				<string>Voice</string>
+				<key>Name</key>
+				<string>voice</string>
+			</dict>
+		</dict>
+		<key>State</key>
+		<dict>
+			<key>Paused</key>
+			<dict>
+				<key>Description</key>
+				<string>Paused</string>
+				<key>Name</key>
+				<string>paused</string>
+			</dict>
+			<key>Recording</key>
+			<dict>
+				<key>Description</key>
+				<string>Recording</string>
+				<key>Name</key>
+				<string>recording</string>
+			</dict>
+			<key>Stopped</key>
+			<dict>
+				<key>Description</key>
+				<string>Stopped</string>
+				<key>Name</key>
+				<string>stopped</string>
+			</dict>
+		</dict>
+	</dict>
+	<key>Name</key>
+	<string>Audio Recorder Suite</string>
+</dict>
+</plist>

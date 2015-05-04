@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<TITLE>Audio Recorder Help</TITLE>
+<META http-equiv="content-type" content="text/html; charset=UTF-8">
+<META name="AppleTitle" content="Audio Recorder Help">
+</HEAD>
+<BODY>
+<CENTER>
+<H1>Audio Recorder</H1>
+Copyright 2002-2005 Ben Shanfelder (<A href="mailto:audiorecorder@gmail.com">audiorecorder@gmail.com</A>)
+</CENTER>
+<P>
+<H3>はじめに</H3>
+<P>Audio Recorder はデフォルトの音声入力装置からの音声を録音するスクリプタブルなアプリケーションで、AIFF、Apple ロスレス、MP3、MP4 もしくは WAV ファイルに直接録音することができます。
+<P>
+<H3>システム条件</H3>
+<UL>
+<LI>Mac OS X 10.1 以上
+<LI>QuickTime 6.5.2 以上
+<LI>500 MHz G3 以上
+<LI>MP4 エンコードには要 Altivec
+<LI>MP3 エンコードには要 <A href="http://www.versiontracker.com/dyn/moreinfo/macosx/22570">LAME フレームワーク</A>
+</UL>
+<P>
+<H3>バージョン 2.0 での変更点</H3>
+<UL>
+<LI>Apple ロスレス、MP3、MP4 そして WAV のサポートを追加
+<LI>録音後に出力ファイルを Finder で表示するオプションを追加
+<LI>録音後に出力ファイルを再生するオプションを追加
+<LI>録音中はスリープに入らないようにしました
+<LI>最大録音時間を設定する詳細オプションを追加
+<LI>ファイル名のフォーマットを設定する詳細オプションを追加
+<LI>スクリプト："next file name（次のファイル名）" プロパティは <A href="http://developer.apple.com/documentation/Cocoa/Conceptual/DataFormatting/Concepts/DateFormatters.html#//apple_ref/doc/uid/20000194/CJBFEHBD">日時フォーマット</A>を使用
+<LI>MP3 のサポートは <A href="http://www.versiontracker.com/dyn/moreinfo/macosx/22570">LAME フレームワーク</A> を使用
+</UL>
+<P>
+<H3>貢献者</H3>
+<UL>
+<LI>フランス語ローカライズ：Steve Hammond
+<LI>日本語ローカライズ：tai (<A href="http://tekapo.com/">http://tekapo.com/</A>)
+</UL>
+<P>
+<H3>詳細オプション</H3>
+<UL>
+<LI><B>FileNameFormat</B> - <A href="http://developer.apple.com/documentation/Cocoa/Conceptual/DataFormatting/Concepts/DateFormatters.html#//apple_ref/doc/uid/20000194/CJBFEHBD">日時フォーマット</A> を用いてファイル名のパターンを設定します。
+<P>この設定を変更するにはターミナルを起動して次を入力します（例 "test-200501"）：
+<BR><CODE>defaults write com.benshan.AudioRecorder FileNameFormat -string "test-%Y%m"</CODE> 
+<P>デフォルト設定に戻すには次を入力します：
+<BR><CODE>defaults delete com.benshan.AudioRecorder FileNameFormat</CODE>
+<BR>
+<LI><B>MaxRecordingMinutes</B> - 最大録音時間を「分」で設定します。
+<P>この設定を変更するにはターミナルを起動して次を入力します（例：１０分）：
+<BR><CODE>defaults write com.benshan.AudioRecorder MaxRecordingMinutes -int 10</CODE>
+<P>デフォルト設定に戻すには次を入力します：
+<BR><CODE>defaults delete com.benshan.AudioRecorder MaxRecordingMinutes</CODE>
+<BR>
+<LI><B>DeleteOnCancel</B> - 保存パネルから「キャンセル」を選択した場合に録音ファイルを消去します。
+<P>この設定を変更するにはターミナルを起動して次を入力します：
+<BR><CODE>defaults write com.benshan.AudioRecorder DeleteOnCancel -bool yes</CODE>
+<P>デフォルト設定に戻すには次を入力します：
+<BR><CODE>defaults delete com.benshan.AudioRecorder DeleteOnCancel</CODE>
+</UL>
+</BODY>
+</HTML>

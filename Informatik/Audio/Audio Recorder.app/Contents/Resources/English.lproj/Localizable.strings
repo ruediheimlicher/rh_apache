@@ -1,0 +1,10 @@
+"Choose" = "Choose";
+"OK" = "OK";
+"Quit" = "Quit Audio Recorder";
+
+"ErrDeviceRunning" = "Could not open the default input device. Check the device in System Preferences, under Sound, then Input. Make sure the device is plugged in and turned on. Check the Console for details.";
+"ErrDeviceChannels" = "Audio Recorder only supports 1 or 2 channels. Change the default input device in System Preferences, under Sound, then Input.";
+"ErrQuickTimeVersion" = "Audio Recorder requires QuickTime version 6.5.2.";
+"ErrLAME" = "The LAME framework is not installed. You will not be able to record to MP3. Choose Help from the menu to learn about the LAME framework.";
+"ErrDeviceUnsupported" = "This feature is not supported by the current default input device. Some devices don't support certain hardware features.";
+"ErrRecord" = "Could not begin recording. Make sure the output folder exists with proper permissions. Check the Console for details.";

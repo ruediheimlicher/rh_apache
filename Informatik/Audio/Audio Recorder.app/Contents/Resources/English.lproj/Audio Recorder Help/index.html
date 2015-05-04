@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<TITLE>Audio Recorder Help</TITLE>
+<META http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<META name="AppleTitle" content="Audio Recorder Help">
+</HEAD>
+<BODY>
+<CENTER>
+<H1>Audio Recorder</H1>
+Copyright 2002-2005 Ben Shanfelder (<A href="mailto:audiorecorder@gmail.com">audiorecorder@gmail.com</A>)
+</CENTER>
+<P>
+<H3>Introduction</H3>
+<P>Audio Recorder is a scriptable application that records audio from the default input device and saves it directly to an AIFF, Apple Lossless, MP3, MP4, or WAV file.
+<P>
+<H3>Requirements</H3>
+<UL>
+<LI>Mac OS X 10.1 or greater
+<LI>QuickTime 6.5.2 or greater
+<LI>500 MHz G3 or faster
+<LI>Altivec for MP4 encoding
+<LI>The <A href="http://www.versiontracker.com/dyn/moreinfo/macosx/22570">LAME framework</A> for MP3 encoding
+</UL>
+<P>
+<H3>Changes in version 2.0</H3>
+<UL>
+<LI>Added support for Apple Lossless, MP4, and WAV
+<LI>Added option to reveal the output file in the Finder after recording
+<LI>Added option to open the output file after recording
+<LI>The system won't go to sleep during recording
+<LI>Added advanced option to set the maximum number of minutes per recording
+<LI>Added advanced option to set the file name format
+<LI>Scripting: The "next file name" property uses <A href="http://developer.apple.com/documentation/Cocoa/Conceptual/DataFormatting/Concepts/DateFormatters.html#//apple_ref/doc/uid/20000194/CJBFEHBD">date formatters</A>
+<LI>MP3 is supported through the <A href="http://www.versiontracker.com/dyn/moreinfo/macosx/22570">LAME framework</A>
+</UL>
+<P>
+<H3>Contributors</H3>
+<UL>
+<LI>French localization by Steve Hammond
+<LI>Japanese localization by tai (<A href="http://tekapo.com/">http://tekapo.com/</A>)
+</UL>
+<P>
+<H3>Advanced options</H3>
+<UL>
+<LI><B>FileNameFormat</B> - Specify the pattern for file names using <A href="http://developer.apple.com/documentation/Cocoa/Conceptual/DataFormatting/Concepts/DateFormatters.html#//apple_ref/doc/uid/20000194/CJBFEHBD">date formatters</A>.
+<P>To change this setting, open the terminal and enter:
+<BR><CODE>defaults write com.benshan.AudioRecorder FileNameFormat -string "test-%Y%m"</CODE> (for "test-200501")
+<P>To revert to the default setting, open the terminal and enter:
+<BR><CODE>defaults delete com.benshan.AudioRecorder FileNameFormat</CODE>
+<BR>
+<LI><B>MaxRecordingMinutes</B> - Specify the maximum recording time in minutes.
+<P>To change this setting, open the terminal and enter:
+<BR><CODE>defaults write com.benshan.AudioRecorder MaxRecordingMinutes -int 10</CODE> (for 10 minutes)
+<P>To revert to the default setting, open the terminal and enter:
+<BR><CODE>defaults delete com.benshan.AudioRecorder MaxRecordingMinutes</CODE>
+<BR>
+<LI><B>DeleteOnCancel</B> - Delete the recording when choosing Cancel from the save panel.
+<P>To change this setting, open the terminal and enter:
+<BR><CODE>defaults write com.benshan.AudioRecorder DeleteOnCancel -bool yes</CODE>
+<P>To revert to the default setting, open the terminal and enter:
+<BR><CODE>defaults delete com.benshan.AudioRecorder DeleteOnCancel</CODE>
+</UL>
+</BODY>
+</HTML>

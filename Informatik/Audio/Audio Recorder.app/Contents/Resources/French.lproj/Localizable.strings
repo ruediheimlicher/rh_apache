@@ -1,0 +1,10 @@
+"Choose" = "Choisir";
+"OK" = "OK";
+"Quit" = "Quitter Audio Recorder";
+
+"ErrDeviceRunning" = "Impossible d'ouvrir la source par défaut. Vérifier le périphérique dans les Préférences Système, dans le paneau son sous l'onglet Entrée. Assurez-vous que le périphérique est branché et est fonctionnel. Vérifier la console pour les détails.";
+"ErrDeviceChannels" = "Audio Recorder supporte seulement 1 ou 2 canaux. Modifier la source dans Préférences Système, dans le paneau son sous l'onglet Entrée.";
+"ErrQuickTimeVersion" = "Audio Recorder doit être utilisé avec QuickTime version 6.5.2.";
+"ErrLAME" = "Le paquet logiciel LAME n'est pas installé. Vous devez utiliser LAME pour faire un enregistrement en format MP3. Aller dans l'aide pour en apprendre plus sur le paquet logiciel LAME.";
+"ErrDeviceUnsupported" = "Cette caractéristique n'est pas supporté par le périphérique d'entré par défaut. Certain périphérique ne supporte pas toutes les caractéristiques matérielles.";
+"ErrRecord" = "Impossible de débuter l'enregistrement. Assurez-vous que le répertoire de sauvegarde existe et d'avoir les droits dans ce répertoire. Verifier la console pour les détails.";

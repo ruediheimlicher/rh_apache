@@ -1,8 +1,8 @@
 HomeCentral
 Pumpedaten
-Datum: 30.03.15 15:05
-Zeit: 15:05
-54312
+Datum: 16.04.15 21:07
+Zeit: 21:07
+76020
 Stunden-Pumpelaufzeit: 0
 Status: 0
 0

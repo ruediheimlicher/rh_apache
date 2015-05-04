@@ -1,9 +1,9 @@
 HomeCentral
 Elektrodaten
-Datum: 31.03.15 17:36
-Zeit: 17:46
-63394
-Elektro-Laufzeit: 567
+Datum: 25.04.15 08:32
+Zeit: 08:32
+30728
+Elektro-Laufzeit: 0
 Status: 0
-1
-63394
+0
+0

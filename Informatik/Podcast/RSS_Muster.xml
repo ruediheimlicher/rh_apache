@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xsi:noNamespaceSchemaLocation="rss-2_0.xsd">	<channel>
+		<!-- Titel des Podcasts, wie er in iTunes erscheint -->		<title>Podcast Blatt Muster</title>
+
+		<!-- URL der Webseite, die aufgerufen werden soll -->		<link>http://www.schuleduernten.ch/blatt/index.htm</link>		
+		<!-- Beschreibung des Podcast -->
+		 <language>de-de </language>
+
+		<description>Podcast Telefonklingel</description>		<item>
+			
+			<!-- Titel der mp3-Datei, wie er in iTunes erscheint -->			<title>Telefon-Klingelton</title>			<link>
+
+				<!--URL der Text-Datei -->				http://www.schuleduernten.ch/blatt/Podcast/Info_Muster.pdf				
+				</link>
+			
+			<!-- Beschreibung der Datei, die bereitgestellt ist -->			<description>Telefonklingeln</description>
+
+			<!--URL der Datei, die bereitgestellt ist (hier: mp3-Datei) -->			<enclosure url="http://www.schuleduernten.ch/blatt/Podcast/Musik.mp3" length="3400000" type="audio/mpeg"/>			
+			<comments>http://ekzemplo.com/entry/4403/comments</comments>
+			<pubDate>Mon, 13 April 2007 15:03:14 +0100</pubDate>		</item>		<item>			<description> 				Go			</description>		</item>	</channel></rss>

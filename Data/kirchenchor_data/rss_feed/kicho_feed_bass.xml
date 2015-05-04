@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  
+  <channel>
+   <atom:link href="http://www.ruediheimlicher.ch/Data/kirchenchor_data/rss_feed/kicho_feed_bass.xml" rel="self" type="application/rss+xml" />
+   <atom:link rel="self" type="application/rss+xml" href="http://podcast.com/enhanced.rss" title="Enhanced Feed"/> <!--http://vemedio.com/blog/posts/multi-format-podcast-feeds-->
+    <title>Kirchenchor Dürnten Bass</title>
+    <description>Podcast Kirchenchor Dürnten</description>
+    <link>http://www.refduernten.ch/kirchenchor</link>
+    <language>de-de</language>
+    <copyright>Copyright 2014</copyright>
+    <lastBuildDate>Thu, 26 Jun 2014 00:15:00 -0500</lastBuildDate>
+    <pubDate>Thu, 26 Jun 2014 00:15:00 -0500</pubDate>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <webMaster>support@ruediheimlicher.ch</webMaster>
+    <ttl>60</ttl>
+    <itunes:author>RH</itunes:author>
+    <itunes:subtitle>Stimmen für den Chor</itunes:subtitle>
+    <itunes:summary>Hilfe fuer Chormitglieder</itunes:summary>
+    <itunes:owner>
+           <itunes:name>RH</itunes:name>
+           <itunes:email>support@ruediheimlicher.ch</itunes:email>
+    </itunes:owner>
+
+<itunes:explicit>No</itunes:explicit>
+
+<itunes:image href="http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e15794/Eingang_podcast.jpg?preview=preview"/>
+    
+<itunes:category text="Music" />
+
+<item>
+	<title>Schubert Hirtenchor</title>
+	<link>http://www.refduernten.ch/kirchenchor</link>
+	<guid>http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e16304/Hirtenchor_B.mp3?preview=preview</guid>
+	<description>Bass</description>
+	<enclosure url="http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e16304/Hirtenchor_B.mp3?preview=preview" length="2000000" type="audio/mpeg"/>
+	<pubDate>Thu, 26 Jun 2014 08:00:00 -0500</pubDate>
+</item>
+
+<item>
+	<title>Hensel Gartenlieder 3 Bass</title>
+	<link>http://www.refduernten.ch/kirchenchor</link>
+	<guid>http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e1479/Hensel_3_B.mp3?preview=preview</guid>
+	<description>3_Im_Herbst Bass</description>
+	<enclosure url="http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e1479/Hensel_3_B.mp3?preview=preview" length="578060" type="audio/mpeg"/>
+	<category>Podcasts</category>
+	<pubDate>Wed, 13 Mar 2013 00:15:00 -0500</pubDate>
+
+	<itunes:author>RH @ ref</itunes:author>
+
+	<itunes:explicit>No</itunes:explicit>
+	<itunes:subtitle>Gartenlieder 3</itunes:subtitle>
+	<itunes:summary>Bass</itunes:summary>
+	<itunes:duration>00:21:18</itunes:duration>
+	<itunes:keywords>singen </itunes:keywords>
+</item>
+
+<item>
+	<title>Hensel Gartenlieder 4 Bass</title>
+	<link>http://www.refduernten.ch/kirchenchor</link>
+	<guid>http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e1489/Hensel_4_B.mp3?preview=preview</guid>
+	<description>4_Im_Herbst Bass</description>
+	<enclosure url="http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e1489/Hensel_4_B.mp3?preview=preview" length="578060" type="audio/mpeg"/>
+	<category>Podcasts</category>
+	<pubDate>Wed, 13 Mar 2013 00:15:00 -0500</pubDate>
+
+	<itunes:author>RH @ ref</itunes:author>
+
+	<itunes:explicit>No</itunes:explicit>
+	<itunes:subtitle>Gartenlieder 4</itunes:subtitle>
+	<itunes:summary>Bass</itunes:summary>
+	<itunes:duration>00:21:18</itunes:duration>
+	<itunes:keywords>singen </itunes:keywords>
+</item>
+
+<item>
+	<title>Hensel Gartenlieder 5 Bass</title>
+	<link>http://www.refduernten.ch/kirchenchor</link>
+	<guid>http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e1493/Hensel_5_B.mp3?preview=preview</guid>
+	<description>5_Im_Herbst Bass</description>
+	<enclosure url="http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e1493/Hensel_5_B.mp3?preview=preview" length="578060" type="audio/mpeg"/>
+	
+	<pubDate>Wed, 13 Mar 2013 00:15:00 -0500</pubDate>
+
+	<itunes:author>RH @ ref</itunes:author>
+
+	<itunes:explicit>No</itunes:explicit>
+	<itunes:subtitle>Gartenlieder 5</itunes:subtitle>
+	<itunes:summary>Bass</itunes:summary>
+	<itunes:duration>00:21:18</itunes:duration>
+	<itunes:keywords>singen </itunes:keywords>
+</item>
+
+
+</channel>
+
+</rss>
+

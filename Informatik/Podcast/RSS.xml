@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+	<rss version="2.0">
+	<channel>
+		<title>Podcast Blatt</title>
+		<link>www.schuleduernten.ch/blatt</link>
+		<description></description>
+		<language>en-us</language>
+		<copyright></copyright>
+		<lastBuildDate>Sat, 14 Apr 2007 11:52:59 GMT</lastBuildDate>
+		<generator>tdscripts.com Podcast Generator</generator>		<webMaster></webMaster>
+		<ttl>1</ttl>
+		<item>
+			<title>Musik</title>
+			<description>Klingel</description>
+			<pubDate>Sat, 14 Apr 2007 11:52:59 GMT</pubDate>
+			<enclosure url="http://www.schuleduernten.ch/blatt/Podcast/Musik.mp3" length="10000" type="audio/mpeg"/>
+			</item>
+		</channel>
+	</rss>

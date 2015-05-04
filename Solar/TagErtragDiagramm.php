@@ -1,15 +1,15 @@
-<? // Tagertrag lesen
+<?php // Tagertrag lesen
 	  /* pChart library inclusions */
- 	include("pChart/class/pData.class.php");
- 	include("pChart/class/pDraw.class.php");
- 	include("pChart/class/pImage.class.php");
-
+ 	include("pChart_2/class/pData.class.php");
+ 	include("pChart_2/class/pDraw.class.php");
+ 	include("pChart_2/class/pImage.class.php");
+	#echo "start<br>";	
 	$ErtragPfad="../Data/SolarTagErtrag.txt";
 	$ErtragHandle = fopen($ErtragPfad,"r") or die("Can't open file");
 	$ErtragText= fread($ErtragHandle,filesize($ErtragPfad));
-	////echo nl2br($ErtragText);
+	#echo nl2br($ErtragText);
 	$ErtragZeilenarray=explode("\n",$ErtragText);
-	////echo "<br>Zeilenarray: $Zeilenarray[2]";
+	echo "<br>Zeilenarray: $ErtragZeilenarray[2]<br>";
 	fclose($ErtragHandle);
 	/*	
 	//echo "raw<br>";
@@ -33,7 +33,7 @@
 	$ErtragZeilenarray = array_values($ErtragZeilenarray);
 	
 	
-	////echo "nach filter<br>";		
+	echo "nach filter<br>";		
 	$i=0;
 	/*
 	foreach($ErtragZeilenarray as $zeile)
@@ -75,7 +75,7 @@
 	foreach ($ErtragDaten as $tagertragelement) 
 	{
 		$ZeitachseDaten[] = $tagertragindex+1;
-		//echo "element: $tagertragindex Wert: $tagertragelement<br>";
+		#echo "element: $tagertragindex Wert: $tagertragelement<br>";
 		$tagertragindex++;
 	}	
 	
@@ -86,7 +86,7 @@
 	}
 	// Diagramm anlegen
 		// Fontarrays definieren
-	
+	echo "vor pChart<br>";		
 	$Schrift = "pChart/fonts/MankSans.ttf";
 	
 	$DiagrammFont = array("FontName"=>$Schrift,"FontSize"=>12);
@@ -146,7 +146,7 @@
 	$ErtragDiagramm->setFontProperties(array("FontName"=>"pChart/fonts/MankSans.ttf","FontSize"=>10));
 	$ErtragDiagramm->drawLegend(250,15,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL));
 
-	$ErtragDiagramm->autoOutput("ErtragDiagramm.png");
+#	$ErtragDiagramm->autoOutput("ErtragDiagramm.png");
 	
 
 	

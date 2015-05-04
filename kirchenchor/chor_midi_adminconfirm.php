@@ -6,11 +6,11 @@ Admin confirm Datenbank chor
 
 
 /* verbinden mit db */
-	$db = include "../bank.php";
+	#$db = include "../bank.php";
 
-
-	mysql_set_charset('utf8',$db);
-	mysql_select_db("midi", $db); 
+	$db = include "chor_db.php";
+	#mysql_set_charset('utf8',$db);
+	#mysql_select_db("midi", $db); 
 
 ?>
 
@@ -546,7 +546,7 @@ else
 
 # Bezeichnung richtig?
 
-	}	# if file da
+}	# if file da
 } # upload
 
 print '<br><form action="chor_midi_admin.php" method = "post" >';

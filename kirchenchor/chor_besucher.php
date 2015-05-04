@@ -1,9 +1,8 @@
-<?
+<?php
 /* verbinden mit db */	
-	$db=mysql_connect('localhost','ruedihei_db','rueti8630');
-
+	$db=mysql_connect('localhost','root','Ideur0047');
 	mysql_set_charset('utf8',$db);
-	mysql_select_db("ruedihei_kicho", $db); 
+	mysql_select_db("kicho", $db); 
 
 if (isset($_POST['uploadok']))
 {
@@ -19,7 +18,7 @@ if (isset($_POST['uploadok']))
 </head>
 <body class="basic">
 
-<?
+<?php
 
 $result_home = mysql_query("SELECT * FROM settings WHERE id= 0", $db)or die(print '<p>Beim Suchen nach home ist ein Fehler passiert: '.mysql_error().'</p>');
 print mysql_error();
@@ -27,12 +26,15 @@ $set = mysql_fetch_array($result_home);
 
 
 print '<div  class = "adminabschnitt">';
-print '<h2 class="eventtitel ">Chor Besucher</h2>';
+print '<h2 class="eventtitel ">Apache Chor Besucher</h2>';
 print '<form action="chor_admin.php" ><h3 class = "admin" ><input type="submit" class="links40" value="zurück zu Admin" name="textfile" style="width: 150px; margin-right:10px;"></h3></form>';
 
 #POST abfragen
 #print_r($_POST);
+if (isset($set['home_ip']) && isset($set['ip']))
+{
 print '<br>home_ip: '.$set['home_ip'].' ip: '.$set['ip'].'<br>';
+}
 print '</div>';
 
 print '<div  class = "besucherabschnitt">';
@@ -71,9 +73,9 @@ $result_editdaten = mysql_query("SELECT * FROM besucher  ORDER BY besuch DESC", 
 			print '</td>';
 			
 			
-			$zeilendic["komponist"] = $komponistdaten['komponist'];
-			$zeilendic["komponist_vn"] = $komponistdaten['komponist_vn'];
-			$zeilendic["werk"] = $komponistdaten['werk'];
+			#$zeilendic["komponist"] = $komponistdaten['komponist'];
+			#$zeilendic["komponist_vn"] = $komponistdaten['komponist_vn'];
+			#$zeilendic["werk"] = $komponistdaten['werk'];
 			print '</tr>';
 		}
 		

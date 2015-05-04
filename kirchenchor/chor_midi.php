@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*
 
 Chor Admin Datenbank 
@@ -7,10 +8,11 @@ Chor Admin Datenbank
 include("pwd.php");
 
 /* verbinden mit db */
-	$db=mysql_connect('localhost','root','Ideur0047');
-
-	mysql_set_charset('utf8',$db);
-	mysql_select_db("midi", $db); 
+	#$db=mysql_connect('localhost','root','Ideur0047');
+	#$db = include "../bank.php";
+	$db = include "chor_db.php";
+	#mysql_set_charset('utf8',$db);
+	#mysql_select_db("midi", $db); 
 
 ?>
 
@@ -25,8 +27,19 @@ include("pwd.php");
 <link href="chor.css" rel="stylesheet" type="text/css" />
 
 <link type="text/css" href="../Audio/Player/jplayer//blue.monday/jplayer.blue.monday.css" rel="stylesheet" />
+
+<!--
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
 <script type="text/javascript" src="../Audio/Player/jplayer/jquery.jplayer.min.js"></script>
+-->
+
+<link type="text/css" href="../skin/pink.flag/scss/jplayer.pink.flag.css" rel="stylesheet" />
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.jplayer.min.js"></script>
+
+
 
 <script type="text/javascript">
 //var playerwerk = "http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3";
@@ -59,9 +72,11 @@ $(document).ready(function()
             	oga: "../Data/kirchenchor/Konzert_2013/Missa/1_Kyrie/Kyrie_A_mix.ogg"
           	});
         },
+        swfPath: "http://www.jplayer.org/latest/js/Jplayer.swf",
         solution: "html, flash",
         swfPath: "js",
         supplied: "mp3, oga",
+        smoothPlayBar: true,
         wmode: "window",
         preload: 'metadata'
       });
@@ -85,6 +100,20 @@ function submitform(registername)
 
 <?php
 #phpinfo();
+#date_default_timezone_set(Europe/Zurich);
+
+$safaribrowser = strpos(getenv('HTTP_USER_AGENT'),"Safari");
+#echo '<br>'.$browser.' pos: '.strpos("Safari",$browser).'<br>';
+#if (strpos($browser, "Safari"))
+if ($safaribrowser)
+{
+	#echo "<br>Browser ist Safari<br>";
+}
+else
+{
+	#echo "<br>Browser ist nicht Safari<br>";
+
+}
 $datum="";
 #print '<p>benutzer;: '. $benutzer.' pw: '. $passwort.'*</p>';
 #print'POST<br>';
@@ -112,22 +141,183 @@ $home_ip = $set['home_ip'];
 $remote_ip=$_SERVER['REMOTE_ADDR'];
 $home_ip = $set['home_ip'];
 $zeit = $_SERVER['REQUEST_TIME'];
+
 #print_r($_SESSION);
 #print 'home_ip: '.$set['home_ip'].' remote_ip: '.$remote_ip.'<br>';
-#echo $_SERVER['HTTP_HOST'];  
-#print 'session_id: '.session_id().'<br>';
+#echo $_SERVER['HTTP_HOST'],"<br>"; 
 $session_id = session_id();
+$aktuellestunde = date("H",$zeit);
+ print ' aktuellestunde: '.$aktuellestunde.' session-stunde: '.$_SESSION['stunde'].'<br>';
+
+$neuerevent=0;
+
+ if (isset($_SESSION['stunde']))
+ {
+ 	if ($_SESSION['stunde'] == $aktuellestunde) # gleicher Anlauf
+ 	{
+ 		$neuerevent=0;
+ 	}
+ 	else # weiterer Anlauf
+ 	{
+ 		$neuerevent=1;
+ 		$_SESSION['stunde'] = date("H",$zeit);
+ 	}
+ 	print 'sessionstunde: '.$_SESSION['stunde'].'<br>';
+ 	
+ }
+ else
+ {
+ 	print 'neue sessionstunde: '.date("H",$zeit).'<br>';
+ 	$_SESSION['stunde'] = date("H",$zeit);
+ 	
+ 	$neuerevent=1;
+ }
+ print ' neuerevent: '.$neuerevent.'<br>';
+#print ' session_id: '.$session_id.'<br>';
 #print 'ip: '.$remote_ip.'<br>';
 #print 'zeit: '.$zeit.'<br>';
 
 $datum = date("d.m.Y",$zeit);
 $uhrzeit = date("H:i",$zeit);
-#echo $datum,"  ",$uhrzeit," Uhr<br>";
+
+
+echo "Datum: ",$datum,"  Zeit: ",$uhrzeit," Uhr<br>";
+#http://www.traum-projekt.com/forum/19-traum-dynamik/131064-datum-format-yyyy-mm-dd.html
+
+
+$sql_datum = date('Y-m-d', strtotime($datum));
+
+$kalenderjahr = date("Y")*1;
+$kalendermonat = date("m")*1;
+$kalendertag = date("d")*1;
+#print 'kalenderjahr: '.$kalenderjahr.' kalendermonat: '.$kalendermonat.' kalendertag: '.$kalendertag.'<br>';
+
 
 $besucher = get_current_user();
 #print_r($_SERVER);
 $besucher = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-#echo $besucher," <br>";
+#echo "besucher: ", $besucher," <br>";
+
+$result_besuche = mysql_query("SELECT * FROM besucher WHERE ip  = '$remote_ip'", $db)or die(print '<p>Beim Suchen nach IP ist ein Fehler passiert: '.mysql_error().'</p>');
+#print mysql_error();
+$rowkontrolle = mysql_num_rows($result_besuche);
+if ($rowkontrolle > 1)
+{
+print 'rowkontrolle: '.$rowkontrolle.'<br>';
+}
+$besucherarray = array();
+
+$register = "";
+$sopran=0;
+$alt=0;
+$tenor=0;
+$bass=0;
+$alle=0;
+
+while ($stat = mysql_fetch_array($result_besuche) ) #
+{
+
+	//print 'in while stat:  stat[ip]: *'.$stat['ip'].'*  remote_ip: '.$remote_ip.' besuche: '.$stat['besuch'].'<br>';
+
+	if (($stat['ip'] == $remote_ip)   && !(in_array($remote_ip,$besucherarray)) ) 
+	{
+		#print_r($stat);
+		#print '<br>';
+		print 'in besuchbesucherarray: '.$stat['besuch'].'<br>';
+		$besucherarray[]=$stat['besuch']; # 
+		$besucher_session_id = $stat['session_id'];
+		#print 'session_id: '.$session_id.' besucher_session_id: '.$besucher_session_id.'<br>';
+
+		if (isset($stat['register']))
+		{
+			$register=$stat['register'];
+			print 'register: '.$register.' | ';
+		}
+		if (isset($stat['sopran']))
+		{
+			$sopran=$stat['sopran'];
+			print 'sopran: '.$sopran.' | ';
+		}
+		if (isset($stat['sopran']))
+		{
+			$alt=$stat['alt'];
+			print 'alt: '.$alt.' | ';
+		}
+		if (isset($stat['sopran']))
+		{
+			$tenor=$stat['tenor'];
+			print 'tenor: '.$tenor.' | ';
+		}
+		if (isset($stat['bass']))
+		{
+			$bass=$stat['bass'];
+			print 'bass: '.$bass.'<br>';
+		}
+		if (isset($stat['alle']))
+		{
+			$bass=$stat['alle'];
+			print 'alle: '.$alle.'<br>';
+		}
+
+	}
+	
+}
+
+$anzahlbesuche=0;
+if (count($besucherarray))
+{
+	$anzahlbesuche = $besucherarray[0]+1;
+}
+#print 'besuche neu: '.$anzahlbesuche.' besucher_session_id: '.$besucher_session_id.'<br>';
+
+if ($remote_ip == $home_ip) # nur at home anzeigen
+{
+	print 'besucher: '.$besucher.' * ';
+	print 'home_ip: '.$set['home_ip'].' remote_ip: '.$remote_ip.' ';
+	print 'besuche neu: '.$anzahlbesuche.' ';
+	print 'session_id: '.$session_id.' besucher_session_id: '.$besucher_session_id.'<br>';
+}
+
+
+#if (!($session_id == $besucher_session_id)) #Neue  Session
+
+{
+	if (count($besucherarray) )
+	{
+		print '<br>bisherige IP ip: '.$stat['ip'].'  home_ip: '.$set['home_ip'].' datum: '.$datum.'<br>';
+		
+		#if ( ! ($remote_ip == $home_ip))
+		{
+			mysql_query("UPDATE besucher SET besuch = '$anzahlbesuche' ,zeit = '$uhrzeit', datum = '$sql_datum', session_id = '$session_id'  WHERE ip = '$remote_ip'"); 
+			print 'error: ';
+			print_r(mysql_error());
+			print '<br>';
+			mysql_query("UPDATE besucher SET  kalendertag = '$kalendertag',kalendermonat = '$kalendermonat' ,kalenderjahr = '$kalenderjahr'   WHERE ip = '$remote_ip'"); 
+
+			
+		}
+	}
+	else
+	
+	{
+		print 'neue IP ip: *'.$stat['ip'].'*  home_ip: '.$set['home_ip'].'<br>';
+		$besuche = $anzahlbesuche+1;
+		print 'name: '.$besucher.' ';
+		print 'besuch: '.$besuche.' ';
+		print 'remote_ip: '.$remote_ip.' ';
+		print 'zeit: '.$uhrzeit.' ';
+		print 'datum: '.$datum.' ';
+		print 'session_id: '.$session_id.'<br>';
+		
+		$result_insert = mysql_query("INSERT INTO besucher (id,name,besuch,ip,zeit,datum,kalenderjahr, kalendermonat,kalendertag,session_id) VALUES (NULL,'$besucher','$besuche','$remote_ip','$uhrzeit','$sql_datum','$kalenderjahr','$kalendermonat','$kalendertag','$session_id')");
+		print_r(mysql_error());
+		print '<br>';
+		
+	}
+
+}
+//print_r($besucherarray);
+
 
 #CREATE TABLE neu_test AS SELECT * FROM test;
 $test=1;
@@ -168,11 +358,66 @@ $event = "";
 $playpfad = "";
 $stimme  = "";
 
-$register = "sopran";
-if (isset($_GET['register']))
+
+
+$register = "";
+if (isset($_GET['register']) )
 {
-$register = $_GET['register']; # beim Klick auf Register
+	$register = $_GET['register']; # beim Klick auf Register
+	mysql_query("UPDATE besucher SET register = '$register'   WHERE ip = '$remote_ip'"); 
+	if ($register === "Sopran")
+	{
+		if ($neuerevent)
+		{
+			$sopran = $sopran + 1;
+			mysql_query("UPDATE besucher SET sopran = '$sopran'   WHERE ip = '$remote_ip'"); 
+		}
+	}
+
+	if ($register === "Alt")
+	{
+		if ($neuerevent)
+		{
+			$alt = $alt + 1;
+			mysql_query("UPDATE besucher SET alt = '$alt'   WHERE ip = '$remote_ip'"); 
+		}
+	}
+
+	if ($register === "Tenor")
+	{
+		if ($neuerevent)
+		{
+			$tenor = $tenor + 1;
+			mysql_query("UPDATE besucher SET tenor = '$tenor'   WHERE ip = '$remote_ip'");
+		} 
+	}
+
+
+	if ($register === "Bass")
+	{
+		if ($neuerevent)
+		{
+			$bass = $bass + 1;
+			mysql_query("UPDATE besucher SET bass = '$bass'   WHERE ip = '$remote_ip'"); 
+		}
+	}
+
+	if ($register === "Alle")
+	{
+		if ($neuerevent)
+		{
+		$alle = $alle + 1;
+		mysql_query("UPDATE besucher SET alle = '$alle'   WHERE ip = '$remote_ip'"); 
+		}
+	}
+
+
 }
+
+
+
+
+
 $playwerk="";
 if (isset($_GET['playpfad']) && $_GET['playpfad'])
 {
@@ -256,16 +501,15 @@ if (isset($_POST['task']))
 }
 #print 'task: '.$task.'<br>';
 
-$registernamenarray = array("Sopran","Alt","Tenor","Bass");
+$registernamenarray = array("Sopran","Alt","Tenor","Bass","Alle");
 
 ?>
 	
 <div id="adminContent">
-      
+
+  
 	<h1 class = "titel"> Kirchenchor Dürnten</h1>
-
 	<?php
-
 	$sent='no';
 	$zeilenname=0;
 	$mediumordner="";
@@ -275,255 +519,6 @@ $registernamenarray = array("Sopran","Alt","Tenor","Bass");
 	$eventarray = array();
 	$werkarray = array();
 	$satzarray = array();
-	#$db->set_charset("utf8"); 
-	/* sql-abfrage schicken */
-	$result_midi = mysql_query("SELECT * FROM audio ", $db)or die(print '<p  >Beim Suchen nach mididaten ist ein Fehler passiert: '.mysql_error().'</p>');
-	if (mysql_error())
-	{
-		print 'SELECT suchname error:';
-		print mysql_error();
-		print '<br>';
-	};
-
-	/* resultat in einer schleife auslesen */
-
-
-	#print '<table width="759" border="1">';
-
-while ($mididaten = mysql_fetch_array($result_midi) )
-{
-	if (isset($mididaten['event']))
-	{
-		$event=$mididaten['event'];
-		
-		#print '<p>Event: '. $event.'</p>';
-		$eventdic = array("event"=>  $event);
-		
-		if (isset($mididaten['werk']))
-		{
-			$werk=$mididaten['werk'];
-			#print '<p>werk: '. $werk.'</p>';
-			$eventdic['werk'] = $werk;
-			$werkarray = array();
-			$werkdic = array("werk" => $werk);
-			if (isset($mididaten['satz']))
-			{
-				$satz=$mididaten['satz'];
-				#print '<p>satz: '. $satz.'</p>';
-				$eventdic['satz'] = $satz;
-				$satzdic = array("satz" => $satz);
-				# Sopran		
-				$sopranstimmen=3;
-				if (isset($mididaten['sopran3']))
-				{
-					#$sopran3=$mididaten['sopran3'];
-					if (strlen($sopran3))
-					{
-						#print '<p>Sopran 3: '. $sopran3.'</p>';
-						$eventdic['sopran3'] = $sopran3;
-						$satzdic['sopran3'] = $sopran3;
-						
-					}
-					else
-					{
-						$sopranstimmen--;
-					}
-				}
-
-				if (isset($mididaten['sopran2']))
-				{
-					#$sopran2=$mididaten['sopran2'];
-					if (strlen($sopran2))
-					{
-						#print '<p>Sopran 2: '. $sopran2.'</p>';
-						$eventdic['sopran2'] = $sopran2;
-						$satzdic['sopran2'] = $sopran2;
-					}
-					else
-					{
-						$sopranstimmen--;
-					}
-				}
-
-				if (isset($mididaten['sopran1']))
-				{
-					#$sopran1=$mididaten['sopran1'];
-					if (strlen($sopran1))
-					{
-						if ($sopranstimmen ==1)
-						{
-							#print '<p>Sopran: '. $sopran1.'</p>';
-						}
-						else
-						{
-							#print '<p>Sopran 1: '. $sopran1.'</p>';
-						}
-						$eventdic['sopran1'] = $sopran1;
-						$satzdic['sopran1'] = $sopran1;
-					}
-				}
-
-		# Alt
-
-				$altstimmen=3;
-				if (isset($mididaten['alt3']))
-				{
-					$alt3=$mididaten['alt3'];
-	
-					if (strlen($alt3))
-					{
-						#print '<p>Alt 3: '. $alt3.'</p>';
-						$eventdic['alt3'] = $alt3;
-					}
-					else
-					{
-						#print '<p>kein Alt 3</p>';
-						$altstimmen--;
-					}
-				}
-
-				if (isset($mididaten['alt2']))
-				{
-					$alt2=$mididaten['alt2'];
-					if (strlen($alt2))
-					{
-						#print '<p>Alt 2: '. $alt2.'</p>';
-						$eventdic['alt2'] = $alt2;
-					}
-					else
-					{
-					#print '<p>kein Alt 2</p>';
-						$altstimmen--;
-					}
-				}
-
-				if (isset($mididaten['alt1']))
-				{
-					$alt1=$mididaten['alt1'];
-					if (strlen($alt1))
-					{
-						if ($altstimmen ==1)
-						{
-							#print '<p>Alt: '. $alt1.'</p>';
-							$eventdic['alt1'] = $alt1;
-						}
-						else
-						{
-							#print '<p>Alt 1: '. $x.'</p>';
-						}
-					}
-				}
-
-				$tenorstimmen=3;
-				if (isset($mididaten['tenor3']))
-				{
-					$tenor3=$mididaten['tenor3'];
-	
-					if (strlen($tenor3))
-					{
-						#print '<p>Tenor 3: '. $tenor3.'</p>';
-						$eventdic['tenor3'] = $tenor3;
-					}
-					else
-					{
-						#print '<p>kein tenor3 </p>';
-						$tenorstimmen--;
-					}
-				}
-
-				if (isset($mididaten['tenor2']))
-				{
-					$tenor2=$mididaten['tenor2'];
-					if (strlen($tenor2))
-					{
-						#print '<p>Tenor 2: '. $tenor2.'</p>';
-						$eventdic['tenor2'] = $tenor2;
-					}
-					else
-					{
-					#print '<p>kein Alt 2</p>';
-						$tenorstimmen--;
-					}
-				}
-
-				if (isset($mididaten['tenor1']))
-				{
-					$tenor1=$mididaten['tenor1'];
-					if (strlen($tenor1))
-					{
-						if ($tenorstimmen ==1)
-						{
-							#print '<p>Tenor: '. $tenor1.'</p>';
-							
-						}
-						else
-						{
-							#print '<p>Tenor 1: '. $tenor1.'</p>';
-						}
-						$eventdic['tenor1'] = $tenor1;
-					}
-				}
-
-		# Bass
-				$bassstimmen=3;
-				if (isset($mididaten['bass3']))
-				{
-					$bass3=$mididaten['bass3'];
-	
-					if (strlen($bass3))
-					{
-						#print '<p>Bass 3: '. $bass3.'</p>';
-						$eventdic['bass3'] = $bass3;
-					}
-					else
-					{
-						#print '<p>kein Alt 3</p>';
-						$bassstimmen--;
-					}
-				}
-
-				if (isset($mididaten['bass2']))
-				{
-					$bass2=$mididaten['bass2'];
-					if (strlen($bass2))
-					{
-						#print '<p>Bass 2: '. $bass2.'</p>';
-						$eventdic['bass2'] = $bass2;
-					}
-					else
-					{
-					#print '<p>kein Alt 2</p>';
-						$bassstimmen--;
-					}
-				}
-
-				if (isset($mididaten['bass1']))
-				{
-					$bass1=$mididaten['bass1'];
-					if (strlen($bass1))
-					{
-						if ($bassstimmen ==1)
-						{
-							#print '<p>Bass: '. $bass1.'</p>';
-							
-						}
-						else
-						{
-							#print '<p>Bass 1: '. $bass1.'</p>';
-						}
-						$eventdic['bass1'] = $bass1;
-						
-					}
-				}
-			} # if werk
-		}# if satz
-		#print 'eventdic von '.$event.'<br>';
-		#print_r($eventdic);
-		#print '<br>';print '<br>';
-		#$eventarray[] = $eventdic;
-	} # if event
-	
-}#while 
 
 	#$index=0;
 #print 'eventarray<br>';print '<br>';
@@ -573,7 +568,7 @@ foreach ($aktiveventliste as $activevent)
 	#print '<br>';
 	print '<h2 class = "eventtitel ">'.$activevent.'</h2>';
 
-	#print '<br>event: '.$activevent.'<br>';
+	#print '<br>event: '.$activevent.' register: '.$register.'<br>';
  	$werkarray = array();
 	$result_werk = mysql_query("SELECT werk FROM audio WHERE event = '$activevent' AND register = '$register'", $db)or die(print '<p  >Beim Suchen nach mididaten ist ein Fehler passiert: '.mysql_error().'</p>');
 	while ($werkdaten = mysql_fetch_array($result_werk))
@@ -737,9 +732,11 @@ print '</div> '; # registerwahlabschnitt
 
 ?>
    <script type="text/javascript">
-   	//playerwerk  = "<?php echo $playpfad; ?>";
+   	playerwerk  = "<?php echo $playpfad; ?>";
    	//playerwerk  = "http://www.refduernten.ch/www.zh.ref.ch/gemeinden/duernten/content/e14561/e12463/e15420/e15577/e1839/Cum_sanctis_S.mp3";
 	</script>
+
+
 
 <?php
 print '<div class = "audioabschnitt">	';
@@ -779,10 +776,83 @@ print '<div class = "audioabschnitt">	';
 				
 				# Beginn Player
 
-				print '<div class="playerabschnitt">';
-				#pfad: ftp://ruediheimlicher:@ruediheimlicher.ch//public_html/Audio/Player/jplayer/jplayer.blue.monday.css
-				print '
 				
+				#pfad: ftp://ruediheimlicher:@ruediheimlicher.ch//public_html/Audio/Player/jplayer/jplayer.blue.monday.css
+				$safaribrowser=1;
+				if ($safaribrowser)
+				{
+				print '<div class="safariplayerabschnitt">';
+				
+				$playerwerk = "mp3=http://www.ruediheimlicher.ch/Data/kirchenchor/Lieder/Test/Requiem2_A.mp3&amp;showstop=1";
+				?>
+				
+				<!-- http://flash-mp3-player.net/players/maxi/generator/ -->
+				<config>
+					<param name="mp3" value="http%3A//flash-mp3-player.net/medias/another_world.mp3"/>
+					<param name="showstop" value="1" />
+					<param name="showvolume" value="1"/>
+					<param name="sliderwidth" value="3"/>
+					<param name="sliderheight" value="20"/>
+				</config>
+
+					<object type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" width="600" height="60">
+					<param name="movie" value="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" />
+					<param name="bgcolor" value="#3afff6" />
+
+					<param name="FlashVars" value="mp3=<?php echo $playpfad ?>&amp;showstop=1&amp;sliderwidth=3&amp;sliderheight=20&amp;bgcolor1=aabbcc&amp;bgcolor2=446688&amp;slidercolor1=6688aa&amp;slidercolor2=224466&amp;sliderovercolor=44ca00" />
+				</object>
+				
+				<?php
+				print '<div class="safarimarkerabschnitt">';
+									# Lineal-Tabelle
+	
+					print '<table class = "markertabelle">';
+					print '<tr>';
+					for ($mark=0;$mark<21;$mark++)
+					{
+						if ($mark & 1)
+						{
+						print '<th class = "marker">\'';
+						print '</th>';
+						}
+						else
+						{
+						print '<th class = "marker">|';
+						print '</th>';
+						}
+					}
+
+					print '</tr>';
+					print '<tr>';
+					for ($mark=0;$mark<21;$mark++)
+					{
+						if ($mark & 1)
+						{
+						print '<td class = "markerindex">';
+						print '</td>';
+					
+						}
+						else
+						{
+						$marker = $mark/2;
+						print '<td class = "markerindex">'.$marker.'';
+						print '</td>';
+						}
+					}
+
+					print '</tr>';
+					print '</table>';
+
+				print '</div> ';#safarimarkerabschnitt
+				print '</div> ';#safariplayerabschnitt
+				}
+				else
+				{
+				/*
+				# Alter Player
+				print '<div class="playerabschnitt">';
+				
+				print '
 				  <div id="jquery_jplayer_1" class="jp-jplayer"></div>
 				  
 				  <div id="jp_container_1" class="jp-audio">
@@ -834,8 +904,8 @@ print '<div class = "audioabschnitt">	';
 					</div>
 				  </div>
 
-				  
-				 ';
+				';
+				
 				
 				print '<div class="markerabschnitt">';
 					# Lineal-Tabelle
@@ -878,14 +948,19 @@ print '<div class = "audioabschnitt">	';
 					print '</table>';
 				print '</div>';	# Markerabschnitt			
 
-			print '</div> ';
+			print '</div> ';#playerabschnitt
+			*/
+			 }
 				# Ende Player
 	
 				
 				
 				print '<br>';
-				print '	<h3 class = "erklaerung ">Mit der Maus lässt sich die Abspielposition setzen. Ein Mausklick an eine Stelle verschiebt die Position dorthin.<br>Der Massstab erleichtert das Wiederauffinden einer Stelle, die wiederholt werden soll.<br>
-				<br>Die Lautstärke lässt sich mit einem Klick in den oberen Balken anpassen.</h3>';
+				print '<br>';
+				print '	<h3 class = "erklaerung ">Mit der Maus lässt sich die Abspielmarke verschieben.<br>
+				Mit der Leertaste der Tastatur kann die Wiedergabe angehalten und wieder fortgesetzt werden.
+				<br><br>Der Massstab erleichtert das Wiederauffinden einer Stelle, die wiederholt werden soll.<br>
+				</h3>';
 
 				
 			print '</div>'; # stimmeabschnitt

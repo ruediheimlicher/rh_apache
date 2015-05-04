@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xsi:noNamespaceSchemaLocation="rss-2_0.xsd">	<channel>
+
+
+
+		<language>de-de </language>
+		<!-- Titel des Podcasts, wie er in iTunes erscheint -->		
+		<title>Podcast Hörspiel </title>
+		
+		<!-- URL der Webseite, die aufgerufen werden soll -->		<link>http://psduernten.educanet2.ch/podcast</link>		
+		<!-- Beschreibung des Podcasts -->
+
+		<description>Hörspiel Kleiner Fisch</description>	
+		<!-- Daten fuer die erste Datei -->		
+		<item>
+			
+			<!-- Titel der mp3-Datei, wie er in iTunes erscheint -->			<title>Der kleine Fisch</title>			<link>
+
+				<!--URL der Text-Datei -->				http://psduernten.educanet2ch/podcast/BG.zip			</link>
+
+			<description>Hörspiel von Marcel und Nemanja</description>
+
+			<!--URL der mp3-Datei -->			<enclosure url="http://psduernten.educanet2.ch/podcast/MN.mp3" length="340000" type="audio/mpeg"/>			
+			<comments>http://psduernten.educanet2ch/podcast</comments>
+			<pubDate>Mon, 13 April 2007 15:03:14 +0100</pubDate>		</item>		<item>			<description> 				Go			</description>		</item>	</channel></rss>

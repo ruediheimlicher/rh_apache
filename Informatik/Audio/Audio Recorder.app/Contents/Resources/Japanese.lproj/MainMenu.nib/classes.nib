@@ -1,0 +1,68 @@
+{
+    IBClasses = (
+        {
+            CLASS = Application; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {mainWindowController = NSWindowController; }; 
+            SUPERCLASS = NSApplication; 
+        }, 
+        {CLASS = ApplicationDelegate; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                changeMonitorInput = id; 
+                changeVolume = id; 
+                pause = id; 
+                record = id; 
+                stop = id; 
+            }; 
+            CLASS = MainWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                duration = NSTextField; 
+                filePath = NSTextField; 
+                monitorInput = NSButton; 
+                pause = NSButton; 
+                record = NSButton; 
+                stop = NSButton; 
+                volume = NSSlider; 
+                volumeMeter = MeterView; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = MeterView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {
+                changeOutputFormat = id; 
+                chooseOutputFolder = id; 
+                closeMP3CustomSettings = id; 
+                loadCustomSettings = id; 
+                saveCustomSettings = id; 
+                showCustomSettings = id; 
+            }; 
+            CLASS = PreferencePanelController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                loadCustomSettings = NSMenuItem; 
+                mP3BitRate = NSPopUpButton; 
+                mP3CustomSettings = NSPanel; 
+                mP3Mode = NSPopUpButton; 
+                openOutputFile = NSButton; 
+                outputFolder = NSTextField; 
+                outputFormat = NSPopUpButton; 
+                quality = NSPopUpButton; 
+                revealOutputFileInFinder = NSButton; 
+                saveCustomSettings = NSMenuItem; 
+                showSavePanel = NSButton; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
+            ACTIONS = {openScriptsFolder = id; }; 
+            CLASS = ScriptsMenu; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSMenu; 
+        }
+    ); 
+    IBVersion = 1; 
+}
