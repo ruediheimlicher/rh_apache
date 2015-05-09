@@ -37,6 +37,7 @@ $set = mysql_fetch_array($result_home);
 print '<div  class = "adminabschnitt">';
 print '<h2 class="eventtitel ">Apache Chor Besucher</h2>';
 print '<form action="chor_admin.php" ><h3 class = "admin" ><input type="submit" class="links40" value="zurück zu Admin" name="textfile" style="width: 150px; margin-right:10px;"></h3></form>';
+print '<form action="chor_midi.php" ><h3 class = "admin" ><input type="submit" class="links40" value="zurück zu Chor_MIDI" name="textfile" style="width: 150px; margin-right:10px;"></h3></form>';
 
 #POST abfragen
 #print_r($_POST);

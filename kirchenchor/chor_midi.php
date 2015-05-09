@@ -102,6 +102,16 @@ function submitform(registername)
 #phpinfo();
 #date_default_timezone_set(Europe/Zurich);
 
+$besucher = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+#echo "besucher: ", $besucher," <br>";
+$localhost=0;
+if ($besucher === "localhost")
+{
+	$localhost=1;
+}
+#$localhost=0;
+#echo "besucher: ", $besucher, " localhost: ", $localhost," <br>";
+
 $safaribrowser = strpos(getenv('HTTP_USER_AGENT'),"Safari");
 #echo '<br>'.$browser.' pos: '.strpos("Safari",$browser).'<br>';
 #if (strpos($browser, "Safari"))
@@ -132,11 +142,38 @@ if (isset($_POST['user']))
 	$user = $_POST['user'];
 }
 
+
+$session_id = session_id();
+
 $result_home = mysql_query("SELECT * FROM settings WHERE id= 1", $db)or die(print '<p>Beim Suchen nach home ist ein Fehler passiert: '.mysql_error().'</p>');
 #print mysql_error();
 $set = mysql_fetch_array($result_home);
 #print 'home_ip: '.$set['home_ip'].'<br>';
 $home_ip = $set['home_ip'];
+$lastsession = "";
+$lastaktuellesession = "";
+$session_id = session_id();
+if (isset($set['lastsession']))
+{
+	$lastsession = $set['lastsession'];
+}
+if (isset($set['aktuellesession']))
+{
+	$lastaktuellesession = $set['aktuellesession'];
+}
+
+
+if (!($lastaktuellesession === $session_id)) # neue Session
+{
+	$neuesession = 1;
+	# aktuellesession aktualisieren
+	mysql_query("UPDATE settings SET aktuellesession = '$session_id' ,  lastsession = '$lastaktuellesession ' WHERE id= 1"); 
+
+}
+else
+{
+	$neuesession=0;
+}
 
 $remote_ip=$_SERVER['REMOTE_ADDR'];
 $home_ip = $set['home_ip'];
@@ -145,43 +182,64 @@ $zeit = $_SERVER['REQUEST_TIME'];
 #print_r($_SESSION);
 #print 'home_ip: '.$set['home_ip'].' remote_ip: '.$remote_ip.'<br>';
 #echo $_SERVER['HTTP_HOST'],"<br>"; 
-$session_id = session_id();
+
 $aktuellestunde = date("H",$zeit);
- print ' aktuellestunde: '.$aktuellestunde.' session-stunde: '.$_SESSION['stunde'].'<br>';
 
 $neuerevent=0;
 
  if (isset($_SESSION['stunde']))
  {
+  	if ($localhost)
+ 	{
+ 	 	print ' aktuellestunde: '.$aktuellestunde.' gesetzte session-stunde: '.$_SESSION['stunde'].' ';
+ 	 }
+
  	if ($_SESSION['stunde'] == $aktuellestunde) # gleicher Anlauf
  	{
+ 	 	if ($localhost)
+ 		{
+ 		print 'gleicher Anlauf<br>';
+ 		}
+
  		$neuerevent=0;
  	}
  	else # weiterer Anlauf
  	{
+ 		if ($localhost)
+ 		{
+ 		print 'weiterer Anlauf<br>';
+ 		}
  		$neuerevent=1;
  		$_SESSION['stunde'] = date("H",$zeit);
  	}
- 	print 'sessionstunde: '.$_SESSION['stunde'].'<br>';
+ 	//print 'sessionstunde: '.$_SESSION['stunde'].'<br>';
  	
  }
  else
  {
- 	print 'neue sessionstunde: '.date("H",$zeit).'<br>';
+ 	if ($localhost)
+ 	{
+ 		print 'neue sessionstunde: '.date("H",$zeit).'<br>';
+ 	}
  	$_SESSION['stunde'] = date("H",$zeit);
- 	
  	$neuerevent=1;
  }
- print ' neuerevent: '.$neuerevent.'<br>';
-#print ' session_id: '.$session_id.'<br>';
-#print 'ip: '.$remote_ip.'<br>';
-#print 'zeit: '.$zeit.'<br>';
+ 
+  if ($localhost)
+ {
+ 	print ' nach isset: aktuellestunde: '.$aktuellestunde.' session-stunde: '.$_SESSION['stunde'].'<br>';
+ 
+ 	print ' neuerevent: '.$neuerevent.'<br>';
 
+	#print ' session_id: '.$session_id.'<br>';
+	#print 'ip: '.$remote_ip.'<br>';
+	#print 'zeit: '.$zeit.'<br>';
+ }
 $datum = date("d.m.Y",$zeit);
 $uhrzeit = date("H:i",$zeit);
 
 
-echo "Datum: ",$datum,"  Zeit: ",$uhrzeit," Uhr<br>";
+
 #http://www.traum-projekt.com/forum/19-traum-dynamik/131064-datum-format-yyyy-mm-dd.html
 
 
@@ -190,20 +248,22 @@ $sql_datum = date('Y-m-d', strtotime($datum));
 $kalenderjahr = date("Y")*1;
 $kalendermonat = date("m")*1;
 $kalendertag = date("d")*1;
-#print 'kalenderjahr: '.$kalenderjahr.' kalendermonat: '.$kalendermonat.' kalendertag: '.$kalendertag.'<br>';
 
+if ($localhost)
+ {
+ 		echo "Datum: ",$datum,"  Zeit: ",$uhrzeit," Uhr<br>";
+	#print 'kalenderjahr: '.$kalenderjahr.' kalendermonat: '.$kalendermonat.' kalendertag: '.$kalendertag.'<br>';
 
+}
 $besucher = get_current_user();
 #print_r($_SERVER);
-$besucher = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-#echo "besucher: ", $besucher," <br>";
 
 $result_besuche = mysql_query("SELECT * FROM besucher WHERE ip  = '$remote_ip'", $db)or die(print '<p>Beim Suchen nach IP ist ein Fehler passiert: '.mysql_error().'</p>');
 #print mysql_error();
 $rowkontrolle = mysql_num_rows($result_besuche);
 if ($rowkontrolle > 1)
 {
-print 'rowkontrolle: '.$rowkontrolle.'<br>';
+	print 'rowkontrolle: '.$rowkontrolle.'<br>';
 }
 $besucherarray = array();
 
@@ -223,7 +283,10 @@ while ($stat = mysql_fetch_array($result_besuche) ) #
 	{
 		#print_r($stat);
 		#print '<br>';
-		print 'in besuchbesucherarray: '.$stat['besuch'].'<br>';
+		if ($localhost)
+ 		{
+			#print 'in besuchbesucherarray: '.$stat['besuch'].'<br>';
+		}
 		$besucherarray[]=$stat['besuch']; # 
 		$besucher_session_id = $stat['session_id'];
 		#print 'session_id: '.$session_id.' besucher_session_id: '.$besucher_session_id.'<br>';
@@ -231,32 +294,50 @@ while ($stat = mysql_fetch_array($result_besuche) ) #
 		if (isset($stat['register']))
 		{
 			$register=$stat['register'];
-			print 'register: '.$register.' | ';
+			if ($localhost)
+ 			{
+				print 'register: '.$register.' | ';
+			}
 		}
 		if (isset($stat['sopran']))
 		{
 			$sopran=$stat['sopran'];
-			print 'sopran: '.$sopran.' | ';
+			if ($localhost)
+ 			{
+				print 'sopran: '.$sopran.' | ';
+			}
 		}
 		if (isset($stat['sopran']))
 		{
 			$alt=$stat['alt'];
-			print 'alt: '.$alt.' | ';
+			if ($localhost)
+ 			{
+				print 'alt: '.$alt.' | ';
+			}
 		}
 		if (isset($stat['sopran']))
 		{
 			$tenor=$stat['tenor'];
-			print 'tenor: '.$tenor.' | ';
+			if ($localhost)
+ 			{
+				print 'tenor: '.$tenor.' | ';
+				}
 		}
 		if (isset($stat['bass']))
 		{
 			$bass=$stat['bass'];
-			print 'bass: '.$bass.'<br>';
+			if ($localhost)
+ 			{
+				print 'bass: '.$bass.'<br>';
+			}
 		}
 		if (isset($stat['alle']))
 		{
 			$bass=$stat['alle'];
-			print 'alle: '.$alle.'<br>';
+			if ($localhost)
+ 			{
+				print 'alle: '.$alle.'<br>';
+			}
 		}
 
 	}
@@ -266,32 +347,43 @@ while ($stat = mysql_fetch_array($result_besuche) ) #
 $anzahlbesuche=0;
 if (count($besucherarray))
 {
-	$anzahlbesuche = $besucherarray[0]+1;
+
+	$anzahlbesuche = $besucherarray[0];
+	if ($neuesession)
+	{
+		$anzahlbesuche = $anzahlbesuche +1;
+		$neuesession = 0;
+	}
+	
+	
 }
 #print 'besuche neu: '.$anzahlbesuche.' besucher_session_id: '.$besucher_session_id.'<br>';
 
-if ($remote_ip == $home_ip) # nur at home anzeigen
-{
+#if ($remote_ip == $home_ip) # nur at home anzeigen
+if ($localhost)
+ {
 	print 'besucher: '.$besucher.' * ';
 	print 'home_ip: '.$set['home_ip'].' remote_ip: '.$remote_ip.' ';
 	print 'besuche neu: '.$anzahlbesuche.' ';
-	print 'session_id: '.$session_id.' besucher_session_id: '.$besucher_session_id.'<br>';
-}
+	print '<br>session_id: '.$session_id.'<br>besucher_session_id: '.$besucher_session_id.'<br>';
 
+}
 
 #if (!($session_id == $besucher_session_id)) #Neue  Session
 
 {
 	if (count($besucherarray) )
 	{
+	if ($localhost)
+ 		{
 		print '<br>bisherige IP ip: '.$stat['ip'].'  home_ip: '.$set['home_ip'].' datum: '.$datum.'<br>';
-		
+		}
 		#if ( ! ($remote_ip == $home_ip))
 		{
 			mysql_query("UPDATE besucher SET besuch = '$anzahlbesuche' ,zeit = '$uhrzeit', datum = '$sql_datum', session_id = '$session_id'  WHERE ip = '$remote_ip'"); 
-			print 'error: ';
+			#print 'error: ';
 			print_r(mysql_error());
-			print '<br>';
+			#print '<br>';
 			mysql_query("UPDATE besucher SET  kalendertag = '$kalendertag',kalendermonat = '$kalendermonat' ,kalenderjahr = '$kalenderjahr'   WHERE ip = '$remote_ip'"); 
 
 			
@@ -300,14 +392,18 @@ if ($remote_ip == $home_ip) # nur at home anzeigen
 	else
 	
 	{
+	$besuche = $anzahlbesuche+1;
+	if ($localhost)
+ 		{
 		print 'neue IP ip: *'.$stat['ip'].'*  home_ip: '.$set['home_ip'].'<br>';
-		$besuche = $anzahlbesuche+1;
+		
 		print 'name: '.$besucher.' ';
 		print 'besuch: '.$besuche.' ';
 		print 'remote_ip: '.$remote_ip.' ';
 		print 'zeit: '.$uhrzeit.' ';
 		print 'datum: '.$datum.' ';
 		print 'session_id: '.$session_id.'<br>';
+		}
 		
 		$result_insert = mysql_query("INSERT INTO besucher (id,name,besuch,ip,zeit,datum,kalenderjahr, kalendermonat,kalendertag,session_id) VALUES (NULL,'$besucher','$besuche','$remote_ip','$uhrzeit','$sql_datum','$kalenderjahr','$kalendermonat','$kalendertag','$session_id')");
 		print_r(mysql_error());
@@ -726,6 +822,7 @@ print '	<div class="registerwahlabschnitt"> ';
 
 		#print '	<li><a href="../index.php">Home</a></li>';				
 		print '	<li><a href="http://www.refduernten.ch/content/e14561/e12463/e15420/e15549/index_ger.html">zurück  </a></li>';
+		
 		print ' </ul>';
 	
 		#print '<br><p>register: '.$register.'</p>';
