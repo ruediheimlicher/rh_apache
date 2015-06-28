@@ -106,7 +106,7 @@ body.archiv
 	{
 	position:absolute;
 	left:10px;
-	top:0px;
+	top:200px;
 	padding: 0px; /* padding (Auffüllung) bezeichnet den Innenabstand und margin (Rand) den Außenabstand der div -Box. */
 	margin:0px;
 	height: 600px;
@@ -550,7 +550,7 @@ h3.auswahluntertitel
 	/*border:1px solid #f00;*/
 	position:absolute; 
 	left:30px;
-	top:170px;
+	top:370px;
 	width:420px;
 	height:auto;
 	background-color:#bdf; 

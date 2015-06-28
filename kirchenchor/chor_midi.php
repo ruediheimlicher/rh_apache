@@ -2,7 +2,8 @@
 session_start();
 /*
 
-Chor Admin Datenbank 
+r/Sites/rh_apache/public_html/kirchenchor/chor_midi.php on line 475
+
 */
 
 include("pwd.php");
@@ -81,6 +82,55 @@ $(document).ready(function()
         preload: 'metadata'
       });
     });
+    
+    onload = function()
+    {
+ 		field = document.getElementById('number_field')
+ 		field.onkeydown = keyhit
+		field.focus()
+	}
+
+<!--http://www.webdeveloper.com/forum/showthread.php?122389-keyPress-event-in-php -->
+function keyhit(e)
+{
+ thisKey = e ? e.which : window.event.keyCode
+ switch (thisKey) 
+ {
+  case 38: key = 'UP'
+   break
+  case 40: key = 'DOWN'
+   break
+   case 69: key = 'localhost'
+   break;
+  default: key = thisKey
+ }
+ 
+ if(key)
+ {
+  field = document.getElementById('number_field')
+  if(isNaN(field.value))
+  {
+   field.value = 0
+  }
+  if(key == 'UP')
+  {
+   field.value++
+  }
+  else if(key == 'DOWN' && field.value > 0)
+  {
+   field.value--
+  }
+  else if (key ==  'localhost')
+  {
+  	field.value = 'localhost'
+  }
+  else
+  {
+  field.value = thisKey
+  }
+ }
+}
+
 </script>
 
 <link href="chor.css" rel="stylesheet" type="text/css" />
@@ -152,7 +202,6 @@ $set = mysql_fetch_array($result_home);
 $home_ip = $set['home_ip'];
 $lastsession = "";
 $lastaktuellesession = "";
-$session_id = session_id();
 if (isset($set['lastsession']))
 {
 	$lastsession = $set['lastsession'];
@@ -183,16 +232,68 @@ $zeit = $_SERVER['REQUEST_TIME'];
 #print 'home_ip: '.$set['home_ip'].' remote_ip: '.$remote_ip.'<br>';
 #echo $_SERVER['HTTP_HOST'],"<br>"; 
 
-$aktuellestunde = date("H",$zeit);
+if ($localhost)
+{
+#print_r(session_get_cookie_params() );
+#print '<br>';
+#print '<form action="'.session_destroy().'" ><h3 class = "admin" ><input type="submit" class="links40" value="kill session" name="textfile" style="width: 150px; margin-right:10px;"></h3></form>';
 
+#print '<form action="'.session_destroy().'">';
+	#print '<form action="" method="post"><p><input type="text" id="number_field" name="number_field" value="0"></p></form>';
+}
+$aktuellestunde = date("H",$zeit);
+$aktuelleminute = date("i",$zeit);
+$neuerminutenevent=0;
 $neuerevent=0;
+ if (isset($_SESSION['minute']))
+ {
+ if ($localhost)
+ 	{
+ 		print ' aktuelleminute: '.$aktuelleminute.' gesetzte session-minute: '.$_SESSION['minute'].' ';
+ 	}
+ 	 if ($_SESSION['minute'] == $aktuelleminute) # gleicher Anlauf
+ 	{
+ 	 	if ($localhost)
+ 		{
+ 		print 'gleicher Minuten-Anlauf<br>';
+ 		}
+
+ 		$neuerminutenevent=0;
+ 	}
+ 	else # weiterer Anlauf
+ 	{
+ 		if ($localhost)
+ 		{
+ 		print 'weiterer Minuten-Anlauf<br>';
+ 		}
+ 		$neuerminutenevent=1;
+ 		$_SESSION['minute'] = date("i",$zeit);
+ 	}
+ 	
+ 	if ($localhost)
+ 	{
+ 		print 'sessionminute: '.$_SESSION['minute'].'<br>';
+ 	}
+ }
+ else
+ {
+  	if ($localhost)
+ 	{
+ 		print 'neue sessionminute: '.date("i",$zeit).'<br>';
+ 	}
+ 	$_SESSION['minute'] = date("i",$zeit);
+ 	$neuerminutenevent=1;
+
+ }
+
 
  if (isset($_SESSION['stunde']))
  {
   	if ($localhost)
  	{
  	 	print ' aktuellestunde: '.$aktuellestunde.' gesetzte session-stunde: '.$_SESSION['stunde'].' ';
- 	 }
+		
+ 	}
 
  	if ($_SESSION['stunde'] == $aktuellestunde) # gleicher Anlauf
  	{
@@ -225,11 +326,16 @@ $neuerevent=0;
  	$neuerevent=1;
  }
  
-  if ($localhost)
+ 
+ 
+ 
+if ($localhost)
  {
  	print ' nach isset: aktuellestunde: '.$aktuellestunde.' session-stunde: '.$_SESSION['stunde'].'<br>';
  
  	print ' neuerevent: '.$neuerevent.'<br>';
+ 	
+ 	print ' neuerminutenevent: '.$neuerminutenevent.'<br>';
 
 	#print ' session_id: '.$session_id.'<br>';
 	#print 'ip: '.$remote_ip.'<br>';
@@ -277,20 +383,24 @@ $alle=0;
 while ($stat = mysql_fetch_array($result_besuche) ) #
 {
 
-	//print 'in while stat:  stat[ip]: *'.$stat['ip'].'*  remote_ip: '.$remote_ip.' besuche: '.$stat['besuch'].'<br>';
+	print 'in while stat:  stat[ip]: *'.$stat['ip'].'*  remote_ip: '.$remote_ip.' besuche: '.$stat['besuch'].'<br>';
 
 	if (($stat['ip'] == $remote_ip)   && !(in_array($remote_ip,$besucherarray)) ) 
 	{
+	
 		#print_r($stat);
 		#print '<br>';
 		if ($localhost)
  		{
+ 			#print 'if stat[ip] == $remote_ip OK<br>';
 			#print 'in besuchbesucherarray: '.$stat['besuch'].'<br>';
 		}
 		$besucherarray[]=$stat['besuch']; # 
-		$besucher_session_id = $stat['session_id'];
-		#print 'session_id: '.$session_id.' besucher_session_id: '.$besucher_session_id.'<br>';
-
+		if (isset($stat['session_id']))
+		{
+			$besucher_session_id = $stat['session_id'];
+			#print 'session_id: '.$session_id.' besucher_session_id: '.$besucher_session_id.'<br>';
+		}
 		if (isset($stat['register']))
 		{
 			$register=$stat['register'];
@@ -304,7 +414,7 @@ while ($stat = mysql_fetch_array($result_besuche) ) #
 			$sopran=$stat['sopran'];
 			if ($localhost)
  			{
-				print 'sopran: '.$sopran.' | ';
+				print 'S: '.$sopran.' | ';
 			}
 		}
 		if (isset($stat['sopran']))
@@ -312,7 +422,7 @@ while ($stat = mysql_fetch_array($result_besuche) ) #
 			$alt=$stat['alt'];
 			if ($localhost)
  			{
-				print 'alt: '.$alt.' | ';
+				print 'A: '.$alt.' | ';
 			}
 		}
 		if (isset($stat['sopran']))
@@ -320,7 +430,7 @@ while ($stat = mysql_fetch_array($result_besuche) ) #
 			$tenor=$stat['tenor'];
 			if ($localhost)
  			{
-				print 'tenor: '.$tenor.' | ';
+				print 'T: '.$tenor.' | ';
 				}
 		}
 		if (isset($stat['bass']))
@@ -328,7 +438,7 @@ while ($stat = mysql_fetch_array($result_besuche) ) #
 			$bass=$stat['bass'];
 			if ($localhost)
  			{
-				print 'bass: '.$bass.'<br>';
+				print 'B: '.$bass.' | ';
 			}
 		}
 		if (isset($stat['alle']))
@@ -347,25 +457,23 @@ while ($stat = mysql_fetch_array($result_besuche) ) #
 $anzahlbesuche=0;
 if (count($besucherarray))
 {
-
 	$anzahlbesuche = $besucherarray[0];
 	if ($neuesession)
 	{
 		$anzahlbesuche = $anzahlbesuche +1;
 		$neuesession = 0;
-	}
-	
-	
+	}	
 }
 #print 'besuche neu: '.$anzahlbesuche.' besucher_session_id: '.$besucher_session_id.'<br>';
 
 #if ($remote_ip == $home_ip) # nur at home anzeigen
 if ($localhost)
  {
-	print 'besucher: '.$besucher.' * ';
+	#print 'besucher: '.$besucher.' * ';
 	print 'home_ip: '.$set['home_ip'].' remote_ip: '.$remote_ip.' ';
 	print 'besuche neu: '.$anzahlbesuche.' ';
-	print '<br>session_id: '.$session_id.'<br>besucher_session_id: '.$besucher_session_id.'<br>';
+	
+	print '<br>aktuelle session_id: '.$session_id.'<br>session_id aus DB besucher: '.$besucher_session_id.'<br>';
 
 }
 
@@ -376,7 +484,7 @@ if ($localhost)
 	{
 	if ($localhost)
  		{
-		print '<br>bisherige IP ip: '.$stat['ip'].'  home_ip: '.$set['home_ip'].' datum: '.$datum.'<br>';
+		print 'bisherige IP ip: *'.$stat['ip'].'*  home_ip: *'.$set['home_ip'].'* datum: '.$datum.'<br>';
 		}
 		#if ( ! ($remote_ip == $home_ip))
 		{
@@ -389,20 +497,18 @@ if ($localhost)
 			
 		}
 	}
-	else
-	
+	else // auswaerts
 	{
-	$besuche = $anzahlbesuche+1;
-	if ($localhost)
+		$besuche = $anzahlbesuche+1;
+		if ($localhost)
  		{
-		print 'neue IP ip: *'.$stat['ip'].'*  home_ip: '.$set['home_ip'].'<br>';
-		
-		print 'name: '.$besucher.' ';
-		print 'besuch: '.$besuche.' ';
-		print 'remote_ip: '.$remote_ip.' ';
-		print 'zeit: '.$uhrzeit.' ';
-		print 'datum: '.$datum.' ';
-		print 'session_id: '.$session_id.'<br>';
+			print 'neue IP ip: *'.$stat['ip'].'*  home_ip: '.$set['home_ip'].'<br>';
+			print 'name: '.$besucher.' ';
+			print 'besuch: '.$besuche.' ';
+			print 'remote_ip: '.$remote_ip.' ';
+			print 'zeit: '.$uhrzeit.' ';
+			print 'datum: '.$datum.' ';
+			print 'aktuelle session_id: '.$session_id.'<br>';
 		}
 		
 		$result_insert = mysql_query("INSERT INTO besucher (id,name,besuch,ip,zeit,datum,kalenderjahr, kalendermonat,kalendertag,session_id) VALUES (NULL,'$besucher','$besuche','$remote_ip','$uhrzeit','$sql_datum','$kalenderjahr','$kalendermonat','$kalendertag','$session_id')");
@@ -466,17 +572,33 @@ if (isset($_GET['register']) )
 	{
 		if ($neuerevent)
 		{
+			print 'sopran neuerevent<br>';
 			$sopran = $sopran + 1;
 			mysql_query("UPDATE besucher SET sopran = '$sopran'   WHERE ip = '$remote_ip'"); 
 		}
+		if ($neuerminutenevent)
+		{
+			print 'sopran neuerminutenevent<br>';
+			$sopran = $sopran + 1;
+			mysql_query("UPDATE besucher SET sopran = '$sopran'   WHERE ip = '$remote_ip'"); 
+		}
+		
 	}
 
 	if ($register === "Alt")
 	{
 		if ($neuerevent)
 		{
+			print 'alt neuerevent<br>';
 			$alt = $alt + 1;
 			mysql_query("UPDATE besucher SET alt = '$alt'   WHERE ip = '$remote_ip'"); 
+		}
+		if ($neuerminutenevent)
+		{
+			print 'alt neuerminutenevent<br>';
+			$alt = $alt + 1;
+			mysql_query("UPDATE besucher SET alt = '$alt'   WHERE ip = '$remote_ip'"); 
+
 		}
 	}
 
@@ -484,6 +606,7 @@ if (isset($_GET['register']) )
 	{
 		if ($neuerevent)
 		{
+			print 'tenor neuerevent<br>';
 			$tenor = $tenor + 1;
 			mysql_query("UPDATE besucher SET tenor = '$tenor'   WHERE ip = '$remote_ip'");
 		} 
@@ -494,6 +617,7 @@ if (isset($_GET['register']) )
 	{
 		if ($neuerevent)
 		{
+			print 'bass neuerevent<br>';
 			$bass = $bass + 1;
 			mysql_query("UPDATE besucher SET bass = '$bass'   WHERE ip = '$remote_ip'"); 
 		}
@@ -507,12 +631,15 @@ if (isset($_GET['register']) )
 		mysql_query("UPDATE besucher SET alle = '$alle'   WHERE ip = '$remote_ip'"); 
 		}
 	}
+		if ($neuerminutenevent)
+		{
+			$alle = $alle + 1;
+			mysql_query("UPDATE besucher SET alle = '$alle'   WHERE ip = '$remote_ip'"); 
+
+		}
 
 
 }
-
-
-
 
 
 $playwerk="";

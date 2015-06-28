@@ -204,9 +204,9 @@ else
 	}
 	if ($cgivars{d2})
 	{
-		$h2 = hex($cgivars{d2});	#	Echo von WoZi  29 Lampe (syncfehler)
+		$h2 = hex($cgivars{d2});	#	(Echo von WoZi  29 Lampe (syncfehler))
 	}
-	#$h3 = hex($cgivars{d3});	#	Brenner Stundencode
+	$h3 = hex($cgivars{d3});	#	Reset Report
 	#$h4 = hex($cgivars{d4});	#	Heizung Stundencode von EEPROM
 	#$h5 = hex($cgivars{d5}); 	# 	26: EEPROM_Err
 	#$h6 = hex($cgivars{d6}); 	# 	25: Write_Err 

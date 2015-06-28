@@ -1,4 +1,4 @@
-<?
+<?php
 
 #include "../sources/libTeeChart.php";
 
@@ -50,7 +50,7 @@
     <div id="mainContent">
 		<h1>HomeCentral</h1>
 	   
-		<?
+		<?php
 		#print_r($_POST);
 		#print '<br>';
 
@@ -316,7 +316,7 @@
 		</div> <!-- solardatenabschnitt --!>
 			
 		<div class = "kalenderabschnitt">	
-		<?
+		<?php
 	
 			# POST auswerten
 			#print 'Datumstring: '.$Datumstring.'<br>';
@@ -498,7 +498,7 @@
 					<tr>
 						<td>
 							<select onchange="this.form.monat.value = this.value"style="width: 55px"> 
-							<?
+							<?php
 							# Monat-Pop setzen, heutemonat selektieren
 							$monatarray= array("Jan","Feb","Mrz","Apr","Mai","Juni","Juli","Aug","Sept","Okt","Nov","Dez");
 							for ($mon=0;$mon<12;$mon++)
@@ -519,7 +519,7 @@
 						
 						<td>
 							<select onchange="this.form.jahr.value = this.value"style="width: 60px"> 
-							<?
+							<?php
 							# Jahr-Pop setzen, heutejahr selektieren
 							$jahrarray= array("2010","2011","2012","2013","2014","2015","2016","2017","2018");
 		
@@ -542,7 +542,7 @@
 						</td>
 		
 						<td>
-							<?
+							<?php
 							#print '<input type="submit" name = "go" value="go" onClick="datumfehler('.$postjahr.','.$heutejahr.')"/>';
 							print '<input type="submit" name = "go" value="go"/>';
 							?>
@@ -556,7 +556,8 @@
 			<form action = "" name = "heute" method = "POST">
 				<input type="submit" class = "kalender" name = "heute" value="Heute" style="width: 150px"/>
 			</form> <!--# Heute -->
-			<?
+			
+			<?php
 			
 			$postjahr=0;
 			# Kalender zeigen#	
@@ -689,7 +690,7 @@
 	 		<textarea name="Solardaten" cols="40" rows="5" ><?echo ($SolardatenText);?></textarea>
 	 		-->
 	 		
-	 		<? 
+	 		<?php
 			 #print 'Jahr:';
 			 
 			 #$tempzeit = strtotime("10 September 2000");
@@ -702,7 +703,7 @@
 			 
 			?>
 			
-			<?
+			<?php
 			
 			
 			if (($aktuellertagdesmonats >0) && !($aktuellertagdesmonats == $heutetagdesmonats) )
@@ -757,7 +758,7 @@
 			
 			 </div> <!-- solardiagrammabschnitt-->
 
-			<?
+			<?php
 			
 	$HomedatenPfad="../Data/HomeDaten.txt";
 	$HomedatenHandle = fopen($HomedatenPfad,"r") or die("Can't open file HomeDaten");
@@ -802,10 +803,13 @@
 	$pumpedatenvorhanden = 0;
 	$elektrodatenvorhanden = 0;
 	$oldminute =0;
+	print_r($Homedatenarray);
+	print 'kopfzeilen: '.$kopfzeilen.'<br>';
+	$offsetsekunde=$Homedatenarray[$kopfzeilen][0];
 	
-	$offsetsekunde=$Homedatenarray[$kopfzeilen+1][0];
 	$oldminute = $offsetsekunde/60;
-	
+	print 'offsetsekunde: '.$offsetsekunde.' oldminute: '.$oldminute.'<br>';
+
 	for ($dataindex=0; $dataindex < $anzDatenzeilen; $dataindex+=$intervall)
 	{
 		
