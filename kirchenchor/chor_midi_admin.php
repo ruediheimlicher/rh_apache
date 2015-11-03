@@ -500,7 +500,7 @@ if (isset($_POST['sent']))
 				
 			</tr>
 			<tr>
-				<td><p class="nameneingabe">werk:</td>
+				<td><p class="nameneingabe">Werk:</td>
 				<td><input size="40" maxlength="40" name="neueswerk"></td>
 			</tr>
 			<tr>
