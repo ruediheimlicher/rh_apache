@@ -409,3 +409,6 @@ neuer Tag: Laufzeit: 53234  26:05:15 14:47
 *** beispielfloat: 3.64159	beispielfix: 3.6	beispielint: 4
 experiment pl: *26:05:15 14:47*
 *** beispielfloat: 3.64159	beispielfix: 3.6	beispielint: 4
+experiment pl: *25:10:15 16:41*
+neuer Tag: Laufzeit: 60075  25:10:15 16:41
+*** beispielfloat: 3.64159	beispielfix: 3.6	beispielint: 4
