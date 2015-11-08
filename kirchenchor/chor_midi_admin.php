@@ -63,8 +63,8 @@ include("pwd.php");
 
 <?php
 #phpinfo();
-print '<p>benutzer;: '. $benutzer.'* pw: '. $passwort.'*</p>';
-print_r($_POST);
+#print '<p>benutzer;: '. $benutzer.'* pw: '. $passwort.'*</p>';
+#print_r($_POST);
 
 print'<br>';
 $pass = 0;
@@ -84,7 +84,7 @@ if (isset($_POST['test']))
 {
 	$test = $_POST['test'];
 }
-print '<p>test: '.$test.'  pass: *'. $pass.'*</p>';
+#print '<p>test: '.$test.'  pass: *'. $pass.'*</p>';
 $user = "admin";
 
 if (isset($_POST['kopieren']) && $_POST['kopieren'])
@@ -179,11 +179,14 @@ stimme3
 $sent='no';
 $zeilenid="";
 $editid=0;
-#print_r($_POST);
+
+print_r($_POST);
+
 if (isset($_POST['edit']))
 {
+	print_r($_POST['edit']);
 	$zeilenid = $_POST['edit'];
-	print 'edit count: '.count($zeilenid).'<br>';
+	print 'edit count: *'.count($zeilenid).'*<br>';
 	if (count($zeilenid))
 	{
 		$editid=$zeilenid[0];
@@ -191,7 +194,7 @@ if (isset($_POST['edit']))
 		
 		if (count($zeilenid)>1)
 		{
-		$editname=$zeilenid[1];
+			$editname=$zeilenid[1];
 		}
 	}
 
@@ -204,193 +207,252 @@ if (isset($_POST['index']))
 {
 	#$satzid =  $_POST['index'][$editid];
 }
-print 'satzid aus edit: '.$satzid.'<br>';
+print '<br>satzid aus edit: '.$satzid.'<br>';
 
 if (isset($_POST['sent']))
 	$sent = $_POST['sent'];	
-	#print 'sent: '.$sent.'<br>';
+	print 'sent: '.$sent.'<br>';
 		
 	if ($sent == 'yes') 
 	{
 		#print '<hr style="; width:600px;margin-left:20px; margin-right:60px; height:1px color:red; background-color:yellow; ">';
-
+		$anzclicked=0;
 		if ( isset($_POST['edit']))
 		{
-			#print 'edit da<br>';
+			$anzclicked = count($_POST['edit']);	
+			print 'edit da. anzclicked: '.$anzclicked.'<br>';
+			
 			if (isset($_POST['changeradio']))
 			{
-				$changeradio = $_POST['changeradio'];	
-				print 'changeradio: '.$changeradio.'<br>';
-				print 'editid: '.$editid.' satzid: '.$satzid.'<br>';
+				$changeradio = $_POST['changeradio'];
 				
-				$zeilenidstring = implode(', ',$zeilenid);
-				#print 'zeilenid[0]: *'.$zeilenid[0].'*  zeilenidstring: '.$zeilenidstring.' <br>';
-				$index=0;
-				mysql_data_seek($result_archiv,$index);
-				#$zeile= mysql_fetch_assoc($result_archiv);
-			
-				#$result_idzeile = mysql_query("SELECT * FROM testarchiv WHERE id = $editid", $db);
-				$result_idzeile = mysql_query("SELECT * FROM audio WHERE id = $editid", $db);
-			
-				#$zeilenarray = mysql_fetch_row($result_idzeile);
-				$zeilenarray = mysql_fetch_assoc($result_idzeile);
-				print 'zeilenarray count: '.count($zeilenarray).'<br>';
-				print_r($zeilenarray);
-				print '<br>';
-				if ($changeradio == 'change')
+				print 'X changeradio: '.$changeradio.'<br>';
+				
+				# mehrere DS
+				if ($anzclicked > 1)
 				{
-					print 'CHANGE<br>';
-					
-					foreach ($zeilenarray as $data)
-					{
-						#print 'data: '.$data.'<br>';
-					}
-	
-					print 'aktiv: '.$zeilenarray['aktiv'].'<br>';
-					print 'event: '.$zeilenarray['event'].'<br>';
-					print 'werk: '.$zeilenarray['werk'].'<br>';
-					print 'satznummer: '.$zeilenarray['satznummer'].'<br>';
-					print 'satz: '.$zeilenarray['satz'].'<br>';
-					print 'register: '.$zeilenarray['register'].'<br>';
-					print 'stimme1: '.$zeilenarray['stimme1'].'<br>';
-					print 'stimme2: '.$zeilenarray['stimme2'].'<br>';
-					print 'stimme3: '.$zeilenarray['stimme3'].'<br>';
-					
-					
-					$changeaktiv=0;
-					$changeevent="";
-					$changewerk="";
-					$changsatznummer=0;
-					$changesatz=0;
-					$changebezeichnung="";
-					$changeregister="";
-					$changestimme1="";
-					$changestimme2="";
-					$changestimme3="";
-					$changeanmerkung = "";
-					$changeaktiv=trim($zeilenarray['aktiv']);
-					
-					$changeevent=trim($zeilenarray['event']);
-					$changewerk=trim($zeilenarray['werk']);
-					$changesatznummer=trim($zeilenarray['satznummer']);
-					$changesatz=htmlentities($zeilenarray['satz']);
-					$changebezeichnung=htmlentities($zeilenarray['bezeichnung']);
-					$changeregister=htmlentities($zeilenarray['register']);
-					$changestimme1=htmlentities($zeilenarray['stimme1']);
-					$changestimme2=trim($zeilenarray['stimme2']);
-					$changestimme3=$zeilenarray['stimme3'];
-					
-					#$changeanmerkung=$zeilenarray['anmerkung'];
-					#$changeteaser=$zeilenarray['teaser'];
-					
-					$changedatensatzstring = '<h2 style="margin-left:30px">vorhandener Datensatz</h2>';
-					print $changedatensatzstring;
+					$clickedarray = $_POST['edit'];
+					print 'clickedarray<br>';
+					print_r($clickedarray);
+					print'<br>';
+					mysql_data_seek($result_archiv,0);
 					print '<form action="chor_midi_adminconfirm.php" method="post">';
-					print '
+					print '<input type="hidden" name="task" value ="multchange">';
+					# http://stackoverflow.com/questions/14025774/php-int-array-in-where-clause-array-to-string-conversion
+					$result_mult = mysql_query("SELECT * FROM audio WHERE id  IN (" . implode(',', $clickedarray) . ")", $db);
+					print 'SELECT error: *'.mysql_error().'*<br>';
 					
-					<table>midi_
-						<tr>
-							<td><p class="nameneingabe">aktiv:</td>
-							<td><input size="4" maxlength="40" name="changeaktiv" value ="'.$changeaktiv.'"></td>
-						</tr>
-						<tr>
-							<td><p class="nameneingabe">Event:</td>
-							<td><input size="40" maxlength="40" name="changeevent" value ="'.$changeevent.'"></td>
-						</tr>
-						<tr>
-							<td><p class="nameneingabe">Werk:</td>
-							<td><input size="40" maxlength="40" name="changewerk" value ="'.$changewerk.'"></td>
-						</tr>
-						<tr>
-							<td><p class="nameneingabe">Satznummer:</td>
-							<td><input size="4" maxlength="40" name="changesatznummer" value ="'.$changsatznummer.'"></td>
-						</tr>
-						<tr>
-							<td><p class="nameneingabe">Satz:</td>
-							<td><input size="40" maxlength="40" name="changesatz" value ="'.$changesatz.'"></td>
-						</tr>
-						<tr>
-							<td><p class="nameneingabe">Bezeichnung:</td>
-							<td><input size="40" maxlength="40" name="changebezeichnung" value ="'.$changebezeichnung.'"></td>
-						</tr>
-						<tr>
-							<td><p class="nameneingabe">Register:</td>
-							<td><input size="40" maxlength="40" name="changeregister" value ="'.$changeregister.'"></td>
-						</tr>
-						<tr>
-							<td><p class="nameneingabe">Stimme 1:</td>
-							<td><textarea rows="2" cols="140"  name="changestimme1"> '.$changestimme1.'</textarea></td>
-						</tr>
-						<tr>
-							<td><p class="nameneingabe">Stimme 2:</td>
-							<td><textarea rows="2" cols="140"  name="changestimme2"> '.$changestimme2.'</textarea></td>
-						</tr>
-									<tr>
-							<td><p class="nameneingabe">Stimme 3:</td>
-							<td><textarea rows="2" cols="140"  name="changestimme3"> '.$changestimme3.'</textarea></td>
-						</tr>
-						<tr>
-							<td><p class="nameneingabe">Anmerkung:</td>
-							<td><textarea rows="2" cols="45" name="changeanmerkung">'.$changeanmerkung.'</textarea></td>
-						</tr>
-			
-					</table>';
+					$changearray = array();
+					
+					print '<h3>Ausgewählte Datensätze: </h3>';
+					
+					while ($zeile = mysql_fetch_assoc($result_mult))
+					{
+					 #'zeile: '.print_r($zeile).'<br>';
+					 #$changearray[] = $zeile;
+						$changearray[] = array('changeid'=>$zeile['id'],'changesatz'=>$zeile['satz']);
+						print '<input type="hidden" name="changeid[]" value ='.$zeile['id'].'>';
+						print '<input type="hidden" name="changesatz[]" value ='.$zeile['satz'].'>';
+						print '<input type="hidden" name="changeregister[]" value ='.$zeile['register'].'>';
+						
+						print '<p>id: '.$zeile['id'].' Satz: '.$zeile['satz'].' Register: '.$zeile['register'].'</p>';
+					}
+					print 'changearray<br>';
+					print_r($changearray);
+					print'<br>';
 					
 					
+					print'<br>';print'<br>';
+					if ($changeradio == "delete")
+					{
+						print '<p class="nameneingabe" ><input type="submit" name="multdelete" value="Datensätze löschen"><input type="submit" name="cancel" value="Abbrechen"></p>';
 					
-					#$changedatensatzstring .= '<p class="nameneingabe">Datum:<input size="40" maxlength="40" name="changedatum" value ="'.$changedatum.'"></p>';
-					#$changedatensatzstring .= '<p class="nameneingabe">Jahr:<input size="40" maxlength="40" name="changejahr" value ="'.$changejahr.'"></p>';
-					#$changedatensatzstring .= '<p class="nameneingabe">Pfr:<input size="40" maxlength="40" name="changepfr" value ="'.$changepfr.'"></p>';
-					#$changedatensatzstring .= '<p class="nameneingabe">Auftritt:<br style = "font-size:4px"><input size="40" maxlength="40" name="changeart" value ="'.$changeart.'"></p>';
-					#$changedatensatzstring .= '<p class="nameneingabe">Begleitung:<br style = "font-size:4px"><input size="40" maxlength="40" name="changebegleitung" value ="'.$changebegleitung.'"></p>';
-					#$changedatensatzstring .= '<p class="nameneingabe">Quelle:<br style = "font-size:4px"><input size="40" maxlength="40" name="changequelle" value ="'.$changequelle.'"></p>';
-					#$changedatensatzstring .= '<p class="nameneingabe">Nr:<br style = "font-size:4px"><input size="40" maxlength="40" name="changenr" value ="'.$changenr.'"></p>';
-					
-					#$changedatensatzstring .= '<p class="nameneingabe">Mitwirkung:<br style = "font-size:4px"><input size="40" maxlength="40" name="changemitwirkung" value ="'.$changemitwirkung.'"></p>';
-					#$changedatensatzstring .= '<p class="nameneingabe">Komponist:<br style = "font-size:4px"><input size="40" maxlength="40" name="changekomponist" value ="'.$changekomponist.'"></p>';
-					#$changedatensatzstring .= '<p class="nameneingabe">Vorname:<br style = "font-size:4px"><input size="40" maxlength="40" name="changekomponist_vn" value ="'.$changekomponist_vn.'"></p>';
-					#$changedatensatzstring .= '<p class="nameneingabe">Werk:<br style = "font-size:4px"><input size="40" maxlength="40" name="changewerk" value ="'.$changewerk.'"></p>';
-					#$changedatensatzstring .= '<p class="nameneingabe">Teil:<br style = "font-size:4px"><input size="40" maxlength="40" name="changeteil" value ="'.$changeteil.'"></p>';
-					#$changedatensatzstring .= '<p class="nameneingabe">Anmerkung:<br><textarea rows="2" cols="45" name="changeanmerkung">'.$changeanmerkung.'</textarea></p>';
-					
-					
-					print '<input type="hidden" name="index" value ="'.$editid.'">';
-					print '<input type="hidden" name="test" value =1>';
-					print '<input type="hidden" name="task" value ="change">';
-					
-			
-					print '<p class="nameneingabe" ><input type="submit" name="speichern" value="Datensatz neu speichern"></p>';
+					}
+					elseif ($changeradio == 'change')
+					{
+						print '<input type="radio" id="aktivieren" name="multaktion" value="aktivieren" checked = "checked"><label for="aktivieren" >Aktivieren</label> ';
+						print '<input type="radio" id="deaktivieren" name="multaktion" value="deaktivieren" "><label for="deaktivieren" >Deaktivieren</label> ';
+						#print '<input type="radio" id="löschen" name="multaktion" value="delete" "><label for="delete" >Löschen</label> ';
+		
+						print '<p class="nameneingabe" ><input type="submit" name="multspeichern" value="Datensätze bearbeiten"><input type="submit" name="cancel" value="Abbrechen"></p>';
+
+					}
 					print '</form><br>';
 				
-				} # end if change
+				
+				} # end mehrere DS
+				else # nur ein DS
+				{
+					print 'editid: '.$editid.' satzid: '.$satzid.' anzclicked: '.$anzclicked.'<br>';
+				
+					$zeilenidstring = implode(', ',$zeilenid);
+					#print 'zeilenid[0]: *'.$zeilenid[0].'*  zeilenidstring: '.$zeilenidstring.' <br>';
+					$index=0;
+					mysql_data_seek($result_archiv,$index);
+					#$zeile= mysql_fetch_assoc($result_archiv);
+			
+					#$result_idzeile = mysql_query("SELECT * FROM testarchiv WHERE id = $editid", $db);
+					$result_idzeile = mysql_query("SELECT * FROM audio WHERE id = $editid", $db);
+			
+					#$zeilenarray = mysql_fetch_row($result_idzeile);
+					$zeilenarray = mysql_fetch_assoc($result_idzeile);
+					print 'zeilenarray count: '.count($zeilenarray).'<br>';
+					#print_r($zeilenarray);
+					print '<br>';
+					if ($changeradio == 'change')
+					{
+						print 'CHANGE<br>';
+					
+						foreach ($zeilenarray as $data)
+						{
+							print 'data: '.$data.'<br>';
+						}
+	
+						print 'aktiv: '.$zeilenarray['aktiv'].'<br>';
+						print 'event: '.$zeilenarray['event'].'<br>';
+						print 'werk: '.$zeilenarray['werk'].'<br>';
+						print 'satznummer: '.$zeilenarray['satznummer'].'<br>';
+						print 'satz: '.$zeilenarray['satz'].'<br>';
+						print 'register: '.$zeilenarray['register'].'<br>';
+						print 'stimme1: '.$zeilenarray['stimme1'].'<br>';
+						print 'stimme2: '.$zeilenarray['stimme2'].'<br>';
+						print 'stimme3: '.$zeilenarray['stimme3'].'<br>';
+					
+					
+						$changeaktiv=0;
+						$changeevent="";
+						$changewerk="";
+						$changsatznummer=0;
+						$changesatz=0;
+						$changebezeichnung="";
+						$changeregister="";
+						$changestimme1="";
+						$changestimme2="";
+						$changestimme3="";
+						$changeanmerkung = "";
+						$changeaktiv=trim($zeilenarray['aktiv']);
+					
+						$changeevent=trim($zeilenarray['event']);
+						$changewerk=trim($zeilenarray['werk']);
+						$changesatznummer=trim($zeilenarray['satznummer']);
+						$changesatz=htmlentities($zeilenarray['satz']);
+						$changebezeichnung=htmlentities($zeilenarray['bezeichnung']);
+						$changeregister=htmlentities($zeilenarray['register']);
+						$changestimme1=htmlentities($zeilenarray['stimme1']);
+						$changestimme2=trim($zeilenarray['stimme2']);
+						$changestimme3=$zeilenarray['stimme3'];
+					
+						#$changeanmerkung=$zeilenarray['anmerkung'];
+						#$changeteaser=$zeilenarray['teaser'];
+					
+						$changedatensatzstring = '<h2 style="margin-left:30px">vorhandener Datensatz</h2>';
+						print $changedatensatzstring;
+						print '<form action="chor_midi_adminconfirm.php" method="post">';
+						print '
+					
+						<table>midi_
+							<tr>
+								<td><p class="nameneingabe">aktiv:</td>
+								<td><input size="4" maxlength="40" name="changeaktiv" value ="'.$changeaktiv.'"></td>
+							</tr>
+							<tr>
+								<td><p class="nameneingabe">Event:</td>
+								<td><input size="40" maxlength="40" name="changeevent" value ="'.$changeevent.'"></td>
+							</tr>
+							<tr>
+								<td><p class="nameneingabe">Werk:</td>
+								<td><input size="40" maxlength="40" name="changewerk" value ="'.$changewerk.'"></td>
+							</tr>
+							<tr>
+								<td><p class="nameneingabe">Satznummer:</td>
+								<td><input size="4" maxlength="40" name="changesatznummer" value ="'.$changsatznummer.'"></td>
+							</tr>
+							<tr>
+								<td><p class="nameneingabe">Satz:</td>
+								<td><input size="40" maxlength="40" name="changesatz" value ="'.$changesatz.'"></td>
+							</tr>
+							<tr>
+								<td><p class="nameneingabe">Bezeichnung:</td>
+								<td><input size="40" maxlength="40" name="changebezeichnung" value ="'.$changebezeichnung.'"></td>
+							</tr>
+							<tr>
+								<td><p class="nameneingabe">Register:</td>
+								<td><input size="40" maxlength="40" name="changeregister" value ="'.$changeregister.'"></td>
+							</tr>
+							<tr>
+								<td><p class="nameneingabe">Stimme 1:</td>
+								<td><textarea rows="2" cols="140"  name="changestimme1"> '.$changestimme1.'</textarea></td>
+							</tr>
+							<tr>
+								<td><p class="nameneingabe">Stimme 2:</td>
+								<td><textarea rows="2" cols="140"  name="changestimme2"> '.$changestimme2.'</textarea></td>
+							</tr>
+										<tr>
+								<td><p class="nameneingabe">Stimme 3:</td>
+								<td><textarea rows="2" cols="140"  name="changestimme3"> '.$changestimme3.'</textarea></td>
+							</tr>
+							<tr>
+								<td><p class="nameneingabe">Anmerkung:</td>
+								<td><textarea rows="2" cols="45" name="changeanmerkung">'.$changeanmerkung.'</textarea></td>
+							</tr>
+			
+						</table>';
+					
+					
+					
+						#$changedatensatzstring .= '<p class="nameneingabe">Datum:<input size="40" maxlength="40" name="changedatum" value ="'.$changedatum.'"></p>';
+						#$changedatensatzstring .= '<p class="nameneingabe">Jahr:<input size="40" maxlength="40" name="changejahr" value ="'.$changejahr.'"></p>';
+						#$changedatensatzstring .= '<p class="nameneingabe">Pfr:<input size="40" maxlength="40" name="changepfr" value ="'.$changepfr.'"></p>';
+						#$changedatensatzstring .= '<p class="nameneingabe">Auftritt:<br style = "font-size:4px"><input size="40" maxlength="40" name="changeart" value ="'.$changeart.'"></p>';
+						#$changedatensatzstring .= '<p class="nameneingabe">Begleitung:<br style = "font-size:4px"><input size="40" maxlength="40" name="changebegleitung" value ="'.$changebegleitung.'"></p>';
+						#$changedatensatzstring .= '<p class="nameneingabe">Quelle:<br style = "font-size:4px"><input size="40" maxlength="40" name="changequelle" value ="'.$changequelle.'"></p>';
+						#$changedatensatzstring .= '<p class="nameneingabe">Nr:<br style = "font-size:4px"><input size="40" maxlength="40" name="changenr" value ="'.$changenr.'"></p>';
+					
+						#$changedatensatzstring .= '<p class="nameneingabe">Mitwirkung:<br style = "font-size:4px"><input size="40" maxlength="40" name="changemitwirkung" value ="'.$changemitwirkung.'"></p>';
+						#$changedatensatzstring .= '<p class="nameneingabe">Komponist:<br style = "font-size:4px"><input size="40" maxlength="40" name="changekomponist" value ="'.$changekomponist.'"></p>';
+						#$changedatensatzstring .= '<p class="nameneingabe">Vorname:<br style = "font-size:4px"><input size="40" maxlength="40" name="changekomponist_vn" value ="'.$changekomponist_vn.'"></p>';
+						#$changedatensatzstring .= '<p class="nameneingabe">Werk:<br style = "font-size:4px"><input size="40" maxlength="40" name="changewerk" value ="'.$changewerk.'"></p>';
+						#$changedatensatzstring .= '<p class="nameneingabe">Teil:<br style = "font-size:4px"><input size="40" maxlength="40" name="changeteil" value ="'.$changeteil.'"></p>';
+						#$changedatensatzstring .= '<p class="nameneingabe">Anmerkung:<br><textarea rows="2" cols="45" name="changeanmerkung">'.$changeanmerkung.'</textarea></p>';
+					
+					
+						print '<input type="hidden" name="index" value ="'.$editid.'">';
+						print '<input type="hidden" name="test" value =1>';
+						print '<input type="hidden" name="task" value ="change">';
+					
+			
+						print '<p class="nameneingabe" ><input type="submit" name="speichern" value="Datensatz neu speichern"></p>';
+						print '</form><br>';
+				
+					} # end if change
 		
 			
 			
-				if ($changeradio == 'delete')
-				{ 	# delete
-					#print '>DELETE<br>';
-					print '<form action="chor_midi_adminconfirm.php"  method="post">';
-					$deleteid = $zeilenid[0];
+					if ($changeradio == 'delete')
+					{ 	# delete
+						#print '>DELETE<br>';
+						print '<form action="chor_midi_adminconfirm.php"  method="post">';
+						$deleteid = $zeilenid[0];
 			
-					$deletename=$zeilenarray['name'];
-					print '	<input type="hidden" name="test" value ="'.$test.'">';
-					print '<input type="hidden" name="name" value ="'.$deletename.'">';
-					print '<input type="hidden" name="index" value ="'.$editid.'">';
-					print '<input type="hidden" name="task" value ="delete">';
-					# <h2 class="lernmedien">Fehler im neuen Datensatz</h2>
-					print '<p ><h2 class="lernmedien"> Datensatz <strong>*'.$deletename.'*</strong> wirklich löschen?</h2>';
-					print '<input type="submit"  class="links40" name="speichern"  value="Datensatz löschen"></p>';
-					print '</form>';
-					print '<form action=""  method="post">';
-					print '<input type="hidden" name="task" value ="new">';
-					print '<input type="hidden" name="sent" value ="no">';
+						$deletename=$zeilenarray['satz'];
+						print '	<input type="hidden" name="test" value ="'.$test.'">';
+						print '<input type="hidden" name="name" value ="'.$deletename.'">';
+						print '<input type="hidden" name="index" value ="'.$editid.'">';
+						print '<input type="hidden" name="task" value ="delete">';
+						# <h2 class="lernmedien">Fehler im neuen Datensatz</h2>
+						print '<p ><h2 class="lernmedien"> Datensatz <strong>*'.$deletename.'*</strong> wirklich löschen?</h2>';
+						print '<input type="submit"  class="links40" name="speichern"  value="Datensatz löschen"></p>';
+						print '</form>';
+						print '<form action=""  method="post">';
+						print '<input type="hidden" name="task" value ="new">';
+						print '<input type="hidden" name="sent" value ="no">';
 				
-					print '<input type="submit" class="links40"  name="speichern"  value="Abbrechen"></form>';
+						print '<input type="submit" class="links40"  name="speichern"  value="Abbrechen"></form>';
 				
 					
 					
-				}# end if delete
-		
+					}# end if delete
+					}# ein DS
 			}
 			else
 			{
@@ -410,63 +472,241 @@ if (isset($_POST['sent']))
 		print '<h2  style="margin-left:30px">Fehler im neuen Datensatz</h2>';
 	
 		print '<hr style=" width:600px;margin-left:20px; margin-right:60px; height:1px color:red; background-color:yellow; ">';
+		
+		$eingabefehler = "";
+		if (isset($_POST['eingabefehler']))
+		{
+			$eingabefehler = $_POST['eingabefehler'];
+			print '<p>'.$eingabefehler.'<br>';
+		}
+		
+		#mysql_data_seek($result_archiv,$index);
+		#$zeile= mysql_fetch_assoc($result_archiv);
+		print 'editid: '.$editid.'<br>';
+		#$result_idzeile = mysql_query("SELECT * FROM testarchiv WHERE id = $editid", $db);
+		$result_idzeile = mysql_query("SELECT * FROM audio WHERE id = $editid", $db);
 	
-					print 'ERR<br>';
-					/*
-					$errname=$zeilenarray[1];
-					#$changename=htmlentities($zeilenarray[1]);
-					$errbeschreibung=$zeilenarray[2];
-					$errart=$zeilenarray[3];
-					$errgruppe=$zeilenarray[5];
-					$errpreis=$zeilenarray[6];
-					$errstufe=htmlentities($zeilenarray[7]);
-					*/
+		#$zeilenarray = mysql_fetch_row($result_idzeile);
+		$zeilenarray = mysql_fetch_assoc($result_idzeile);
+		print 'zeilenarray count: '.count($zeilenarray).'<br>';
+		print_r($zeilenarray);
+		print '*<br>';
+
+		print 'ERR<br>';
+	
+		$aktiv = $_POST['aktiv'];
+		print 'aktiv: '.$aktiv.'<br>';
+		
+		if ($aktiv)
+		{
+		$checked =  'checked = "checked"';
+		}
+		else
+		{
+		$checked = "";
+		}
+		
+		$event = $_POST['event'];
+		$werk = $_POST['werk'];
+		$satznummer = $_POST['satznummer'];
+		$satz = $_POST['satz'];
+		$bezeichnung = $_POST['bezeichnung'];
+		$register = $_POST['register'];
+		print 'register: '.$register.'<br>';
+		$stimme1 = chop($_POST['stimme1']);
+		$stimme2 = chop($_POST['stimme2']);
+		$stimme3 = chop($_POST['stimme3']);
+		$anmerkung = chop($_POST['anmerkung']);
+	
+		# neu
+		$sopranstimme1="";
+		$sopranstimme2="";
+		$sopranstimme3="";
+		if (isset($_POST['sopranstimme1']))
+		{
+			$sopranstimme1 = chop($_POST['sopranstimme1']);
+		}
+		if (isset($_POST['sopranstimme2']))
+		{
+			$sopranstimme2 = chop($_POST['sopranstimme2']);
+		}
+		if (isset($_POST['sopranstimme3']))
+		{
+		$sopranstimme3 = chop($_POST['sopranstimme3']);
+		}
+		
+		if (isset($_POST['altstimme1'])) {$altstimme1 = chop($_POST['altstimme1']);}else $altstimme1 = "";
+		if (isset($_POST['altstimme2'])) {$altstimme2 = chop($_POST['altstimme2']);}else $altstimme2 = "";
+		if (isset($_POST['altstimme2'])) {$altstimme3 = chop($_POST['altstimme3']);}else $altstimme3 = "";
+	
+		if (isset($_POST['tenorstimme1'])) {$tenorstimme1 = chop($_POST['tenorstimme1']);}else $tenorstimme1 = "";
+		if (isset($_POST['tenorstimme2'])) {$tenorstimme2 = chop($_POST['tenorstimme2']);}else $tenorstimme2 = "";
+		if (isset($_POST['tenorstimme3'])) {$tenorstimme3 = chop($_POST['tenorstimme3']);}else $tenorstimme3 = "";
+	
+		if (isset($_POST['bassstimme1'])) {$bassstimme1 = chop($_POST['bassstimme1']);}else $bassstimme1 = "";
+		if (isset($_POST['bassstimme2'])) {$bassstimme2 = chop($_POST['bassstimme2']);}else $bassstimme2 = "";
+		if (isset($_POST['bassstimme3'])) {$bassstimme3 = chop($_POST['bassstimme3']);}else $bassstimme3 = "";
+
+		if (isset($_POST['allestimmen'])) {$allestimmen = chop($_POST['allestimmen']);}else $allestimmen = "";
+
+	
+				
+		print '<form action="chor_midi_adminconfirm.php" method="post">';
+		# new
+		print '
+		<table>;
+			<tr>
+				<td><p class="nameneingabe">aktiv:</td>
+				<td>';
+		if ($aktiv)
+		{		
+			print '
+				    <input type="radio" id="yes" name="neuesaktiv" value="1" checked = "checked"><label for="neuesaktiv" > Ja</label> 
+    				<input type="radio" id="no" name="neuesaktiv" value="0"><label for="neuesaktiv"> Nein</label> 
+    				';
+    	}
+    	else
+ 		{		
+			print '
+				    <input type="radio" id="yes" name="neuesaktiv" value="1"><label for="neuesaktiv" > Ja</label> 
+    				<input type="radio" id="no" name="neuesaktiv" value="0" checked = "checked"><label for="neuesaktiv"> Nein</label> 
+    				';
+    	}
+    	
+		print '	</td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">event:</td>
+				<td><input size="28" maxlength="40" name="neuerevent" value = "'.$event.'"></td>
+				
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Werk:</td>
+				<td><input size="28" maxlength="40" name="neueswerk" value = "'.$werk.'"></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Satznummer:</td>
+				<td><input size="10" maxlength="40" name="neuesatznummer" value = "'.$satznummer.'"></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Satz:</td>
+				<td><input size="28" maxlength="40" name="neuersatz" value = "'.$satz.'"></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Bezeichnung:</td>
+				<td><input size="28" maxlength="40" name="neuebezeichnung" value = "'.$bezeichnung.'"></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Register:</td>
+				<td class = "registereingabe">
+			';	 
+			$sopranchecked = "";
+			$altchecked = "";
+			$tenorchecked = "";
+			$basschecked = "";
+			$allechecked = "";
+			if ($register == "sopran")
+			{
+				$sopranchecked =  ' checked = "checked"';
+			}
+			elseif ($register == "alt")
+			{
+				$altchecked =  ' checked = "checked"';
+			}
+			elseif ($register == "tenor")
+			{
+				$tenorchecked =  ' checked = "checked"';
+			}
+			elseif ($register == "bass")
+			{
+				$basschecked =  ' checked = "checked"';
+			}
+			elseif ($register == "alle")
+			{
+				$allechecked =  ' checked = "checked"';
+			}
+
 			
-					$errdatum=trim($zeilenarray['datum']);
-					$errjahr=trim($zeilenarray['jahr']);
-					$errpfr=trim($zeilenarray['pfr']);
-					$errmitwirkung=trim($zeilenarray['mitwirkung']);
-					$errart=htmlentities($zeilenarray['art']);
-					$errbegleitung=htmlentities($zeilenarray['begleitung']);
-					$errquelle=htmlentities($zeilenarray['quelle']);
-					$errnr=htmlentities($zeilenarray['nr']);
-					$errkomponist=trim($zeilenarray['komponist']);
-					$errkomponist_vn=$zeilenarray['komponist_vn'];
-					$errwerk=$zeilenarray['werk'];
-					$errteil=$zeilenarray['teil'];
-					
-					$erranmerkung=$zeilenarray['anmerkung'];
+			print '
+        			<input type="radio" id="sopran" name="neuesregister" value="sopran" '.$sopranchecked.'><label for="sopran" > Sopran</label> 
+    				<input type="radio" id="alt" name="neuesregister" value="alt" '.$altchecked.'><label for="alt"> Alt</label> 
+					<input type="radio" id="tenor" name="neuesregister" value="tenor" '.$tenorchecked.'><label for="tenor"> Tenor</label> 
+					<input type="radio" id="bass" name="neuesregister" value="bass" '.$basschecked.'><label for="bass"> Bass</label> 
+					<input type="radio" id="alle" name="neuesregister" value="alle" '.$allechecked.'><label for="alle"> Alle</label> 
+  			';	
+			print '
+				<!--<input size="40" maxlength="40" name="neuesregister"></td> -->
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Stimme 1:</td>
+				<td><textarea rows="2" cols="25" name="neuestimme1" value = "'.$stimme1.'"></textarea></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Stimme 2:</td>
+				<td><textarea rows="2" cols="25" name="neuestimme2" value = "'.$stimme2.'"></textarea></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Stimme 3:</td>
+				<td><textarea rows="2" cols="25" name="neuestimme3" value = "'.$stimme3.'"></textarea></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Alle Stimmen:</td>
+				<td><textarea rows="2" cols="25" name="neueallestimmen" value = "'.$allestimmen.'"></textarea></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Anmerkung:</td>
+				<td><textarea rows="2" cols="25" name="neueanmerkung" value = "'.$anmerkung.'"></textarea></td>
+			</tr>
+		
+		</table>';
+
+		print '<table>
+			<tr>
+			<td><p class="nameneingabe">Stimme</td>
+				<td><p class="nameneingabe">Sopran</td>
+				<td><p class="nameneingabe">Alt</td>
+				<td><p class="nameneingabe">Tenor</td>
+				<td><p class="nameneingabe">Bass</td>
+			</tr>
+
+		
+			<tr>
+				<td><p class="nameneingabe">Stimme 1:</td>
+				<td><textarea rows="2" cols="25" name="neuesopranstimme1" value = "'.$sopranstimme1.'"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuealtstimme1" value = "'.$altstimme1.'"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuetenorstimme1" value = "'.$tenorstimme1.'"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuebassstimme1" value = "'.$bassstimme1.'"></textarea></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Stimme 2:</td>
+				<td><textarea rows="2" cols="25" name="neuesopranstimme2"value = "'.$sopranstimme2.'"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuealtstimme2" value = "'.$altstimme2.'"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuetenorstimme2" value = "'.$tenorstimme2.'"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuebassstimme2" value = "'.$bassstimme2.'"></textarea></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Stimme 3:</td>
+				<td><textarea rows="2" cols="25" name="neuesopranstimme3"value = "'.$sopranstimme3.'"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuealtstimme3 value = "'.$altstimme3.'""></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuetenorstimme3" value = "'.$tenorstimme3.'"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuebassstimme3" value = "'.$bassstimme3.'"></textarea></td>
+			</tr>
+			<!--
+			<tr>
+				<td><p class="nameneingabe">Alle Stimmen:</td>
+				<td><textarea rows="2" cols="25" name="neueallestimmen"></textarea></td>
+
+			</tr>
+			--!>
+		</table>';
+		
 	
-				
-					print '<form action="chor_midi_adminconfirm.php" method="post">';
-					$errdatensatzstring = '<h1 style="margin-left:40px">Daten</h1>';
-					$changedatensatzstring .= '<p class="nameneingabe">Datum:<br><input size="40" maxlength="40" name="neuesdatum" value ='.$errdatum.'"></p>';
-					$errdatensatzstring .= '<p class="nameneingabe">Jahr:<br><input size="40" maxlength="40" name="neuesjahr" value ="'.$errjahr.'"></p>';
-					$errdatensatzstring .= '<p class="nameneingabe">Pfr:<br><input size="40" maxlength="40" name="neuerpfr" value ="'.$errpfr.'"></p>';
-					$errdatensatzstring .= '<p class="nameneingabe">Mitwirkung:<br><input size="40" maxlength="40" name="neuemitwirkung" value ="'.$errmitwirkung.'"></p>';
-					$errdatensatzstring .= '<p class="nameneingabe">Auftritt:<br><input size="40" maxlength="160" name="neueart" value ="'.$errart.'"></p>';					
-
-					$errdatensatzstring .= '<p class="nameneingabe">Begleitung:<br><input size="40" maxlength="160" name="neuebegleitung" value ="'.$errbegleitung.'"></p>';
-					$errdatensatzstring .= '<p class="nameneingabe">Quelle:<br><input size="40" maxlength="160" name="neuequelle" value ="'.$errquelle.'"></p>';
-					$errdatensatzstring .= '<p class="nameneingabe">Nr:<br><input size="40" maxlength="160" name="neuenr" value ="'.$errnr.'"></p>';
-					
-					$errdatensatzstring .= '<p class="nameneingabe">Komponist:<br><input size="40" maxlength="40" name="neuerkomponist" value ="'.$errkomponist.'"></p>';
-					$errdatensatzstring .= '<p class="nameneingabe">Vorname:<br><input size="40" maxlength="40" name="neuerkomponist_vn" value ="'.$errkomponist_vn.'"></p>';
-					$errdatensatzstring .= '<p class="nameneingabe">Werk:<br><input size="40" maxlength="40" name="neuerswerk" value ="'.$errwerk.'"></p>';
-					$errdatensatzstring .= '<p class="nameneingabe">Teil:<br><input size="40" maxlength="40" name="neuerteil" value ="'.$errteil.'"></p>';
-					
-					#$errdatensatzstring .= '<p class="nameneingabe">Anmerkung:<br><textarea rows="2" cols="45" name="neueanmerkung" <textarea>'.$erranmerkung.'</textarea></textarea></p>';
-
-					$errdatensatzstring .= '<p class="nameneingabe">Beschreibung:<br><textarea rows="2" cols="45" name="neuebeschreibung" <textarea>'.$erranmerkung.'</textarea></textarea></p>';
-				
-				
-				
-					print '<input type="hidden" name="index" value ="'.$editid.'">';
-					print '	<input type="hidden" name="test" value ="'.$test.'">';
-					print '<input type="hidden" name="task" value ="new">';
-					print $errdatensatzstring;
-					print '<br><p class="nameneingabe" ><input type="submit" name="speichern" value="Datensatz neu speichern"></p>';
-					print '</form><br>';
+		# end new 
+		print '<input type="hidden" name="index" value ="'.$editid.'">';
+		print '	<input type="hidden" name="test" value ="'.$test.'">';
+		print '<input type="hidden" name="task" value ="new">';
+		print '<br><p class="nameneingabe" ><input type="submit" name="speichern" value="Datensatz neu speichern"></p>';
+		print '</form><br>';
 
 	}
 	else
@@ -485,7 +725,7 @@ if (isset($_POST['sent']))
 		}
 		
 		print '
-		<table>
+		<table>;
 			<tr>
 				<td><p class="nameneingabe">aktiv:</td>
 				<td>
@@ -496,24 +736,24 @@ if (isset($_POST['sent']))
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">event:</td>
-				<td><input size="40" maxlength="40" name="neuerevent" value = "'.$neuerevent.'"></td>
+				<td><input size="28" maxlength="40" name="neuerevent" value = "'.$neuerevent.'"></td>
 				
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">Werk:</td>
-				<td><input size="40" maxlength="40" name="neueswerk"></td>
+				<td><input size="28" maxlength="40" name="neueswerk"></td>
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">Satznummer:</td>
-				<td><input size="4" maxlength="40" name="neuesatznummer"></td>
+				<td><input size="10" maxlength="40" name="neuesatznummer"></td>
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">Satz:</td>
-				<td><input size="40" maxlength="40" name="neuersatz"></td>
+				<td><input size="28" maxlength="40" name="neuersatz"></td>
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">Bezeichnung:</td>
-				<td><input size="40" maxlength="40" name="neuebezeichnung"></td>
+				<td><input size="28" maxlength="40" name="neuebezeichnung"></td>
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">Register:</td>
@@ -528,43 +768,73 @@ if (isset($_POST['sent']))
 
 				<!--<input size="40" maxlength="40" name="neuesregister"></td> -->
 			</tr>
-						<tr>
+			<tr>
 				<td><p class="nameneingabe">Stimme 1:</td>
-				<td><textarea rows="2" cols="45" name="neuestimme1"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuestimme1"></textarea></td>
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">Stimme 2:</td>
-				<td><textarea rows="2" cols="45" name="neuestimme2"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuestimme2"></textarea></td>
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">Stimme 3:</td>
-				<td><textarea rows="2" cols="45" name="neuestimme3"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuestimme3"></textarea></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Alle Stimmen:</td>
+				<td><textarea rows="2" cols="25" name="neueallestimmen"></textarea></td>
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">Anmerkung:</td>
-				<td><textarea rows="2" cols="45" name="neueanmerkung"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neueanmerkung"></textarea></td>
 			</tr>
-			
+		
+		</table>';
+
+		print '<table>
+			<tr>
+			<td><p class="nameneingabe">Stimme</td>
+				<td><p class="nameneingabe">Sopran</td>
+				<td><p class="nameneingabe">Alt</td>
+				<td><p class="nameneingabe">Tenor</td>
+				<td><p class="nameneingabe">Bass</td>
+			</tr>
+
+		
+			<tr>
+				<td><p class="nameneingabe">Stimme 1:</td>
+				<td><textarea rows="2" cols="25" name="neuesopranstimme1"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuealtstimme1"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuetenorstimme1"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuebassstimme1"></textarea></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Stimme 2:</td>
+				<td><textarea rows="2" cols="25" name="neuesopranstimme2"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuealtstimme2"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuetenorstimme2"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuebassstimme2"></textarea></td>
+			</tr>
+			<tr>
+				<td><p class="nameneingabe">Stimme 3:</td>
+				<td><textarea rows="2" cols="25" name="neuesopranstimme3"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuealtstimme3"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuetenorstimme3"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuebassstimme3"></textarea></td>
+			</tr>
+			<!--
+			<tr>
+				<td><p class="nameneingabe">Alle Stimmen:</td>
+				<td><textarea rows="2" cols="25" name="neueallestimmen"></textarea></td>
+
+			</tr>
+			--!>
 		</table>';
 		
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Datum:<br><input size="40" maxlength="40" name="neuesdatum"></p>';
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Jahr:<br><input size="40" maxlength="40" name="neuesjahr"></p>';
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Pfr:<br><input size="40" maxlength="40" name="neuerpfr"></p>';
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Mitwirkung:<br><input size="40" maxlength="40" name="neuemitwirkung"></p>';
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Auftritt:<br><input size="40" maxlength="40" name="neueart"></p>';
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Begleitung:<br><input size="40" maxlength="40" name="neuebegleitung"></p>';
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Quelle:<br><input size="40" maxlength="40" name="neuequelle"></p>';
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Nr:<br><input size="40" maxlength="20" name="neuenr"></p>';
-		
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Komponist:<br><input size="40" maxlength="40" name="neuerkomponist"></p>';
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Vorname:<br><input size="40" maxlength="40" name="neuerkomponist_vn"></p>';
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Werk:<br><input size="40" maxlength="40" name="neueswerk"></p>';
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Teil:<br><input size="40" maxlength="40" name="neuerteil"></p>';
-		
-		#$neuerdatensatzstring .= '<p class="nameneingabe">Anmerkung:<br><textarea rows="2" cols="45" name="neueanmerkung"></textarea></p>';
 		
 		
-		#print $neuerdatensatzstring;
+		
+		
 		print '<input type="hidden" name="task" value ="new">';
 		print '	<input type="hidden" name="test" value ="'.$test.'">';
 		print '<p class="nameneingabe" ><input type="submit" name="speichern" value="neuen Datensatz speichern"></p>';
@@ -597,7 +867,7 @@ if (isset($_POST['sent']))
 	$tableheaderstring .= '<th class="text breite200" >Satz</th>';
 	$tableheaderstring .= '<th class="text breite300 " >Bez</th>';
 	$tableheaderstring .= '<th class="text breite80 " >Register</th>';
-	$tableheaderstring .= '<th class="text breite100 " >Stimme 1</th>';
+	$tableheaderstring .= '<th class="text breite200 " >Stimme 1</th>';
 	$tableheaderstring .= '<th class="text breite100 " >Stimme 2</th>';
 	$tableheaderstring .= '<th class="text breite100 " >Stimme 3</th>';
 
@@ -637,7 +907,7 @@ if (isset($_POST['sent']))
 		#print '<input type="hidden" name=name[] value ="'.$archivdaten['name'].'">';
 		#print '<input type="hidden" name=preis[] value ='.$archivdaten['preis'].'>';
 
-	$zeile++;
+		$zeile++;
 	}
 	print '<input type="hidden" name="sent" value="yes">';
 
