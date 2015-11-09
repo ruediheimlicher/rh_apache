@@ -153,7 +153,8 @@ function submitform(registername)
 #date_default_timezone_set(Europe/Zurich);
 
 $besucher = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-#echo "besucher: ", $besucher," <br>";
+echo "besucher: ", $besucher," <br>";
+print 'remote addr: '.$_SERVER['REMOTE_ADDR'].'<br>';
 $localhost=0;
 if ($besucher === "localhost")
 {
@@ -178,9 +179,10 @@ $datum="";
 #print '<p>benutzer;: '. $benutzer.' pw: '. $passwort.'*</p>';
 #print'POST<br>';
 #print_r($_POST);
-#print'<br>';
-#print'GET<br>';print_r($_GET);
-#print'<br>';
+print'<br>';
+print'GET<br>*';
+print_r($_GET);
+print'*<br>';
 $pass = 0;
 if (isset($_POST['passwort']))
 {
@@ -191,6 +193,7 @@ if (isset($_POST['user']))
 {
 	$user = $_POST['user'];
 }
+
 
 
 $session_id = session_id();
@@ -229,7 +232,7 @@ $home_ip = $set['home_ip'];
 $zeit = $_SERVER['REQUEST_TIME'];
 
 #print_r($_SESSION);
-#print 'home_ip: '.$set['home_ip'].' remote_ip: '.$remote_ip.'<br>';
+print 'home_ip: '.$set['home_ip'].' remote_ip: '.$remote_ip.'<br>';
 #echo $_SERVER['HTTP_HOST'],"<br>"; 
 
 if ($localhost)
@@ -344,8 +347,6 @@ if ($localhost)
 $datum = date("d.m.Y",$zeit);
 $uhrzeit = date("H:i",$zeit);
 
-
-
 #http://www.traum-projekt.com/forum/19-traum-dynamik/131064-datum-format-yyyy-mm-dd.html
 
 
@@ -383,7 +384,7 @@ $alle=0;
 while ($stat = mysql_fetch_array($result_besuche) ) #
 {
 
-	print 'in while stat:  stat[ip]: *'.$stat['ip'].'*  remote_ip: '.$remote_ip.' besuche: '.$stat['besuch'].'<br>';
+	print 'in while stat:  stat[ip]: *'.$stat['ip'].'*  remote_ip: *'.$remote_ip.'* besuche: *'.$stat['besuch'].'*<br>';
 
 	if (($stat['ip'] == $remote_ip)   && !(in_array($remote_ip,$besucherarray)) ) 
 	{
@@ -417,7 +418,7 @@ while ($stat = mysql_fetch_array($result_besuche) ) #
 				print 'S: '.$sopran.' | ';
 			}
 		}
-		if (isset($stat['sopran']))
+		if (isset($stat['alt']))
 		{
 			$alt=$stat['alt'];
 			if ($localhost)
@@ -425,7 +426,7 @@ while ($stat = mysql_fetch_array($result_besuche) ) #
 				print 'A: '.$alt.' | ';
 			}
 		}
-		if (isset($stat['sopran']))
+		if (isset($stat['tenor']))
 		{
 			$tenor=$stat['tenor'];
 			if ($localhost)
@@ -470,10 +471,10 @@ if (count($besucherarray))
 if ($localhost)
  {
 	#print 'besucher: '.$besucher.' * ';
-	print 'home_ip: '.$set['home_ip'].' remote_ip: '.$remote_ip.' ';
+	print 'home_ip: *'.$set['home_ip'].'* remote_ip: *'.$remote_ip.'* <br>';
 	print 'besuche neu: '.$anzahlbesuche.' ';
 	
-	print '<br>aktuelle session_id: '.$session_id.'<br>session_id aus DB besucher: '.$besucher_session_id.'<br>';
+	print 'aktuelle session_id: '.$session_id.'<br>session_id aus DB besucher: '.$besucher_session_id.'<br>';
 
 }
 
@@ -482,10 +483,10 @@ if ($localhost)
 {
 	if (count($besucherarray) )
 	{
-	if ($localhost)
- 		{
-		print 'bisherige IP ip: *'.$stat['ip'].'*  home_ip: *'.$set['home_ip'].'* datum: '.$datum.'<br>';
-		}
+		if ($localhost)
+			{
+				print 'count: '.count($besucherarray).' bisherige IP ip: *'.$stat['ip'].'*  home_ip: *'.$set['home_ip'].'* datum: '.$datum.'<br>';
+			}
 		#if ( ! ($remote_ip == $home_ip))
 		{
 			mysql_query("UPDATE besucher SET besuch = '$anzahlbesuche' ,zeit = '$uhrzeit', datum = '$sql_datum', session_id = '$session_id'  WHERE ip = '$remote_ip'"); 
@@ -494,13 +495,13 @@ if ($localhost)
 			#print '<br>';
 			mysql_query("UPDATE besucher SET  kalendertag = '$kalendertag',kalendermonat = '$kalendermonat' ,kalenderjahr = '$kalenderjahr'   WHERE ip = '$remote_ip'"); 
 
-			
+		
 		}
 	}
 	else // auswaerts
 	{
 		$besuche = $anzahlbesuche+1;
-		if ($localhost)
+#		if ($localhost)
  		{
 			print 'neue IP ip: *'.$stat['ip'].'*  home_ip: '.$set['home_ip'].'<br>';
 			print 'name: '.$besucher.' ';
@@ -566,7 +567,7 @@ $stimme  = "";
 $register = "";
 if (isset($_GET['register']) )
 {
-	$register = $_GET['register']; # beim Klick auf Register
+	$register = $_GET['register']; # beim Klick auf Register ausgeloest
 	mysql_query("UPDATE besucher SET register = '$register'   WHERE ip = '$remote_ip'"); 
 	if ($register === "Sopran")
 	{
@@ -610,6 +611,15 @@ if (isset($_GET['register']) )
 			$tenor = $tenor + 1;
 			mysql_query("UPDATE besucher SET tenor = '$tenor'   WHERE ip = '$remote_ip'");
 		} 
+		if ($neuerminutenevent)
+		{
+			print 'tenor neuerminutenevent<br>';
+			$tenor = $tenor + 1;
+			mysql_query("UPDATE besucher SET tenor = '$tenor'   WHERE ip = '$remote_ip'"); 
+
+		}
+	
+		
 	}
 
 
@@ -622,6 +632,14 @@ if (isset($_GET['register']) )
 			mysql_query("UPDATE besucher SET bass = '$bass'   WHERE ip = '$remote_ip'"); 
 		}
 	}
+	if ($neuerminutenevent)
+	{
+		print 'bass neuerminutenevent<br>';
+		$bass = $bass + 1;
+		mysql_query("UPDATE besucher SET bass = '$bass'   WHERE ip = '$remote_ip'"); 
+
+	}
+
 
 	if ($register === "Alle")
 	{

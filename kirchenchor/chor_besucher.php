@@ -21,8 +21,13 @@ if (isset($_POST['uploadok']))
 <?php
 
 $result_home = mysql_query("SELECT * FROM settings WHERE id= 0", $db)or die(print '<p>Beim Suchen nach home ist ein Fehler passiert: '.mysql_error().'</p>');
-print mysql_error();
+print 'mysql_error: <br>*'; print mysql_error();
 $set = mysql_fetch_array($result_home);
+print '*<br>';
+if (isset($set['home_ip']) && isset($set['ip']))
+{
+	print '<br>home_ip: '.$set['home_ip'].' ip: '.$set['ip'].'<br>';
+}
 
 
 print '<div  class = "adminabschnitt">';
@@ -31,15 +36,11 @@ print '<form action="chor_admin.php" ><h3 class = "admin" ><input type="submit" 
 
 #POST abfragen
 #print_r($_POST);
-if (isset($set['home_ip']) && isset($set['ip']))
-{
-print '<br>home_ip: '.$set['home_ip'].' ip: '.$set['ip'].'<br>';
-}
 print '</div>';
 
 print '<div  class = "besucherabschnitt">';
 print '<div  class = "besucherlisteabschnitt">';
-
+print '*<br>';
 
 $result_editdaten = mysql_query("SELECT * FROM besucher  ORDER BY besuch DESC", $db)or die(print '<p  >Beim Suchen nach editdaten ist ein Fehler passiert: '.mysql_error().'</p>');
 		if (mysql_error())

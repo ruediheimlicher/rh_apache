@@ -29,9 +29,23 @@ $datum = date("d.m.Y",$zeit);
 $uhrzeit = date("H:i",$zeit);
 echo "Datum: ",$datum,"  Zeit: ",$uhrzeit," Uhr<br>";
 
-$result_home = mysql_query("SELECT * FROM settings WHERE id= 0", $db)or die(print '<p>Beim Suchen nach home ist ein Fehler passiert: '.mysql_error().'</p>');
+$result_home = mysql_query("SELECT * FROM settings WHERE id= 1", $db)or die(print '<p>Beim Suchen nach home ist ein Fehler passiert: '.mysql_error().'</p>');
+print 'mysql_error: *';
 print mysql_error();
+print '*<br>';
+
 $set = mysql_fetch_array($result_home);
+#print ' +';
+#print_r($set);
+#print ' +<br>';
+if (isset($set['home_ip']))
+{
+print 'home_ip: '.$set['home_ip'].'<br>';
+}
+if (isset($set['ip']))
+{
+print 'ip: '.$set['ip'].'<br>';
+}
 
 
 print '<div  class = "adminabschnitt">';
@@ -41,10 +55,6 @@ print '<form action="chor_midi.php" ><h3 class = "admin" ><input type="submit" c
 
 #POST abfragen
 #print_r($_POST);
-if (isset($set['home_ip']) && isset($set['ip']))
-{
-print '<br>home_ip: '.$set['home_ip'].' ip: '.$set['ip'].'<br>';
-}
 print '</div>';
 
 print '<div  class = "besucherabschnitt">';
@@ -66,8 +76,8 @@ $result_editdaten = mysql_query("SELECT * FROM besucher  ORDER BY besuch DESC", 
 		
 		print '<table >';
 		print '<tr height = 24px>';
-		print '<th class = "text" width = "120px">IP Besucher</td>';
-		print '<th class = "text" width = "200px">IP Session</td>';
+		print '<th class = "text" width = "200px">IP Besucher</td>';
+		print '<th class = "text" width = "250px">IP Session</td>';
 		print '<th class = "text" width = "80px">Zeit</td>';
 		print '<th class = "text" width = "100px">Datum</td>';
 		print '<th class = "text" width = "80px">Besuche</td>';
