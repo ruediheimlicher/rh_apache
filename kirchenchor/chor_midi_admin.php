@@ -51,6 +51,8 @@ include("pwd.php");
 	
 <!--<h2 class="lernmedien">Admin</h2>-->
 <!--https://www.daniweb.com/web-development/javascript-dhtml-ajax/threads/119146/using-a-popup-to-fill-an-input-field -->
+
+<!--
  <form id="frm" name="frm" action="#">
     <span>Names: </span>
     <select name="nameSelection">
@@ -60,13 +62,13 @@ include("pwd.php");
     </select>
     <input type="button" value="Select Name" onclick="makeSelection(this.form, 'nameSelection');">
   </form>
-
+--!>
 <?php
 #phpinfo();
 #print '<p>benutzer;: '. $benutzer.'* pw: '. $passwort.'*</p>';
 #print_r($_POST);
 
-print'<br>';
+#print'<br>';
 $pass = 0;
 if (isset($_POST['passwort']))
 {
@@ -180,8 +182,7 @@ $sent='no';
 $zeilenid="";
 $editid=0;
 
-print_r($_POST);
-
+#print_r($_POST);
 if (isset($_POST['edit']))
 {
 	print_r($_POST['edit']);
@@ -207,11 +208,11 @@ if (isset($_POST['index']))
 {
 	#$satzid =  $_POST['index'][$editid];
 }
-print '<br>satzid aus edit: '.$satzid.'<br>';
+#print '<br>satzid aus edit: '.$satzid.'<br>';
 
 if (isset($_POST['sent']))
 	$sent = $_POST['sent'];	
-	print 'sent: '.$sent.'<br>';
+#	print 'sent: '.$sent.'<br>';
 		
 	if ($sent == 'yes') 
 	{
@@ -220,32 +221,34 @@ if (isset($_POST['sent']))
 		if ( isset($_POST['edit']))
 		{
 			$anzclicked = count($_POST['edit']);	
-			print 'edit da. anzclicked: '.$anzclicked.'<br>';
+#			print 'edit da. anzclicked: '.$anzclicked.'<br>';
 			
 			if (isset($_POST['changeradio']))
 			{
 				$changeradio = $_POST['changeradio'];
 				
-				print 'X changeradio: '.$changeradio.'<br>';
+#				print 'X changeradio: '.$changeradio.'<br>';
 				
 				# mehrere DS
 				if ($anzclicked > 1)
 				{
 					$clickedarray = $_POST['edit'];
-					print 'clickedarray<br>';
-					print_r($clickedarray);
-					print'<br>';
+#					print 'clickedarray<br>';
+#					print_r($clickedarray);
+#					print'<br>';
 					mysql_data_seek($result_archiv,0);
 					print '<form action="chor_midi_adminconfirm.php" method="post">';
 					print '<input type="hidden" name="task" value ="multchange">';
 					# http://stackoverflow.com/questions/14025774/php-int-array-in-where-clause-array-to-string-conversion
 					$result_mult = mysql_query("SELECT * FROM audio WHERE id  IN (" . implode(',', $clickedarray) . ")", $db);
+					
 					print 'SELECT error: *'.mysql_error().'*<br>';
 					
 					$changearray = array();
 					
 					print '<h3>Ausgewählte Datensätze: </h3>';
 					
+					print '<p>';
 					while ($zeile = mysql_fetch_assoc($result_mult))
 					{
 					 #'zeile: '.print_r($zeile).'<br>';
@@ -255,8 +258,9 @@ if (isset($_POST['sent']))
 						print '<input type="hidden" name="changesatz[]" value ='.$zeile['satz'].'>';
 						print '<input type="hidden" name="changeregister[]" value ='.$zeile['register'].'>';
 						
-						print '<p>id: '.$zeile['id'].' Satz: '.$zeile['satz'].' Register: '.$zeile['register'].'</p>';
+						print 'id: '.$zeile['id'].' Satz: '.$zeile['satz'].' Register: '.$zeile['register'].'<br>';
 					}
+					print '</p>';
 					print 'changearray<br>';
 					print_r($changearray);
 					print'<br>';
@@ -398,24 +402,6 @@ if (isset($_POST['sent']))
 			
 						</table>';
 					
-					
-					
-						#$changedatensatzstring .= '<p class="nameneingabe">Datum:<input size="40" maxlength="40" name="changedatum" value ="'.$changedatum.'"></p>';
-						#$changedatensatzstring .= '<p class="nameneingabe">Jahr:<input size="40" maxlength="40" name="changejahr" value ="'.$changejahr.'"></p>';
-						#$changedatensatzstring .= '<p class="nameneingabe">Pfr:<input size="40" maxlength="40" name="changepfr" value ="'.$changepfr.'"></p>';
-						#$changedatensatzstring .= '<p class="nameneingabe">Auftritt:<br style = "font-size:4px"><input size="40" maxlength="40" name="changeart" value ="'.$changeart.'"></p>';
-						#$changedatensatzstring .= '<p class="nameneingabe">Begleitung:<br style = "font-size:4px"><input size="40" maxlength="40" name="changebegleitung" value ="'.$changebegleitung.'"></p>';
-						#$changedatensatzstring .= '<p class="nameneingabe">Quelle:<br style = "font-size:4px"><input size="40" maxlength="40" name="changequelle" value ="'.$changequelle.'"></p>';
-						#$changedatensatzstring .= '<p class="nameneingabe">Nr:<br style = "font-size:4px"><input size="40" maxlength="40" name="changenr" value ="'.$changenr.'"></p>';
-					
-						#$changedatensatzstring .= '<p class="nameneingabe">Mitwirkung:<br style = "font-size:4px"><input size="40" maxlength="40" name="changemitwirkung" value ="'.$changemitwirkung.'"></p>';
-						#$changedatensatzstring .= '<p class="nameneingabe">Komponist:<br style = "font-size:4px"><input size="40" maxlength="40" name="changekomponist" value ="'.$changekomponist.'"></p>';
-						#$changedatensatzstring .= '<p class="nameneingabe">Vorname:<br style = "font-size:4px"><input size="40" maxlength="40" name="changekomponist_vn" value ="'.$changekomponist_vn.'"></p>';
-						#$changedatensatzstring .= '<p class="nameneingabe">Werk:<br style = "font-size:4px"><input size="40" maxlength="40" name="changewerk" value ="'.$changewerk.'"></p>';
-						#$changedatensatzstring .= '<p class="nameneingabe">Teil:<br style = "font-size:4px"><input size="40" maxlength="40" name="changeteil" value ="'.$changeteil.'"></p>';
-						#$changedatensatzstring .= '<p class="nameneingabe">Anmerkung:<br><textarea rows="2" cols="45" name="changeanmerkung">'.$changeanmerkung.'</textarea></p>';
-					
-					
 						print '<input type="hidden" name="index" value ="'.$editid.'">';
 						print '<input type="hidden" name="test" value =1>';
 						print '<input type="hidden" name="task" value ="change">';
@@ -547,7 +533,7 @@ if (isset($_POST['sent']))
 		if (isset($_POST['bassstimme2'])) {$bassstimme2 = chop($_POST['bassstimme2']);}else $bassstimme2 = "";
 		if (isset($_POST['bassstimme3'])) {$bassstimme3 = chop($_POST['bassstimme3']);}else $bassstimme3 = "";
 
-		if (isset($_POST['allestimmen'])) {$allestimmen = chop($_POST['allestimmen']);}else $allestimmen = "";
+		if (isset($_POST['alle'])) {$alle = chop($_POST['alle']);}else $alle = "";
 
 	
 				
@@ -649,10 +635,12 @@ if (isset($_POST['sent']))
 				<td><p class="nameneingabe">Stimme 3:</td>
 				<td><textarea rows="2" cols="25" name="neuestimme3" value = "'.$stimme3.'"></textarea></td>
 			</tr>
+			<!--
 			<tr>
 				<td><p class="nameneingabe">Alle Stimmen:</td>
-				<td><textarea rows="2" cols="25" name="neueallestimmen" value = "'.$allestimmen.'"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuealle" value = "'.$alle.'"></textarea></td>
 			</tr>
+			-->
 			<tr>
 				<td><p class="nameneingabe">Anmerkung:</td>
 				<td><textarea rows="2" cols="25" name="neueanmerkung" value = "'.$anmerkung.'"></textarea></td>
@@ -667,6 +655,7 @@ if (isset($_POST['sent']))
 				<td><p class="nameneingabe">Alt</td>
 				<td><p class="nameneingabe">Tenor</td>
 				<td><p class="nameneingabe">Bass</td>
+				<td><p class="nameneingabe">alle</td>
 			</tr>
 
 		
@@ -676,6 +665,7 @@ if (isset($_POST['sent']))
 				<td><textarea rows="2" cols="25" name="neuealtstimme1" value = "'.$altstimme1.'"></textarea></td>
 				<td><textarea rows="2" cols="25" name="neuetenorstimme1" value = "'.$tenorstimme1.'"></textarea></td>
 				<td><textarea rows="2" cols="25" name="neuebassstimme1" value = "'.$bassstimme1.'"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuealle"></textarea></td>
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">Stimme 2:</td>
@@ -694,7 +684,7 @@ if (isset($_POST['sent']))
 			<!--
 			<tr>
 				<td><p class="nameneingabe">Alle Stimmen:</td>
-				<td><textarea rows="2" cols="25" name="neueallestimmen"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuealle"></textarea></td>
 
 			</tr>
 			--!>
@@ -780,10 +770,12 @@ if (isset($_POST['sent']))
 				<td><p class="nameneingabe">Stimme 3:</td>
 				<td><textarea rows="2" cols="25" name="neuestimme3"></textarea></td>
 			</tr>
+			<!--
 			<tr>
 				<td><p class="nameneingabe">Alle Stimmen:</td>
-				<td><textarea rows="2" cols="25" name="neueallestimmen"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuealle"></textarea></td>
 			</tr>
+			--!>
 			<tr>
 				<td><p class="nameneingabe">Anmerkung:</td>
 				<td><textarea rows="2" cols="25" name="neueanmerkung"></textarea></td>
@@ -798,6 +790,7 @@ if (isset($_POST['sent']))
 				<td><p class="nameneingabe">Alt</td>
 				<td><p class="nameneingabe">Tenor</td>
 				<td><p class="nameneingabe">Bass</td>
+				<td><p class="nameneingabe">alle</td>
 			</tr>
 
 		
@@ -807,6 +800,7 @@ if (isset($_POST['sent']))
 				<td><textarea rows="2" cols="25" name="neuealtstimme1"></textarea></td>
 				<td><textarea rows="2" cols="25" name="neuetenorstimme1"></textarea></td>
 				<td><textarea rows="2" cols="25" name="neuebassstimme1"></textarea></td>
+				<td><textarea rows="2" cols="25" name="neuealle"></textarea></td>
 			</tr>
 			<tr>
 				<td><p class="nameneingabe">Stimme 2:</td>
@@ -822,19 +816,8 @@ if (isset($_POST['sent']))
 				<td><textarea rows="2" cols="25" name="neuetenorstimme3"></textarea></td>
 				<td><textarea rows="2" cols="25" name="neuebassstimme3"></textarea></td>
 			</tr>
-			<!--
-			<tr>
-				<td><p class="nameneingabe">Alle Stimmen:</td>
-				<td><textarea rows="2" cols="25" name="neueallestimmen"></textarea></td>
-
-			</tr>
-			--!>
 		</table>';
-		
-		
-		
-		
-		
+
 		print '<input type="hidden" name="task" value ="new">';
 		print '	<input type="hidden" name="test" value ="'.$test.'">';
 		print '<p class="nameneingabe" ><input type="submit" name="speichern" value="neuen Datensatz speichern"></p>';
@@ -928,8 +911,6 @@ if (isset($_POST['sent']))
 	print '	<input type="hidden" name="test" value =1>';
 	print '<input type="submit" class="links40" name="change" value="Weiterfahren"></form>';
 
-	#print '</div>'; # admingruppenabschnitt
-	#print '</div>'; # adminabschnitt1
 
 	print '<hr style="; width:600px;margin-left:20px; margin-right:60px; height:1px color:red; background-color:yellow; ">';
 
@@ -938,43 +919,43 @@ if (isset($_POST['sent']))
 	#print '<hr style="; width:600px;margin-left:20px; margin-right:60px; margin-top:0px; height:1px color:red; background-color:yellow; ">';
 	
 	# Tabelle laden
-		$gruppenordnerpfad = "kirchenchor_data";
-		$bildordnerpfad = "konzert";
-		print '<p class = "nameneingabe" ><strong>Benötigte Dateien:</strong>(nacheinander zu laden) </p>';
-		
-		print '<dir style="margin-left:30px; margin-bottom:0px;margin-top:0px;" >
-		<ul>
-  		<li> Dateiname: <strong>Plakat</strong> Dateiformat: <strong>pdf</strong></li>
-  		<li> Dateiname: <strong>Programm</strong> Dateiformat: <strong>pdf</strong></li>
-  		<li> Dateiname: <strong>ProgrammTitel</strong> Dateiformat: <strong>jpg</strong></li>
-		</ul>
-		</dir>';
-		
-		print '<p class = "nameneingabe" >Bezeichnung für alle Dateien: <strong>Jahr_Monat_Dateiname</strong> Bsp: <strong>2013_04_Plakat.pdf</strong> </p>';
+	$gruppenordnerpfad = "kirchenchor_data";
+	$bildordnerpfad = "konzert";
+	print '<p class = "nameneingabe" ><strong>Benötigte Dateien:</strong>(nacheinander zu laden) </p>';
+	
+	print '<dir style="margin-left:30px; margin-bottom:0px;margin-top:0px;" >
+	<ul>
+	<li> Dateiname: <strong>Plakat</strong> Dateiformat: <strong>pdf</strong></li>
+	<li> Dateiname: <strong>Programm</strong> Dateiformat: <strong>pdf</strong></li>
+	<li> Dateiname: <strong>ProgrammTitel</strong> Dateiformat: <strong>jpg</strong></li>
+	</ul>
+	</dir>';
+	
+	print '<p class = "nameneingabe" >Bezeichnung für alle Dateien: <strong>Jahr_Monat_Dateiname</strong> Bsp: <strong>2013_04_Plakat.pdf</strong> </p>';
 
-		
-		print '<form action="chor_midi_adminconfirm.php" method="post"
-					enctype="multipart/form-data">
-						<p class="nameneingabe" ><label for="file">Pfad für Datei suchen:</label>
-							<input type="file" accept=".pdf,.jpg"name="tabelle" id="tabellenfile" />
-						</p>';
 	
-					# Pfade weitergeben
-		print '		<input type="hidden" name="task" value ="upload">';
-		print '		<input type="hidden" name="gruppenordnerpfad" value="'.$gruppenordnerpfad.'" type="file"/>'; 	# POST gruppenordnerpfad
-		print '		<input type="hidden" name="bildordnerpfad" value="'.$bildordnerpfad.'" type="file"/>'; 			# POST bildordnerpfad relevant
-		print '		<input type="hidden" name="medium" value="'.$mediumordner.'" type="file"/>'; 					# POST medium
-		print '		<input type="hidden" name="test" value ="'.$test.'">';
-						# zu adminconfirm schicken
-		print '		<input type="submit" class="links40" name="submit" value="Datei laden" />';
-	
-		print '</form>';
+	print '<form action="chor_midi_adminconfirm.php" method="post"
+				enctype="multipart/form-data">
+					<p class="nameneingabe" ><label for="file">Pfad für Datei suchen:</label>
+						<input type="file" accept=".pdf,.jpg"name="tabelle" id="tabellenfile" />
+					</p>';
+
+				# Pfade weitergeben
+	print '		<input type="hidden" name="task" value ="upload">';
+	print '		<input type="hidden" name="gruppenordnerpfad" value="'.$gruppenordnerpfad.'" type="file"/>'; 	# POST gruppenordnerpfad
+	print '		<input type="hidden" name="bildordnerpfad" value="'.$bildordnerpfad.'" type="file"/>'; 			# POST bildordnerpfad relevant
+	print '		<input type="hidden" name="medium" value="'.$mediumordner.'" type="file"/>'; 					# POST medium
+	print '		<input type="hidden" name="test" value ="'.$test.'">';
+					# zu adminconfirm schicken
+	print '		<input type="submit" class="links40" name="submit" value="Datei laden" />';
+
+	print '</form>';
 
 	# change end
 
 	print '<hr style="; width:600px;margin-left:20px; margin-right:60px; height:1px color:red; background-color:yellow; ">';
 
-	print '<form action="index.php" ><input type="submit" class="links40" value="zurück zur Startseite" name="textfile"></form>';
+	print '<form action="" ><input type="submit" class="links40" value="zurück zur Startseite" name="textfile"></form>';
 	mysql_close($db);
 
 }

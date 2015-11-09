@@ -196,6 +196,7 @@ if ($task == 'new')
 	$stimme1 = chop($_POST['neuestimme1']);
 	$stimme2 = chop($_POST['neuestimme2']);
 	$stimme3 = chop($_POST['neuestimme3']);
+	$alle = chop($_POST['neuealle']);
 	$anmerkung = chop($_POST['neueanmerkung']);
 	
 	# neu
@@ -215,8 +216,9 @@ if ($task == 'new')
 	if (isset($_POST['neuebassstimme2'])) $bassstimme2 = chop($_POST['neuebassstimme2']); else $bassstimme2="";
 	if (isset($_POST['neuebassstimme3'])) $bassstimme3 = chop($_POST['neuebassstimme3']); else $bassstimme3="";
 	
-	if (isset($_POST['neueallestimmen'])) $allestimmen = chop($_POST['neueallestimmen']); else $allestimmen="";
-
+	if (isset($_POST['neuealle'])) $alle = chop($_POST['neuealle']); else $alle="";
+	
+	print 'alle A: '.$alle.'<br>';
 	# neu
 
 	#$eingabe=array($_POST['eingabe']);
@@ -232,7 +234,7 @@ if ($task == 'new')
 	$eingabefehler='';
 	$fehlerlaenge=strlen($eingabefehler);
 	
-	$linkcounter = 0; # mindestens ein Link muss vorhanden sein
+	$linkcounter = 0; # Kontrolle: Mindestens ein Link muss vorhanden sein
 	
 	
 	#print 'Fehlerstring start: '.$eingabefehler.'<br>';
@@ -305,7 +307,7 @@ if ($task == 'new')
 	{
 		$eingabefehler .= 'Das Feld für Stimme 3 enthält ein falsches Zeichen.<br>'; 
 	}
-	if (!preg_match($linkmuster,$allestimmen))
+	if (!preg_match($linkmuster,$alle))
 	{
 		$eingabefehler .= 'Das Feld für Alle Stimmen enthält ein falsches Zeichen.<br>'; 
 	}
@@ -362,18 +364,19 @@ if ($task == 'new')
 		$eingabefehler .= 'Das Feld für Bassstimme 3 enthält ein falsches Zeichen.<br>'; 
 	}
 
-	if (!preg_match($linkmuster,$allestimmen))
+	if (!preg_match($linkmuster,$alle))
 	{
 		$eingabefehler .= 'Das Feld für Alle Stimmen enthält ein falsches Zeichen.<br>'; 
 	}
 
+	print 'alle B: '.$alle.'<br>';
 	
-	
-	if ((strlen($stimme1.$stimme2.$stimme3.$allestimmen) == 0) && 
+	if ((strlen($stimme1.$stimme2.$stimme3.$alle) == 0) && 
 		(strlen($sopranstimme1.$sopranstimme2.$sopranstimme3) == 0)&&
 		(strlen($altstimme1.$altstimme2.$altstimme3) == 0)&&
 		(strlen($tenorstimme1.$tenorstimme2.$tenorstimme3) == 0) &&
-		(strlen($bassstimme1.$bassstimme2.$bassstimme3) == 0))
+		(strlen($bassstimme1.$bassstimme2.$bassstimme3) == 0)&&
+		(strlen($alle) == 0))
 	{
 		$eingabefehler .= 'Mindestens ein Link muss vorhanden sein.<br>'; 
 	}
@@ -399,11 +402,11 @@ if ($task == 'new')
 			#print ' <p>Neuer Datensatz:  name: '.$medien['name'].' nummer: '.$medien['nummer'].' teaser: '.$medien['teaser'].'</p>';;
 
 		# Einzelne Stimme einsetzen: Einzelfelder enthalten Text
-		if (strlen($stimme1) || strlen($stimme2) || strlen($stimme3)  || strlen($allestimmen) ) 
+		if (strlen($stimme1) || strlen($stimme2) || strlen($stimme3)) 
 		{
 	
-			$result_insert = mysql_query("INSERT INTO audio (id,aktiv, event, werk, satznummer, satz, bezeichnung, register,  stimme1, stimme2,  stimme3, anmerkung) 
-								VALUES (NULL, '$aktiv', '$event','$werk', '$satznummer', '$satz','$bezeichnung', '$register', '$stimme1','$stimme2',  '$stimme3',  '$anmerkung')");
+			$result_insert = mysql_query("INSERT INTO audio (id,aktiv, event, werk, satznummer, satz, bezeichnung, register,  stimme1, stimme2,  stimme3,  anmerkung) 
+								VALUES (NULL, '$aktiv', '$event','$werk', '$satznummer', '$satz', '$bezeichnung', '$register', '$stimme1','$stimme2',  '$stimme3',  '$anmerkung')");
 	
 			print 'INSERT error: *'.mysql_error().'*<br>';
 			$resultat=mysql_affected_rows($db);
@@ -428,7 +431,7 @@ if ($task == 'new')
 				$stimme1 = $_POST['neuestimme1'];
 				$stimme2 = $_POST['neuestimme2'];
 				$stimme3 = $_POST['neuestimme3'];
-				$allestimmen = $_POST['neueallestimmen'];
+				$alle = $_POST['neuealle'];
 				$anmerkung = $_POST['neueanmerkung'];
 		
 		
@@ -443,7 +446,7 @@ if ($task == 'new')
 				print '<p class = "liste">stimme1:*'.$stimme1.'*</p>';
 				print '<p class = "liste">stimme2:*'.$stimme2.'*</p>';
 				print '<p class = "liste">stimme3:*'.$stimme3.'*</p>';
-				print '<p class = "liste">allestimmen:*'.$allestimmen.'*</p>';
+				print '<p class = "liste">alle:*'.$alle.'*</p>';
 	
 			}
 			else
@@ -535,6 +538,24 @@ if ($task == 'new')
 			$bassresultat=0;
 		}
 		
+		# alle
+		if (strlen($alle))
+		{
+			$register = 'alle';
+			$result_insert = mysql_query("INSERT INTO audio (id,aktiv, event, werk, satznummer, satz, bezeichnung, register,  stimme1, anmerkung) 
+								VALUES (NULL, '$aktiv', '$event','$werk', '$satznummer', '$satz','$bezeichnung', '$alleregister','$alle','$anmerkung')");
+	
+			print 'INSERT alle error: *'.mysql_error().'*<br>';
+			$alleresultat=mysql_affected_rows($db);	
+			print 'INSERT alle resultat affected_rows: *'.$alleresultat.'*<br>';		
+			print '<p>Rückgabe von INSERT alle: *'. $result_insert.'*</p>';
+
+		} # end alle
+		else
+		{
+			$alleresultat=0;
+		}
+		
 
 
 		print '<div class = " adminconfirmabschnitt1">';
@@ -592,7 +613,17 @@ if ($task == 'new')
 		}
 		else
 		{
-			#print '<p class = "liste"> Beim Importieren der Bassstimmen ist ein Fehler aufgetreten.</p>';
+			print '<p class = "liste"> Beim Importieren der Bassstimmen ist ein Fehler aufgetreten.</p>';
+		}
+
+		print '<p class = "liste">register:*'.$alleregister.'*</p>';
+		if ($alleresultat==1)
+		{
+			print '<p class = "liste">alle:*'.$alle.'*</p>';
+		}
+		else
+		{
+			print '<p class = "liste"> Beim Importieren der Allestimme ist ein Fehler aufgetreten.</p>';
 		}
 
 	
@@ -614,6 +645,7 @@ if ($task == 'change')
 	$stimme1="";
 	$stimme2="";
 	$stimme3="";
+	$alle="";
 	$anmerkung = "";
 
 	$index = $_POST['index'];
@@ -660,6 +692,7 @@ if ($task == 'change')
 		print '<p class = "liste">stimme1:*'.$stimme1.'*</p>';
 		print '<p class = "liste">stimme2:*'.$stimme2.'*</p>';
 		print '<p class = "liste">stimme3:*'.$stimme3.'*</p>';
+		
 		print '</div>';
 	}
 	else
@@ -732,7 +765,6 @@ if ($task == 'multchange')
 		}
 		foreach ($changeid as $tempid)
 		{ 
-		
 			print 'id: '.$tempid.' satz: '.$changesatz[$index].' register: '.$changeregister[$index].'<br>';
 
 			#print 'tempid: '.$tempid.' changesatz: '.$changesatz[$index].' <br>';
@@ -768,7 +800,6 @@ if ($task == 'delete')
 	
 	
 
-	#$result_delete = mysql_query("DELETE FROM testarchiv  WHERE id = '$index'");
 	$result_delete = mysql_query("DELETE FROM audio  WHERE id = '$index'");
 	$resultat=mysql_affected_rows($db);
 	#print 'DELETE error: *'.mysql_error().'*<br>';
@@ -788,7 +819,7 @@ if ($task == 'delete')
 
 if ($task == 'multdelete')
 {
-	print '<h2 class="lernmedien"><strong>Mehrere Datensätze löschen:</strong></h2><br>';
+	print '<h2 class="lernmedien"><strong>Mehrere Datensätze löschen:</strong></h2>';
 	$multaktion = "";
 	if (isset($_POST['multaktion']))
 	{
@@ -829,9 +860,10 @@ if ($task == 'multdelete')
 	print '<div class = "adminconfirmabschnitt1">';
 	
 	$index=0;
+	print '<p>';
 	foreach ($changeid as $tempid)
 	{ 
-		{
+		
 			#print 'id: '.$tempid.' satz: '.$changesatz[$index].' register: '.$changeregister[$index].'<br>';
 
 			#print 'tempid: '.$tempid.' changesatz: '.$changesatz[$index].' <br>';
@@ -843,13 +875,14 @@ if ($task == 'multdelete')
 			
 		if ($result_change==1)
 		{
-			print '<p>id: '.$tempid.' Satz: '.$changesatz[$index].' Register: '.$changeregister[$index].'</p>';
+			print 'id: '.$tempid.' Satz: '.$changesatz[$index].' Register: '.$changeregister[$index].'<br>';
 
 		}
 		$index = $index+1;
-		}# end delete
+		
 		
 	}# foreach
+	print '</p>';
 	print '<h3 class="lernmedien">Die Datensätze wurden gelöscht</h3>';
 
 	print '</div>';
